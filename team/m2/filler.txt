@@ -1,0 +1,1 @@
+Github doesnt let you create an empty folder so I just added this file. We will add markkdown files in the team/m2 folder. Will delete this file later.
