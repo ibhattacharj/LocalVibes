@@ -39,7 +39,7 @@
 - **Role**: Reviews team submissions and ensures that all deliverables meet the necessary quality standards. Frank is responsible for proofreading and ensuring the accuracy of all documents before submission.
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/blob/main/team/m2/data.md): Added data.md
-  2. [Commit 2](https://github.com/repo/commit2): 
+  2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/blob/main/reports/Asher%20Katz.md): Added to report section
   3. [Commit 3](https://github.com/repo/commit3): 
 
 ## Jacob Torres - Documentation Lead
