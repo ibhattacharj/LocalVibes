@@ -28,37 +28,37 @@ This tool allows artists to plan joint performances or events together, facilita
 ## Fan-Generated Content
 Fans can upload photos from events and leave reviews, contributing to a community-driven atmosphere on the platform.
 
-**Assigned to**: [undecided]
+**Assigned to**: [Zaida]
 
 ## Support Local Music
 Users can directly support local artists by donating, purchasing merchandise, or buying tickets through the app. This feature provides financial backing for artists and promotes local talent sustainably.
 
-**Assigned to**: [undecided]
+**Assigned to**: [Zainab]
 
 ## Crowdsourced Venues
 Users can suggest or register unique spaces to host music events, increasing the variety of event locations and encouraging creativity in venue selection. 
 
-**Assigned to**: [undecided]
+**Assigned to**: [Emma]
 
 ## Event Sharing & RSVP
 This feature allows users to share events on social media and track RSVPs. It improves event planning for organizers and encourages wider participation through social sharing.
 
-**Assigned to**: [undecided]
+**Assigned to**: [Emma]
 
 ## Music Networking Hub
 This feature connects artists, fans, and promoters, creating a comprehensive network that strengthens relationships within the music community. It facilitates communication among participants in the local scene. 
 
-**Assigned to**: [undecided]
+**Assigned to**: [Jacob]
 
 ## Music Scene Analytics
 The app will provide insights on attendance trends, popular genres, and event preferences, enabling artists and organizers to make data-driven decisions for future events.
 
-**Assigned to**: [undecided]
+**Assigned to**: [Adrien]
 
 ## Local Music notifications
 Users can subscribe to a notification system that provides regular updates on upcoming events, artist spotlights, and local music news. 
 
-**Assigned to**: [undecided]
+**Assigned to**: [Asher]
 
 ## New Artist Showcase
 This feature highlights emerging talent in the local scene, providing increased visibility for new artists for those users that want to support artists early in their career. 
