@@ -40,7 +40,7 @@
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/blob/main/team/m2/data.md): Added data.md
   2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/blob/main/reports/Asher%20Katz.md): Added to report section
-  3. [Commit 3](https://github.com/repo/commit3): 
+  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/blob/features-file/team/m2/features.md): updated roles for the features file
 
 ## Jacob Torres - Documentation Lead
 - **Role**: Responsible for overseeing the organization and maintenance of all project documentation. Sarah ensures that all documents are up to date, well-organized, and accessible to team members.
