@@ -33,7 +33,7 @@
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/blob/main/team/m2/data.md): Updated data.md file to include potential API's that can be used to reduce the 'reinventing the wheel' our team has to do. 
   2. [Commit 2](): Emailed Professor Richards to extend deadline of Milestone #2 from Friday to Monday, encompassing team concerns surrounding the loss of time due to the confusion around the previous lab and the long weekend, alongside many scheduling conflicts due to exams.
-  3. [Commit 3](): Updated reports file to contain my contributions to Milestone #2.
+  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/blob/main/reports/Adrien.md): Updated reports file to contain my contributions to Milestone #2.
 
 ## Asher Katz - Quality Control
 - **Role**: Reviews team submissions and ensures that all deliverables meet the necessary quality standards. Frank is responsible for proofreading and ensuring the accuracy of all documents before submission.
