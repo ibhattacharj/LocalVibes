@@ -17,7 +17,7 @@
 ## Zaida - Note-Taker
 - **Role**: Records detailed notes during meetings and ensures that action items are clearly communicated. Carol is responsible for distributing meeting minutes to the team after each session.
 - **Top 3 Commits**:
-  1. [Commit 1](): 
+  1. [Commit 1](): Took meeting notes during our Milestone 2 meetup pertaining to our project plan and what needs to be accomplished. 
   2. [Commit 2](): 
   3. [Commit 3](): 
 
