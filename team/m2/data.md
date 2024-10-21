@@ -4,7 +4,7 @@
 - **Event ID:** Unique identifier for each event.
 - **Event Name:** Name of the event.
 - **Genre:** Musical genre associated with the event (e.g., Rock, Jazz, Indie, Hip-Hop).
-- **Location:** Details of the venue or location (address, coordinates).
+- **Location:** Details of the venue or location (address, coordinates). Can use Google Maps Geocoding API to convert addresses to coordinates.
 - **Event Date & Time:** Scheduled date and time of the event.
 - **Event Description:** Brief description of the event.
 - **Ticket Information:** Price, purchasing options, and availability.
@@ -16,12 +16,12 @@
 - **Artist/Band Name:** Name of the artist or band.
 - **Bio:** Artist/band biography or description.
 - **Genre:** Primary genre or genres of the artist.
-- **Media Links:** Embedded music links (e.g., Spotify, SoundCloud, YouTube).
+- **Media Links:** Embedded music links. Integrate with Spotify API, Apple Music API, or SoundCloud API. 
 - **Upcoming Events:** List of upcoming performances and shows.
 - **Merchandise:** Information about available merchandise (items, prices).
 - **Donation Link:** Option to donate to the artist directly.
 
-## 3. Event Map
+## 3. Event Map (Implement map functionality using Google Maps JavaScript API)
 - **Location ID:** Unique identifier for each event location.
 - **Venue Name:** Name of the venue (if applicable).
 - **Address:** Full address of the venue.
@@ -95,14 +95,14 @@
 - **Distribution Date:** Date when the newsletter is distributed.
 - **Subscribers:** List of users subscribed to the newsletter.
 
-## 13. Donation & Merchandise Transactions
+## 13. Donation & Merchandise Transactions (can use Stripe, Paypal, or Venmo links)
 - **Transaction ID:** Unique identifier for each transaction.
 - **User ID:** The user making the transaction.
 - **Artist ID:** The artist receiving the donation or purchase.
 - **Transaction Type:** Type of transaction (e.g., Donation, Merchandise Purchase).
 - **Amount:** Amount of the transaction.
 
-## 14. Social Sharing & RSVPs
+## 14. Social Sharing & RSVPs (can integrate with Facebook/Instagram API)
 - **Share ID:** Unique identifier for each shared event.
 - **User ID:** The user sharing the event.
 - **Event ID:** The event being shared.
