@@ -10,9 +10,9 @@
 ## Zainab Al Namer - Timekeeper
 - **Role**: Manages the timing of all team activities. Bob ensures that meetings start and end on time, keeps track of deadlines, and reminds the team of upcoming due dates.
 - **Top 3 Commits**:
-  1. [Commit 1](): 
-  2. [Commit 2](): 
-  3. [Commit 3](): 
+  1. [Commit 1](): Checked the availability of all team members and created a schedule to meet regularly.
+  2. [Commit 2](): Updated the Users.md file to reflect what we discussed about users of out application.
+  3. [Commit 3](): Updated the reports file to reflect my contributions for Milestone 2.
 
 ## Zaida - Note-Taker
 - **Role**: Records detailed notes during meetings and ensures that action items are clearly communicated. Carol is responsible for distributing meeting minutes to the team after each session.
