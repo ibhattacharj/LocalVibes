@@ -1,11 +1,11 @@
 # Team Roles and Commit Contributions
 
 ## Ipsita Bhattacharjee - Project Manager
-- **Role**: Oversees the overall project timeline, ensures that milestones are met, and coordinates the team’s efforts. Alice is responsible for setting meeting agendas and ensuring that the team stays focused on project goals.
+- **Role**: Oversees the overall project timeline, ensures that milestones are met, and coordinates the team’s efforts. Ipsita is responsible for setting meeting agendas and ensuring that the team stays focused on project goals.
 - **Top 3 Commits**:
-  1. [Commit 1](): Created the initial GitHub repository and set up the project structure, including the `team/m2` folder for milestone submissions.
-  2. [Commit 2](): Organized and led the first team meeting, distributing tasks and ensuring deadlines were agreed upon.
-  3. [Commit 3](): Drafted the initial version of the `problem.md` file and facilitated team feedback to finalize it.
+  1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/commit/ed3da11a70492fcff17d624e7a2811f4e40e6d7e): Created the initial GitHub repository and set up the project structure, including the `team/m2` folder for milestone submissions.
+  2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/commit/860409f6704fbd1cb1d0a6367bf7f00d8719938e): Organized and led the first team meeting, distributing tasks and ensuring deadlines were agreed upon.
+  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/commit/14708073f8b343d3122adcf081f7ace8414aa432): Drafted the initial version of the `problem.md` file and facilitated team feedback to finalize it.
 
 ## Zainab Al Namer - Timekeeper
 - **Role**: Manages the timing of all team activities. Bob ensures that meetings start and end on time, keeps track of deadlines, and reminds the team of upcoming due dates.
