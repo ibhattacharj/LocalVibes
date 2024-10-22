@@ -18,8 +18,8 @@
 - **Role**: Records detailed notes during meetings and ensures that action items are clearly communicated. Carol is responsible for distributing meeting minutes to the team after each session.
 - **Top 3 Commits**:
   1. [Commit 1](): Took meeting notes during our Milestone 2 meetup pertaining to our project plan and what needs to be accomplished. 
-  2. [Commit 2](): 
-  3. [Commit 3](): 
+  2. [Commit 2](): Added to reports file
+  3. [Commit 3](): Updated roles.md
 
 ## Emma Azzi - Task Manager
 - **Role**: Responsible for organizing and tracking team tasks. David manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
