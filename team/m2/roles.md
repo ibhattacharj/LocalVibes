@@ -22,7 +22,7 @@
   3. [Commit 3](): Updated roles.md
 
 ## Emma Azzi - Task Manager
-- **Role**: Responsible for organizing and tracking team tasks. David manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
+- **Role**: Responsible for organizing and tracking team tasks. Emma manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/commit/6ed60331e74d2c7cac7b54dc30e25556e4ad8ca6): Added UI markdown, describing UI wireframe diagrams in detail
   2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/commit/05231c0acca14c73dc098da9f60334efa4f2b633): Added Images folder, with images including screenshots from wireframing session
