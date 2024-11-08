@@ -1,11 +1,11 @@
 # Team Roles and Commit Contributions
 
 ## Ipsita Bhattacharjee - Project Manager
-- **Role**: Oversees the overall project timeline, ensures that milestones are met, and coordinates the team’s efforts. Alice is responsible for setting meeting agendas and ensuring that the team stays focused on project goals.
+- **Role**: Oversees the overall project timeline, ensures that milestones are met, and coordinates the team’s efforts. Ipsita is responsible for setting meeting agendas and ensuring that the team stays focused on project goals.
 - **Top 3 Commits**:
-  1. [Commit 1](): Created the initial GitHub repository and set up the project structure, including the `team/m2` folder for milestone submissions.
-  2. [Commit 2](): Organized and led the first team meeting, distributing tasks and ensuring deadlines were agreed upon.
-  3. [Commit 3](): Drafted the initial version of the `problem.md` file and facilitated team feedback to finalize it.
+  1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/commit/ed3da11a70492fcff17d624e7a2811f4e40e6d7e): Created the initial GitHub repository and set up the project structure, including the `team/m2` folder for milestone submissions.
+  2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/commit/860409f6704fbd1cb1d0a6367bf7f00d8719938e): Organized and led the first team meeting, distributing tasks and ensuring deadlines were agreed upon.
+  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/commit/14708073f8b343d3122adcf081f7ace8414aa432): Drafted the initial version of the `problem.md` file and facilitated team feedback to finalize it.
 
 ## Zainab Al Namer - Timekeeper
 - **Role**: Manages the timing of all team activities. Bob ensures that meetings start and end on time, keeps track of deadlines, and reminds the team of upcoming due dates.
@@ -18,15 +18,15 @@
 - **Role**: Records detailed notes during meetings and ensures that action items are clearly communicated. Carol is responsible for distributing meeting minutes to the team after each session.
 - **Top 3 Commits**:
   1. [Commit 1](): Took meeting notes during our Milestone 2 meetup pertaining to our project plan and what needs to be accomplished. 
-  2. [Commit 2](): 
-  3. [Commit 3](): 
+  2. [Commit 2](): Added to reports file
+  3. [Commit 3](): Updated roles.md
 
 ## Emma Azzi - Task Manager
-- **Role**: Responsible for organizing and tracking team tasks. David manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
+- **Role**: Responsible for organizing and tracking team tasks. Emma manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
 - **Top 3 Commits**:
-  1. [Commit 1](): 
-  2. [Commit 2](): 
-  3. [Commit 3](): 
+  1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/commit/6ed60331e74d2c7cac7b54dc30e25556e4ad8ca6): Added UI markdown, describing UI wireframe diagrams in detail
+  2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/commit/05231c0acca14c73dc098da9f60334efa4f2b633): Added Images folder, with images including screenshots from wireframing session
+  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/commit/b2d05f26408ee5bff467bc80fcf2e493388506e7): Updated the reports file to reflect my contributions for Milestone 2. 
 
 ## Adrien Bekker - Communication Lead
 - **Role**: Facilitates communication within the team. Adrien is responsible for maintaining and managing the team’s Slack workspace and ensuring that all members stay informed and engaged.
