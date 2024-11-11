@@ -1,5 +1,7 @@
 import { faker } from 'https://esm.sh/@faker-js/faker';
 
+export const allEvents = [];
+
 function populateFakeEvents(containerId, numEvents) {
     const container = document.getElementById(containerId);
 
@@ -20,7 +22,9 @@ function populateFakeEvents(containerId, numEvents) {
         `;
 
         container.appendChild(eventCard);
+        allEvents.push({title: eventTitle, element: eventCard});
     }
 }
+
 populateFakeEvents('popular-events-list', 10);
 populateFakeEvents('events-for-you-list', 10);
