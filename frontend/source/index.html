@@ -6,40 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LocalVibes</title>
     <link rel="stylesheet" href="main.css"> <!-- Link to your CSS file -->
-    <style>
-        .event-list-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-        .event-list.horizontal-scroll {
-            display: flex;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        .event-card {
-            flex: 0 0 auto;
-            width: 200px;
-            margin: 10px;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .scroll-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 50%;
-            font-size: 18px;
-            margin: 0 10px;
-        }
-        .scroll-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
     <script type='module' src="fakeData.js" defer></script> <!-- Link to your generated fake events script -->
 
 </head>
@@ -131,5 +97,17 @@
         <p>&copy; 2024 LocalVibes. All rights reserved.</p>
     </footer>
 
+    <script>
+        function scrollEventList(sectionId, direction) {
+            const list = document.getElementById(sectionId + '-list');
+            const scrollAmount = list.clientWidth; //scroll container width (equal to 3 event cards)
+    
+            if (direction === 'left') {
+                list.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                list.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+    </script>
 </body>
 </html>
