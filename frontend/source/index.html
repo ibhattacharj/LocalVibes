@@ -5,7 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LocalVibes</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="main.css"> <!-- Link to your CSS file -->
+    <style>
+        .event-list-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .event-list.horizontal-scroll {
+            display: flex;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .event-card {
+            flex: 0 0 auto;
+            width: 200px;
+            margin: 10px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .scroll-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 18px;
+            margin: 0 10px;
+        }
+        .scroll-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script type='module' src="fakeData.js" defer></script> <!-- Link to your generated fake events script -->
+
 </head>
 <body>
 
@@ -19,8 +55,76 @@
 
     <!-- Main Content Area -->
     <main>
-        
-    </main>
+        <!-- Event Search Section -->
+        <section id="event-search">
+            <!-- Search Bar -->
+            <div class="search-bar-container">
+                <input type="text" id="search-bar" placeholder="Search for events..." />
+                <button id="search-button">Search</button>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filters-container">
+                <!-- Genre Filter -->
+                <label for="genre-filter">Genre:</label>
+                <select id="genre-filter">
+                    <option value="">All Genres</option>
+                    <option value="rock">Rock</option>
+                    <option value="jazz">Jazz</option>
+                    <option value="hip-hop">Hip-Hop</option>
+                    <option value="electronic">Electronic</option>
+                    <!-- Add more genres as needed -->
+                </select>
+
+                <!-- Location Filter -->
+                <label for="location-filter">Location:</label>
+                <input type="text" id="location-filter" placeholder="Enter a location..." />
+
+                <!-- Venue Type Filter -->
+                <label for="venue-filter">Venue Type:</label>
+                <select id="venue-filter">
+                    <option value="">All Venues</option>
+                    <option value="club">Club</option>
+                    <option value="house-party">House Party</option>
+                    <option value="library">Library Basement</option>
+                    <!-- Add more venue types as needed -->
+                </select>
+            </div>
+
+            <!-- Interactive Map Section -->
+            <div id="map-container">
+                <!-- The map will be empty initially, will be populated after search -->
+                <p>Click on the search bar to populate the map with events.</p>
+                <div id="event-map">
+                    <!-- This is where the map will be rendered -->
+                </div>
+            </div>
+
+            <!-- Popular Events Section -->
+            <section id="popular-events">
+                <h2>Popular Events</h2>
+                <div class="event-list-container">
+                    <button class="scroll-button left" onclick="scrollEventList('popular-events', 'left')">&#9664;</button>
+                    <div class="event-list horizontal-scroll" id="popular-events-list">
+                        <!-- Fake events will be populated dynamically here by fakeData.js -->
+                    </div>
+                    <button class="scroll-button right" onclick="scrollEventList('popular-events', 'right')">&#9654;</button>
+                </div>
+            </section>
+
+            <!-- Personalized Event Recommendations Section -->
+            <section id="events-for-you">
+                <h2>Events For You</h2>
+                <div class="event-list-container">
+                    <button class="scroll-button left" onclick="scrollEventList('events-for-you', 'left')">&#9664;</button>
+                    <div class="event-list horizontal-scroll" id="events-for-you-list">
+                        <!-- Fake events will be populated dynamically here by fakeData.js -->
+                    </div>
+                    <button class="scroll-button right" onclick="scrollEventList('events-for-you', 'right')">&#9654;</button>
+                </div>
+            </section>
+        </section>
+
 
     <!-- Footer Section -->
     <footer>
