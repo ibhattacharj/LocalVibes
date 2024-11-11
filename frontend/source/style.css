@@ -17,7 +17,7 @@ main {
 
 /* Basic navbar styling */
 .navbar {
-    background-color: #cfc9c9;
+    background-color: #303C6C;
     padding: 12px 0;
 }
 
@@ -66,8 +66,8 @@ main {
 
 /* Footer styling */
 footer {
-    background-color: #333;
-    color: white;
+    /* background-color: #b1b7cc; */
+    color: rgb(6, 6, 6);
     text-align: center;
     padding: 1px 0;
 }
