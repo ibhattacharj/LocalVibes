@@ -10,8 +10,10 @@ function populateFakeEvents(containerId, numEvents) {
         const eventTitle = faker.company.catchPhrase();
         const eventGenre = faker.music.genre();
         const eventLocation = faker.location.city();
+        const eventImage = faker.image.urlPicsumPhotos({ width: 640, height: 480 }); //generates random image URL from Picsum
 
         eventCard.innerHTML = `
+            <img src="${eventImage}" alt="Event Image">
             <h3>${eventTitle}</h3>
             <p>Genre: ${eventGenre}</p>
             <p>Location: ${eventLocation}</p>
