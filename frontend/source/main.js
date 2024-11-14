@@ -10,6 +10,13 @@ const mapContainer = document.getElementById('map-container');
 searchBar.addEventListener('input', () => {
     const searchTerm = searchBar.value.toLowerCase();
 
+    // Utilizes localStorage
+    localStorage.setItem("search", JSON.stringify(searchBar.value));
+    console.log("hi");
+    updateState(searchTerm);
+});
+
+function updateState(searchTerm) {
     if (searchTerm.length > 0) {
         popularEventsSection.style.display = 'none';
         eventsForYouSection.style.display = 'none';
@@ -41,5 +48,8 @@ searchBar.addEventListener('input', () => {
         popularEventsSection.style.display = 'block';
         eventsForYouSection.style.display = 'block';
     }
+}
 
-});
+// Calls updateState()
+searchBar.value = JSON.parse(localStorage.getItem("search"));
+updateState(JSON.parse(localStorage.getItem("search")));
