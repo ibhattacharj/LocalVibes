@@ -1,3 +1,21 @@
+.banner-section {
+    margin: 40px 0;
+    padding: 20px;
+    background-color: #8308b8; 
+    border-radius: 16px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.banner-heading {
+    text-align: center;
+    font-size: 2em;
+    color: #ffd700; /* Gold heading color */
+    margin-bottom: 20px;
+    font-family: 'Trebuchet MS', sans-serif; /*bolded monospace font */
+    font-weight: bolder;
+    text-transform: uppercase; /* all caps */
+}
+
 body {
     background-color: #1e1e2f; 
     color: #e0c084; /* Text color */
@@ -68,6 +86,22 @@ body {
     color: #e0c084; /* Gold color for descriptions/genre */
 }
 
+.filters-container label {
+    margin-right: 5px; 
+}
+
+#map-container {
+    width: 100%;
+    display: none;
+    position: sticky;
+}
+
+#map-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .scroll-button {
     background-color: #1e1e2f;
     color: #e0c084;
@@ -85,20 +119,47 @@ body {
     transform: scale(1.1);
 }
 
-.banner-section {
-    margin: 40px 0;
-    padding: 20px;
-    background-color: #8308b8; 
-    border-radius: 16px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+#search-and-map {
+    display: flex;               
+    gap: 20px;                  
 }
 
-.banner-heading {
-    text-align: center;
-    font-size: 2em;
-    color: #ffd700; /* Gold heading color */
-    margin-bottom: 20px;
-    font-family: 'Trebuchet MS', sans-serif; /*bolded monospace font */
-    font-weight: bolder;
-    text-transform: uppercase; /* all caps */
+.search-bar-container, .filters-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px; 
+    flex-wrap: wrap; 
+}
+
+.search-bar-container input, .filters-container input, .filters-container select, #search-button {
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #e0c084; 
+    background-color: #1a002b;
+    color: #e0c084;
+}
+#search-button {
+    background-color: #e0c084;
+    color: #1a002b; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#search-button:hover {
+    background-color: #b8860b; 
+}
+
+#search-results {
+    width: 33%;                  
+    display: none;
+    overflow-y: auto;
+    max-height: 100vh;
+    scrollbar-color: white #b8860b;  
+}
+
+#search-results img {
+    max-width: 200px;
+    max-height: 200px;
 }

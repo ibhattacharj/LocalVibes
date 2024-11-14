@@ -3,11 +3,8 @@ import { allEvents } from './fakeData.js';
 const searchBar = document.getElementById('search-bar');
 const popularEventsSection = document.getElementById('popular-events');
 const eventsForYouSection = document.getElementById('events-for-you');
-const searchResultsContainer = document.createElement('div'); 
-searchResultsContainer.id = 'search-results';
-
-const mainElement = document.querySelector("main");
-mainElement.appendChild(searchResultsContainer);
+const searchResultsContainer = document.getElementById("search-results"); 
+const mapContainer = document.getElementById('map-container');
 
 
 searchBar.addEventListener('input', () => {
@@ -19,6 +16,7 @@ searchBar.addEventListener('input', () => {
 
 
         searchResultsContainer.style.display = 'block';  
+        mapContainer.style.display = 'block';
 
         searchResultsContainer.innerHTML = '';
 
@@ -39,6 +37,7 @@ searchBar.addEventListener('input', () => {
     } else {
 
         searchResultsContainer.style.display = 'none';
+        mapContainer.style.display = 'none';
         popularEventsSection.style.display = 'block';
         eventsForYouSection.style.display = 'block';
     }
