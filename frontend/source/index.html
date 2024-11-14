@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LocalVibes</title>
-    <link rel="stylesheet" href="main.css"> <!-- Link to CSS file -->
-    <script type='module' src="fakeData.js" defer></script> <!-- Link to generated fake events script -->
+    <link rel="stylesheet" href="main.css"> <!-- Link to your CSS file -->
+    <script type='module' src="fakeData.js" defer></script> <!-- Link to your generated fake events script -->
     <script type='module' src="main.js" defer></script>
 </head>
 <body>
@@ -36,7 +36,7 @@
                     <option value="jazz">Jazz</option>
                     <option value="hip-hop">Hip-Hop</option>
                     <option value="electronic">Electronic</option>
-                    <!-- Add more genres as we see fit, might just completely replace with "Tags" implementation -->
+                    <!-- Add more genres as needed -->
                 </select>
 
                 <!-- Location Filter -->
@@ -50,25 +50,25 @@
                     <option value="club">Club</option>
                     <option value="house-party">House Party</option>
                     <option value="library">Library Basement</option>
-                    <!-- Add more venue types -->
+                    <!-- Add more venue types as needed -->
                 </select>
             </div>
 
-            <!-- Interactive Map Section -->
-            <div id="map-container">
-                <!-- The map will be empty initially, will be populated after search -->
-                <div id="event-map">
-                    <!-- This is where the map will be rendered -->
+            <!-- Interactive Map Section and Search -->
+            <div id="search-and-map">
+                <div id="search-results"></div>
+                <div id="map-container">
+                    <img src="https://developers.google.com/static/maps/images/landing/hero_maps_static_api.png" />
                 </div>
             </div>
 
             <!-- Popular Events Section -->
-            <section id="popular-events" class="banner-section"> <!-- Having the class="banner-section in this and not the other section provides the contract of background color between the two sections-->
-                <h2 class="banner-heading">Popular Events</h2>
-                <div class="event-list-container">
+            <section id="popular-events">
+                <h2>Popular Events</h2>
+                <div class="z-container">
                     <button class="scroll-button left" onclick="scrollEventList('popular-events', 'left')">&#9664;</button>
                     <div class="event-list horizontal-scroll" id="popular-events-list">
-                        <!-- Fake events will be populated dynamically by fakeData.js -->
+                        <!-- Fake events will be populated dynamically here by fakeData.js -->
                     </div>
                     <button class="scroll-button right" onclick="scrollEventList('popular-events', 'right')">&#9654;</button>
                 </div>
@@ -76,11 +76,11 @@
 
             <!-- Personalized Event Recommendations Section -->
             <section id="events-for-you">
-                <h2 class ="banner-heading">Events For You</h2>
+                <h2>Events For You</h2>
                 <div class="event-list-container">
                     <button class="scroll-button left" onclick="scrollEventList('events-for-you', 'left')">&#9664;</button>
                     <div class="event-list horizontal-scroll" id="events-for-you-list">
-                        <!-- Fake events will be populated dynamically by fakeData.js -->
+                        <!-- Fake events will be populated dynamically here by fakeData.js -->
                     </div>
                     <button class="scroll-button right" onclick="scrollEventList('events-for-you', 'right')">&#9654;</button>
                 </div>
