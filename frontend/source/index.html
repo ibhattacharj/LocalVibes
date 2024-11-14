@@ -63,9 +63,9 @@
             </div>
 
             <!-- Popular Events Section -->
-            <section id="popular-events">
-                <h2>Popular Events</h2>
-                <div class="z-container">
+            <section id="popular-events"class="banner-section"> <!-- Having the class="banner-section in this and not the other section provides the contract of background color between the two sections-->
+                <h2 class="banner-heading">Popular Events</h2>
+                <div class="event-list-container">
                     <button class="scroll-button left" onclick="scrollEventList('popular-events', 'left')">&#9664;</button>
                     <div class="event-list horizontal-scroll" id="popular-events-list">
                         <!-- Fake events will be populated dynamically here by fakeData.js -->
@@ -76,7 +76,7 @@
 
             <!-- Personalized Event Recommendations Section -->
             <section id="events-for-you">
-                <h2>Events For You</h2>
+                <h2 class ="banner-heading">Events For You</h2>
                 <div class="event-list-container">
                     <button class="scroll-button left" onclick="scrollEventList('events-for-you', 'left')">&#9664;</button>
                     <div class="event-list horizontal-scroll" id="events-for-you-list">
