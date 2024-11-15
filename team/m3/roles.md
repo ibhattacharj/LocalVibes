@@ -31,9 +31,9 @@
 ## Adrien Bekker - Communication Lead
 - **Role**: Facilitates communication within the team. Adrien is responsible for maintaining and managing the team’s Slack workspace and ensuring that all members stay informed and engaged.
 - **Top 3 Commits**:
-  1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/blob/main/team/m2/data.md): Updated data.md file to include potential API's that can be used to reduce the 'reinventing the wheel' our team has to do. 
-  2. [Commit 2](): Emailed Professor Richards to extend deadline of Milestone #2 from Friday to Monday, encompassing team concerns surrounding the loss of time due to the confusion around the previous lab and the long weekend, alongside many scheduling conflicts due to exams.
-  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/blob/main/reports/Adrien.md): Updated reports file to contain my contributions to Milestone #2.
+  1. [Commit 1]([https://github.com/ibhattacharj/LocalVibes/blob/main/team/m2/data.md](https://github.com/ibhattacharj/LocalVibes/pull/8)): Used fake data to create a list of events and implemented a dynamic search feature that hides the home page while searching and reappears when search is not being used.
+  2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/pull/11): Added Placeholder Map on the right side of search results, made search tools styled according to rest of the page, added scrollbar to event results so that it is more user friendly.
+  3. [Commit 3]([https://github.com/ibhattacharj/LocalVibes/blob/main/reports/Adrien.md](https://github.com/ibhattacharj/LocalVibes/pull/12)): Used localStorage to keep the search term in the search bar for events even if tab was refreshed.
 
 ## Asher Katz - Quality Control
 - **Role**: Reviews team submissions and ensures that all deliverables meet the necessary quality standards. Frank is responsible for proofreading and ensuring the accuracy of all documents before submission.
