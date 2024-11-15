@@ -1,0 +1,120 @@
+.event-detail-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.event-detail {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #1a002b;
+    padding: 20px;
+    border-radius: 16px;
+    color: #e0c084;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.event-detail img {
+    width: 100%;
+    max-height: 300px; 
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.event-detail-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #e0c084; 
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.event-detail-genre,
+.event-detail-location{
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #e0c084;
+}
+
+#map-container {
+    margin: 20px 0;
+}
+
+#map-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+button {
+    padding: 12px 24px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Add button style */
+#add-to-interested {
+    background-color: #4caf50; /* Green background */
+    color: white;
+    font-weight: bold;
+}
+
+#add-to-interested:hover {
+    background-color: #388e3c; /* Darker green on hover */
+}
+
+/* Remove Button (Maroon) */
+#remove-from-interested {
+    background-color: #800000; /* Maroon background */
+    color: white;
+    font-weight: bold;
+}
+
+#remove-from-interested:hover {
+    background-color: #660000; /* Darker maroon on hover */
+}
+
+#rsvp-button {
+    background-color: #e0c084; 
+    color: #1a002b;
+}
+
+#rsvp-button:hover {
+    background-color: #b8860b; 
+}
+
+
+#share-button {
+    background-color: #e0c084; 
+    color: #1a002b;
+}
+
+#share-button:hover {
+    background-color: #b8860b; 
+}
+
+
+#back-to-main {
+    background-color: #e0c084; 
+    color: #1a002b;
+}
+
+#back-to-main:hover {
+    background-color: #b8860b; 
+}
