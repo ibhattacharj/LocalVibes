@@ -18,7 +18,6 @@ This feature offers users an interactive map that displays upcoming music events
 ## Personalized Event Recommendations
 The app will suggest events based on users' preferences, music taste, and past event attendance. This personalized approach helps users discover shows of interest, increasing engagement and attendance.
 
-<<<<<<< HEAD
 **Assigned to**: [Adrien]
 
 ## Collaborative Gig Scheduling for Artists
@@ -50,9 +49,6 @@ Users can directly support local artists by donating, purchasing merchandise, or
 Users can suggest or register unique spaces to host music events, increasing the variety of event locations and encouraging creativity in venue selection. 
 
 **Assigned to**: [Emma]
-=======
-**Assigned to**: Adrien
->>>>>>> 07aa085d21f603321decdbe7e46c311cd63a2504
 
 ## Event Sharing & RSVP
 This feature allows users to share events on social media and track RSVPs. It improves event planning for organizers and encourages wider participation through social sharing.
