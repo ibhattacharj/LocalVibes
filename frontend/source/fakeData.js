@@ -22,7 +22,7 @@ function populateFakeEvents(containerId, numEvents) {
         `;
 
         container.appendChild(eventCard);
-        allEvents.push({title: eventTitle, element: eventCard});
+        allEvents.push({title: eventTitle, genre:eventGenre, location:eventLocation, image: eventImage, element: eventCard});
     }
 }
 
