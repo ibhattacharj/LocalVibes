@@ -73,7 +73,46 @@ export function toEventDetails(event) {
     showEventDetails(event);
 
 }
+//For Profile Page(s)
+import { fakeEvents, userTags } from './fakeData.js'; 
 
+// Make Tags
+function addTags() {
+    const tagsContainer = document.querySelector('.tags-container');
+    userTags.forEach(tag => {
+        const tagElement = document.createElement('div');
+        tagElement.classList.add('tag');
+        tagElement.textContent = tag;
+        tagsContainer.appendChild(tagElement);
+    });
+}
+
+// Add Events
+function addEvents(eventType, containerId) {
+    const container = document.getElementById(containerId);
+    const events = fakeEvents[eventType]; // 'interested', 'upcoming', 'past'
+    events.forEach(event => {
+        const eventCard = document.createElement('div');
+        eventCard.classList.add('event-card');
+        eventCard.innerHTML = `
+            <img src="${event.image}" alt="${event.title}">
+            <h3>${event.title}</h3>
+            <p>${event.date}</p>
+        `;
+        container.appendChild(eventCard);
+    });
+}
+
+// Initialize Profile Page
+function initProfilePage() {
+    addTags();
+    addEvents('interested', 'interested-events');
+    addEvents('upcoming', 'upcoming-events');
+    addEvents('past', 'past-events');
+}
+
+// Run on DOM load
+document.addEventListener('DOMContentLoaded', initProfilePage);
 
 // Calls updateState()
 searchBar.value = JSON.parse(localStorage.getItem("search"));

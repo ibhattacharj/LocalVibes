@@ -164,3 +164,52 @@ body {
     max-height: 200px;
 }
 
+#profile-page {
+    padding: 20px;
+    background-color: #1e1e2f;
+    color: #e0c084;
+    text-align: center;
+}
+
+.profile-header h1 {
+    font-size: 2.5em;
+    color: #ffd700;
+}
+
+.tags-section, .events-section, .create-event-section {
+    margin: 20px 0;
+}
+
+.tags-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tag {
+    background-color: #ffd700;
+    color: #1e1e2f;
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tag:hover {
+    background-color: #b8860b;
+}
+
+#create-event-button {
+    background-color: #ffd700;
+    color: #1a002b;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#create-event-button:hover {
+    background-color: #b8860b;
+}

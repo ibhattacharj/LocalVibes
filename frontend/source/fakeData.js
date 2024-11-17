@@ -29,5 +29,20 @@ function populateFakeEvents(containerId, numEvents) {
     }
 }
 
+export const fakeEvents = {
+    interested: [
+        { title: 'Rock Fest 2024', date: '2024-12-01', image: 'rock-fest.jpg' },
+        { title: 'Jazz Night', date: '2024-11-20', image: 'jazz-night.jpg' }
+    ],
+    upcoming: [
+        { title: 'Electronic Beats', date: '2024-12-10', image: 'electronic-beats.jpg' }
+    ],
+    past: [
+        { title: 'Acoustic Jam', date: '2024-10-15', image: 'acoustic-jam.jpg' }
+    ]
+};
+
+export const userTags = ['Rock', 'Jazz', 'Electronic', 'Acoustic', 'Pop', 'Classical', 'Hip-Hop', 'Country'];
+
 populateFakeEvents('popular-events-list', 10);
 populateFakeEvents('events-for-you-list', 10);
