@@ -1,4 +1,5 @@
 import { faker } from 'https://esm.sh/@faker-js/faker';
+import { toEventDetails } from './main.js';
 
 export const allEvents = [];
 
@@ -20,9 +21,11 @@ function populateFakeEvents(containerId, numEvents) {
             <p>Genre: ${eventGenre}</p>
             <p>Location: ${eventLocation}</p>
         `;
+        const event = { title: eventTitle, genre: eventGenre, location: eventLocation, image: eventImage };
 
+        eventCard.addEventListener('click', ()=> toEventDetails(event));
         container.appendChild(eventCard);
-        allEvents.push({title: eventTitle, genre:eventGenre, location:eventLocation, image: eventImage, element: eventCard});
+        allEvents.push({... event, element: eventCard});
     }
 }
 
