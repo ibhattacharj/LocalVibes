@@ -55,7 +55,7 @@ function updateState(searchTerm) {
     }
 }
 
-function toEventDetails(event) {
+export function toEventDetails(event) {
 
     let eventDetailView = document.getElementById('event-detail-view');
     if (!eventDetailView) {
