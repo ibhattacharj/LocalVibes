@@ -154,11 +154,22 @@ footer {
     background-color: #2a2a3f;
     padding: 10px;
     border-radius: 8px;
-    position: relative;
     color: #e0c084;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.review {
+    background-color: #1a002b;
+    border-radius: 8px;
+    padding: 10px;
+    color: #e0c084;
+    font-size: 0.9em;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0; 
 }
 
 .submit-review {
@@ -209,3 +220,4 @@ textarea#review-text {
     resize: none;
     font-size: 1em;
 }
+
