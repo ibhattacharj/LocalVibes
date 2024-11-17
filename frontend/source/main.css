@@ -213,3 +213,81 @@ body {
 #create-event-button:hover {
     background-color: #b8860b;
 }
+
+/* Apply to the entire body and html to ensure full height */
+html, body {
+    height: 100%;
+    margin: 0; /* Remove default margins */
+}
+
+
+/* Set the body to be a flex container and fill the height */
+body {
+    display: flex;
+    flex-direction: column; /* Arrange children (header, main, footer) in a column */
+}
+
+
+/* Ensure the main content area grows to take up available space */
+main {
+    flex: 1; /* This makes the main section flexible and takes up the available space */
+}
+
+
+/* Basic navbar styling */
+.navbar {
+    background-color: #1A002B;
+    padding: 15px 0;
+}
+
+
+.navbar nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between; /* Space out the items (left and right) */
+    align-items: center; /* Align items vertically in the center */
+}
+
+
+.navbar nav ul li {
+    margin: 0 20px;
+}
+
+
+.navbar nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+
+.navbar nav ul li a:hover {
+    color: #f4f4f4;
+}
+
+
+/* Styling for the Home icon */
+.home-icon a {
+    font-size: 24px; /* Increase the size of the home icon */
+    color: white;
+}
+
+
+.home-icon a:hover {
+    color: #f4f4f4; /* Change icon color on hover */
+}
+
+
+/* Styling for the Profile icon */
+.profile-icon a {
+    font-size: 24px; /* Increase the size of the profile icon */
+    color: white;
+}
+
+
+.profile-icon a:hover {
+    color: #f4f4f4; /* Change icon color on hover */
+}
+
