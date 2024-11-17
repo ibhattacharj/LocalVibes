@@ -23,9 +23,9 @@ function populateFakeEvents(containerId, numEvents) {
         `;
         const event = { title: eventTitle, genre: eventGenre, location: eventLocation, image: eventImage };
 
+        eventCard.addEventListener('click', ()=> toEventDetails(event));
         container.appendChild(eventCard);
         allEvents.push({... event, element: eventCard});
-        eventCard.addEventListener('click', ()=> toEventDetails(event));
     }
 }
 
