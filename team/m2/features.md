@@ -25,8 +25,18 @@ This tool allows artists to plan joint performances or events together, facilita
 
 **Assigned to**: [Ipsita]
 
-## Fan-Generated Content
+## Fan-Generated Content (Not implemented because of reliance on profiles that have yet to be fully implemented)
 Fans can upload photos from events and leave reviews, contributing to a community-driven atmosphere on the platform.
+
+**Assigned to**: [Ipsita]
+
+## Events page - Reviews 
+When a single event is expanded, users can leave reviews and see all existing reviews, contributing to a community-driven atmosphere on the platform. Given that our events are currently generated with random fake data, have not yet incorporated IndexedDB; that is the next step.
+
+**Assigned to**: [Ipsita]
+
+## Events page - RSVP (Not implemented because of reliance on profiles that have yet to be fully implemented)
+When a single event is expanded, users can RSVP to the event; a little modal pops up asking for basic information such as if one is attending, how many people are in their party, and any additonal info. Again, have not incorporated IndexedDB just because profiles and events haven't been fully/properly created yet.
 
 **Assigned to**: [Zaida]
 
