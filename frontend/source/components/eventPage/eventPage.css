@@ -1,5 +1,6 @@
 .event-detail-view {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh; 
@@ -14,9 +15,14 @@
     background-color: #1a002b;
     padding: 20px;
     border-radius: 16px;
+    border: 5px solid;
+    border-image: linear-gradient(45deg, #ffd700, #b8860b) 1;
     color: #e0c084;
     text-align: center;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .event-detail img {
@@ -61,60 +67,22 @@ button {
     border-radius: 8px;
     font-size: 1em;
     cursor: pointer;
+    background-color: #e0c084;
+    color: #1a002b;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
     transform: scale(1.05);
+    background-color: #b8860b;
 }
 
-/* Add button style */
-#add-to-interested {
-    background-color: #4caf50; /* Green background */
-    color: white;
-    font-weight: bold;
-}
-
-#add-to-interested:hover {
-    background-color: #388e3c; /* Darker green on hover */
-}
-
-/* Remove Button (Maroon) */
-#remove-from-interested {
-    background-color: #800000; /* Maroon background */
-    color: white;
-    font-weight: bold;
-}
-
-#remove-from-interested:hover {
-    background-color: #660000; /* Darker maroon on hover */
-}
-
-#rsvp-button {
-    background-color: #e0c084; 
-    color: #1a002b;
-}
-
-#rsvp-button:hover {
-    background-color: #b8860b; 
-}
-
-
-#share-button {
-    background-color: #e0c084; 
-    color: #1a002b;
-}
-
-#share-button:hover {
-    background-color: #b8860b; 
-}
-
-
-#back-to-main {
-    background-color: #e0c084; 
-    color: #1a002b;
-}
-
-#back-to-main:hover {
-    background-color: #b8860b; 
+footer {
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #1e1e2f;
+    color: #e0c084;
 }

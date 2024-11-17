@@ -7,7 +7,7 @@ export function showEventDetails(event) {
     eventDetailView.innerHTML = `
         <div class="event-detail">
             <button id="back-to-main">Back to Main</button>
-            <img src="${event.image || 'default-image-url.jpg'}" alt="${event.title}" class="event-detail-image">
+            <img src="${event.image|| 'default-image-url.jpg'}" alt="${event.title}" class="event-detail-image">
             <h2 class="event-detail-title">${event.title}</h2>
             <p class="event-detail-genre">Genre: ${event.genre || 'N/A'}</p>
             <p class="event-detail-location">Location: ${event.location || 'N/A'}</p>
