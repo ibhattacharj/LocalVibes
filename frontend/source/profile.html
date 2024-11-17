@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="./components/eventPage/eventPage.css">
+    <link rel="stylesheet" href="main.css"> <!-- Main CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+
+        body {
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        .navbar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #1A002B;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar nav ul li {
+            margin: 0 10px;
+        }
+
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        /* Centered content styling */
+        main {
+            margin-top: 80px; /* Ensure content is below the navbar */
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Profile Header Styling */
+        .profile-header p {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Tags Section Styling */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            background-color: #ffd700;
+            color: #1e1e2f;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .tag:hover {
+            background-color: #b8860b;
+        }
+
+        /* Event Categories Styling */
+        .events-section {
+            margin-bottom: 30px;
+        }
+
+        .event-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .event-card {
+            flex: 0 0 250px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .event-card img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .event-card h3 {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .event-card p {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        #create-event-button {
+            padding: 10px 20px;
+            background-color: #ffd700;
+            color: #1A002B;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #create-event-button:hover {
+            background-color: #b8860b;
+        }
+
+        footer {
+            margin-top: 50px;
+            color: #666;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <header>
+        <div class="navbar">
+            <!-- home-->
+            <nav>
+                <ul>
+                    <li class="home-icon"><a href="index.html"><i class="fas fa-home"></i></a></li>
+                </ul>
+            </nav>
+
+            <!-- profile -->
+            <nav>
+                <ul>
+                    <li class="profile-icon"><i class="fas fa-user"></i></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <!-- profile page content -->
+    <main id="profile-page">
+        <div class="profile-header">
+            <p>Welcome, [User Name]!</p>
+        </div>
+
+        <!-- tags section -->
+        <section class="tags-section">
+            <h2>Tags</h2>
+            <div class="tags-container">
+                <div class="tag">Rock</div>
+                <div class="tag">Jazz</div>
+                <div class="tag">Electronic</div>
+                <div class="tag">Pop</div>
+            </div>
+        </section>
+
+        <!-- Events -->
+        <section class="events-section">
+            <h2>Interested In</h2>
+            <div id="interested-events" class="event-list">
+                <div class="event-card">
+                    <img src="rock-event.jpg" alt="Rock Event">
+                    <h3>Rock Fest 2024</h3>
+                    <p>Genre: Rock</p>
+                    <p>Location: New York</p>
+                </div>
+            </div>
+
+            <h2>Upcoming Events</h2>
+            <div id="upcoming-events" class="event-list">
+                <div class="event-card">
+                    <img src="jazz-event.jpg" alt="Jazz Event">
+                    <h3>Jazz Night</h3>
+                    <p>Genre: Jazz</p>
+                    <p>Location: Chicago</p>
+                </div>
+            </div>
+
+            <h2>Past Events</h2>
+            <div id="past-events" class="event-list">
+                <div class="event-card">
+                    <img src="electronic-event.jpg" alt="Electronic Event">
+                    <h3>Electronic Beats</h3>
+                    <p>Genre: Electronic</p>
+                    <p>Location: Miami</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- event button -->
+        <section class="create-event-section">
+            <button id="create-event-button">Create Event</button>
+        </section>
+    </main>
+
+    <!-- footer -->
+    <footer>
+        <p>&copy; 2024 LocalVibes. All rights reserved.</p>
+    </footer>
+</body>
+</html>
