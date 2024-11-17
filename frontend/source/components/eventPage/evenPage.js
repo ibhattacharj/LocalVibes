@@ -44,7 +44,7 @@ export function showEventDetails(event) {
     document.getElementById('back-to-main').addEventListener('click', backToMain);
     document.getElementById('share-button').addEventListener('click', () => shareEvent(event));
     document.getElementById('rsvp-button').addEventListener('click', rsvpEvent);
-    
+    document.getElementById("submit-review").addEventListener("click", submitReview); 
 }
 
 function updateInterested(event) {
@@ -76,4 +76,22 @@ function shareEvent(event) {
 function rsvpEvent() {
     // blank page for now
     window.open('about:blank', '_blank');
+}
+
+function submitReview() {
+  const reviewText = document.getElementById("review-text").value.trim(); 
+  const reviewBox = document.getElementById("review-box"); 
+
+  if (reviewText) {
+    const reviewElement = document.createElement("div");
+    reviewElement.className = "review"; 
+    reviewElement.textContent = reviewText; 
+
+    reviewBox.appendChild(reviewElement);
+
+    document.getElementById("review-text").value = "";
+  }
+//   else {
+//     alert("Please write a review before submitting.");
+//   }
 }
