@@ -24,8 +24,8 @@ export function showEventDetails(event) {
                 <div class="reviews-container">
                     <div class="reviews-header">
                         <h3>Reviews</h3>
-                        <button id="prev-review" class="review-nav">&lt;</button>
-                        <button id="next-review" class="review-nav">&gt;</button>
+                        <button id="prev-review" class="review-nav-left">&lt;</button>
+                        <button id="next-review" class="review-nav-right">&gt;</button>
                     </div>
                     <div class="review-box" id="review-box">
                     </div>
@@ -37,7 +37,6 @@ export function showEventDetails(event) {
             
             </div>
             
-        </div>
         </div>
     `;
 
