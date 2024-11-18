@@ -44,3 +44,8 @@
 - **Details**: Added basic navbar
 - **Link to Commit**: [Commit on index.html](https://github.com/ibhattacharj/LocalVibes/commit/6c5fff609cde2c0f2f4fae5177c25679b0b91e33)
 
+
+### November 17, 2024
+- **Task**: Created sequence diagram for RSVP modal
+- **Details**: Designed a sequence diagram illustrating the interaction flow for the RSVP modal. The diagram captures key interactions between the user, the modal interface, and the RSVP form submission process, including data input, validation, and logging. This visual representation aids in understanding and documenting the RSVP functionality.
+- **Link to Commit**: [Commit on feature-sequence-diagram.md](https://github.com/ibhattacharj/LocalVibes/commit/82657ba8f0af36e66d673bcdca0f06e6a67a4a5b)

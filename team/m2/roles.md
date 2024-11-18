@@ -3,9 +3,9 @@
 ## Ipsita Bhattacharjee - Project Manager
 - **Role**: Oversees the overall project timeline, ensures that milestones are met, and coordinates the team’s efforts. Ipsita is responsible for setting meeting agendas and ensuring that the team stays focused on project goals.
 - **Top 3 Commits**:
-  1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/commit/ed3da11a70492fcff17d624e7a2811f4e40e6d7e): Created the initial GitHub repository and set up the project structure, including the `team/m2` folder for milestone submissions.
-  2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/commit/860409f6704fbd1cb1d0a6367bf7f00d8719938e): Organized and led the first team meeting, distributing tasks and ensuring deadlines were agreed upon.
-  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/commit/14708073f8b343d3122adcf081f7ace8414aa432): Drafted the initial version of the `problem.md` file and facilitated team feedback to finalize it.
+  1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/commit/ba7760f5fc98ecbdface322c5c7312960d0bd456): Developed the HTML outline for the entire website, enabling seamless addition of webpages and components to the DOM during development; wanted my groupmates to have a centralized and non-confusing place to start putting code.
+  2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/commit/208c129df44c03d189e4ad860ae5e344baa7f5b4): Messaged the groupchat to figure out what meeting time worked for everyone, and we met in the evening the next day. I facilitated discussion as to how to integrate a few remaining components, as well as task delegation for us to fully complete our milestone #3 submission.
+  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/commit/05ad394dfcb52baf6df4a01a2a91f1433f103acf): Led discussion on what updates all of us needed to make on `features.md` given that we didn't implement exactly everything we wanted.
 
 ## Zainab Al Namer - Timekeeper
 - **Role**: Manages the timing of all team activities. Bob ensures that meetings start and end on time, keeps track of deadlines, and reminds the team of upcoming due dates.
