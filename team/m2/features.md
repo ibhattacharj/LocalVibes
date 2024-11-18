@@ -62,7 +62,7 @@ Users can create events by providing details such as name, description, location
 
 **Contribution:** Emma successfully implemented the Event Creation Form, which includes the following fields:
 
-**Event Name
+Event Name
 
 Description
 
@@ -72,7 +72,7 @@ Tags
 
 Date and Time
 
-Image Upload (for flyers or posters)**
+Image Upload (for flyers or posters)
 
 ## Event Sharing & RSVP
 This feature allows users to share events on social media and track RSVPs. It improves event planning for organizers and encourages wider participation through social sharing.
