@@ -53,16 +53,25 @@ Users can suggest or register unique spaces to host music events, increasing the
 **Contribution**: Emma worked on a similar feature by creating a form that allows users to register events. This feature supports both individual users and event organizers, encouraging diverse and creative event spaces. The form includes input fields for venue details like location, capacity, and type. Focus was directed toward implementing the Event Creation feature first, as it’s foundational to the platform’s functionality. The Crowdsourced Venues feature will build upon similar form-handling techniques.
 
 ## Event Creation
+
 Users can create events by providing details such as name, description, location, time, and optional tags. This feature forms the core functionality of the platform, enabling event organizers to share and promote their shows.
+
 **Assigned to:** [Emma]
+
 **Status:** Implemented
+
 **Contribution:** Emma successfully implemented the Event Creation Form, which includes the following fields:
 
 **Event Name
+
 Description
+
 Location
+
 Tags
+
 Date and Time
+
 Image Upload (for flyers or posters)**
 
 ## Event Sharing & RSVP
