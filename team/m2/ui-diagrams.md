@@ -80,7 +80,7 @@ Users looking to discover events by location can explore the map to see what's n
 
 ## 6. Event Sharing
 
-The Event Creation Screen allows event organizers to create and publish events by providing key details like the event name, description, location, time, and optional tags. Organizers can also upload a flyer or poster for the event.
+The Event Creation Form allows event organizers to create and publish events by providing key details like the event name, description, location, time, and optional tags. Organizers can also upload a flyer or poster for the event.
 
 Components:
 
@@ -89,7 +89,7 @@ Components:
 3. Location Field: A text input for the event's location (required).
 4. Tags Field: A text input for specifying event categories or genres (e.g., "Jazz", "Open Mic
 5. Time Picker: A date and time input for setting the event schedule (required).
-6. . Image Upload: A file input for uploading a flyer or poster (optional).
+6. Image Upload: A file input for uploading a flyer or poster (optional).
 7. Submit Button: A button that validates the inputs and saves the event data to database.
 
 ![Event Creation Form](./images/event-creation-form.png)
