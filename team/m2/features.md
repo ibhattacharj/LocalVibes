@@ -11,7 +11,7 @@ Artists can create profiles featuring bios, and details of upcoming shows. This 
 **Assigned to**: Asher
 
 ## Interactive Event Map
-This feature offers users an interactive map that displays upcoming music events by location. Users can explore events happening in various venues, house parties, or other unconventional spaces, helping them discover nearby shows and plan attendance effectively.
+This feature offers users an interactive map that displays upcoming music events by location. Users can explore events happening in various venues, house parties, or other unconventional spaces, helping them discover nearby shows and plan attendance effectively. (could not get to this for milestone three, profile bar took all effort)
 
 **Assigned to**: Adrien, Jacob
 
@@ -92,7 +92,8 @@ The app will provide insights on attendance trends, popular genres, and event pr
 **Assigned to**: Adrien
 
 ## Local Music notifications
-Users can subscribe to a notification system that provides regular updates on upcoming events, artist spotlights, and local music news. 
+Users can subscribe to a notification system that provides regular updates on upcoming events, artist spotlights, and local music news. (could not get to this for milestone three, profile bar took all effort)
+
 
 **Assigned to**: Asher
 
