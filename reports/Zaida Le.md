@@ -3,5 +3,5 @@ Contribution Log for Zaida Le
    Link: gh pr checkout 26 - https://github.com/ibhattacharj/LocalVibes/pull/26
 2. Implemented the tags feature. This allows for events to be catagorized by which genre of music the user is looking for. This will also be used in the profile section, where users can display which genres they are mainly interested in. 
   Link: gh pr checkout 27 - https://github.com/ibhattacharj/LocalVibes/pull/27
-3. 
+3. Created a Mermaid sequence diagram to illustrate the interaction flow for the Login/Signup feature.
    
