@@ -45,6 +45,6 @@
 ## Jacob Torres - Documentation Lead
 - **Role**: Responsible for overseeing the organization and maintenance of all project documentation. Sarah ensures that all documents are up to date, well-organized, and accessible to team members.
 - **Top 3 Commits**:
-  1. [Commit 1](https://github.com/repo/commit1): 
-  2. [Commit 2](https://github.com/repo/commit2): 
-  3. [Commit 3](https://github.com/repo/commit3): 
+  1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/commit/9d9170ae64e7580a3c76e7a802657deae66af0ae): Added main tabs for "Events for You" and "Popular Events" with fakeData file to mimic event uploads. 
+  2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/commit/5af771bb7ac752cf9b11b8fc654e0e955d3c75df): Added css style basis 
+  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/commit/7f64c4b7063b5ed9de5e08577243de5ded911625): Made Events srollable and interactable
