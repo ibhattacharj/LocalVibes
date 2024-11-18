@@ -17,10 +17,10 @@
 ## Zaida - Note-Taker
 - **Role**: Records detailed notes during meetings and ensures that action items are clearly communicated. Carol is responsible for distributing meeting minutes to the team after each session.
 - **Top 3 Commits**:
-  1. [Commit 1](): Took meeting notes during our Milestone 2 meetup pertaining to our project plan and what needs to be accomplished. 
-  2. [Commit 2](): Added to reports file
-  3. [Commit 3](): Updated roles.md
-
+  1. [Commit 1](): Implemented the login/signup feature. In this commit, three different files were created, login.html, login.css, and signup.html. The two html pages allow a user to input data into each required text box. If the user does not already have an account, they can switch to the signup page and visa versa.
+2. [Commit 2](): Implemented the tags feature. This allows for events to be catagorized by which genre of music the user is looking for. This will also be used in the profile section, where users can display which genres they are mainly interested in. 
+3. [Commit 3](): Created a Mermaid sequence diagram to illustrate the interaction flow for the Login/Signup feature.
+   
 ## Emma Azzi - Task Manager
 - **Role**: Responsible for organizing and tracking team tasks. Emma manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
 - **Top 3 Commits**:
