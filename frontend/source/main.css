@@ -291,3 +291,54 @@ main {
     color: #f4f4f4; /* Change icon color on hover */
 }
 
+/* Profile Header */
+.profile-header p {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Tags Section */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.tag {
+    background-color: #ffd700;
+    color: #1e1e2f;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tag:hover {
+    background-color: #b8860b;
+}
+
+/* Create Event Button */
+#create-event-button {
+    padding: 10px 20px;
+    background-color: #ffd700;
+    color: #1A002B;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#create-event-button:hover {
+    background-color: #b8860b;
+}
+
+/* Footer */
+footer {
+    margin-top: 50px;
+    color: #666;
+}
