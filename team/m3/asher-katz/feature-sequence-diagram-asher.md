@@ -1,42 +1,42 @@
-graph TD
-    A[User Interface] -->|Clicks Home Icon| B[Home Page (index.html)]
-    A -->|Clicks Profile Icon| C[Profile Page (profile.html)]
+sequenceDiagram
+    participant User
+    participant HomeIcon
+    participant ProfileIcon
+    participant HomePage
+    participant ProfilePage
+    participant Navbar
+    participant EventSearch
+    participant PopularEvents
+    participant EventsForYou
+    participant ProfileHeader
+    participant TagsSection
+    participant InterestedEvents
+    participant UpcomingEvents
+    participant PastEvents
+    participant CreateEventButton
+    participant CSS
+    participant JS
 
-    subgraph Navbar
-        D[Home Icon] --> B
-        E[Profile Icon] --> C
-    end
+    User->>HomeIcon: Clicks Home Icon
+    HomeIcon->>HomePage: Navigate to index.html
+    User->>ProfileIcon: Clicks Profile Icon
+    ProfileIcon->>ProfilePage: Navigate to profile.html
 
-    subgraph Home Page (index.html)
-        F[Event Search Section]
-        F --> G[Search Bar]
-        F --> H[Filters: Genre, Location, Venue Type]
-        F --> I[Interactive Map Section]
-        J[Popular Events Section] -->|Scroll Buttons| K[Horizontal Scroll for Popular Events]
-        L[Events For You Section] -->|Scroll Buttons| M[Horizontal Scroll for Personalized Events]
-    end
+    HomePage->>EventSearch: Displays Search Bar, Filters, and Interactive Map
+    EventSearch->>CSS: Apply styles from main.css
+    EventSearch->>JS: Add dynamic event data via fakeData.js
+    HomePage->>PopularEvents: Displays popular events with scroll functionality
+    HomePage->>EventsForYou: Displays personalized events with scroll functionality
 
-    subgraph Profile Page (profile.html)
-        N[Profile Header: "Welcome, [User Name]!"]
-        N --> O[Tags Section: Tags like Rock, Jazz, etc.]
-        P[Interested Events Section] -->|Dynamic Events| Q[Horizontal Scroll for Interested Events]
-        R[Upcoming Events Section] -->|Dynamic Events| S[Horizontal Scroll for Upcoming Events]
-        T[Past Events Section] -->|Dynamic Events| U[Horizontal Scroll for Past Events]
-        V[Create Event Button]
-    end
-
-    subgraph Styling (CSS)
-        W[main.css]
-        W --> Navbar
-        W --> Home Page
-        W --> Profile Page
-    end
-
-    subgraph Scripts (JS)
-        X[fakeData.js]
-        X -->|Dynamic Event Data| Home Page
-        X -->|Dynamic Event Data| Profile Page
-        Y[main.js]
-        Y -->|Scroll Functionality| J
-        Y -->|Scroll Functionality| L
-    end
+    ProfilePage->>ProfileHeader: Displays "Welcome, [User Name]!"
+    ProfileHeader->>CSS: Apply styles from main.css
+    ProfilePage->>TagsSection: Displays user tags like Rock, Jazz, etc.
+    TagsSection->>CSS: Apply styles from main.css
+    ProfilePage->>InterestedEvents: Displays dynamic interested events
+    InterestedEvents->>JS: Add dynamic event data via fakeData.js
+    ProfilePage->>UpcomingEvents: Displays dynamic upcoming events
+    UpcomingEvents->>JS: Add dynamic event data via fakeData.js
+    ProfilePage->>PastEvents: Displays dynamic past events
+    PastEvents->>JS: Add dynamic event data via fakeData.js
+    ProfilePage->>CreateEventButton: Displays "Create Event" button
+    CreateEventButton->>CSS: Apply styles from main.css
