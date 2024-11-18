@@ -92,6 +92,8 @@ Components:
 6. . Image Upload: A file input for uploading a flyer or poster (optional).
 7. Submit Button: A button that validates the inputs and saves the event data to database.
 
+![Event Creation Form](./images/event-creation-form.png)
+
 Use Case:
 
 A user (e.g., event organizer) fills in all required fields and optionally uploads a flyer or poster. Once the Submit Button is clicked:
