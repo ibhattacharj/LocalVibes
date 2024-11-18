@@ -33,17 +33,17 @@ Fans can upload photos from events and leave reviews, contributing to a communit
 ## Events page - Reviews 
 When a single event is expanded, users can leave reviews and see all existing reviews, contributing to a community-driven atmosphere on the platform. Given that our events are currently generated with random fake data, have not yet incorporated IndexedDB; that is the next step.
 
-**Assigned to**: [Ipsita]
+**Assigned to**: Zainab and Ipsita
 
 ## Events page - RSVP (Not implemented because of reliance on profiles that have yet to be fully implemented)
 When a single event is expanded, users can RSVP to the event; a little modal pops up asking for basic information such as if one is attending, how many people are in their party, and any additonal info. Again, have not incorporated IndexedDB just because profiles and events haven't been fully/properly created yet.
 
-**Assigned to**: [Zaida]
+**Assigned to**: [Ipsita]
 
 ## Support Local Music
-Users can directly support local artists by donating, purchasing merchandise, or buying tickets through the app. This feature provides financial backing for artists and promotes local talent sustainably.
+Users can directly support local artists by donating, purchasing merchandise, or buying tickets through the app. This feature provides financial backing for artists and promotes local talent sustainably. (We are waiting until the implementation of the profiles is finalized, so we can have seprate user interfaces for artists, and then we can implement this feature)
 
-**Assigned to**: [Zainab]
+**Assigned to**: [Zaida]
 
 ## Crowdsourced Venues
 Users can suggest or register unique spaces to host music events, increasing the variety of event locations and encouraging creativity in venue selection. 
@@ -98,7 +98,7 @@ Users can subscribe to a notification system that provides regular updates on up
 **Assigned to**: Asher
 
 ## New Artist Showcase
-This feature highlights emerging talent in the local scene, providing increased visibility for new artists for those users that want to support artists early in their career. 
+This feature highlights emerging talent in the local scene, providing increased visibility for new artists for those users that want to support artists early in their career. (this feature will require more information about the users, and we don't have that yet. Thus, couldn't be implemented)
 
 **Assigned to**: Zainab
 
@@ -137,6 +137,7 @@ This feature highlights emerging talent in the local scene, providing increased 
 - Share Link
 - Reviews (host enabled)
 - Description / Tags (includes artists)
+- Back To main button
 
 **Assigned to**: Zainab, Ipsita
 
