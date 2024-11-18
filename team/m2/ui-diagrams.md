@@ -78,6 +78,31 @@ Users looking to discover events by location can explore the map to see what's n
 
 ---
 
+## 6. Event Sharing
+
+The Event Creation Screen allows event organizers to create and publish events by providing key details like the event name, description, location, time, and optional tags. Organizers can also upload a flyer or poster for the event.
+
+Components:
+
+1. Event Name Field: A text input for the event title (required).
+2. Description Field: A text area for providing details about the event (required).
+3. Location Field: A text input for the event's location (required).
+4. Tags Field: A text input for specifying event categories or genres (e.g., "Jazz", "Open Mic
+5. Time Picker: A date and time input for setting the event schedule (required).
+6. . Image Upload: A file input for uploading a flyer or poster (optional).
+7. Submit Button: A button that validates the inputs and saves the event data to database.
+
+Use Case:
+
+A user (e.g., event organizer) fills in all required fields and optionally uploads a flyer or poster. Once the Submit Button is clicked:
+
+1. Inputs are validated to ensure required fields are not empty.
+2. The event details are saved to IndexedDB for persistence.
+3. The form resets, ready for the next entry.
+
+
+---
+
 ## Conclusion
 
 Each screen in **LocalVibes** focuses on user experience by providing an easy-to-navigate interface. The wireframes showcase how users can explore local music events, manage their profiles, and contribute to the community by donating or reviewing shows.
