@@ -24,9 +24,9 @@
 ## Emma Azzi - Task Manager
 - **Role**: Responsible for organizing and tracking team tasks. Emma manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
 - **Top 3 Commits**:
-  1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/commit/6ed60331e74d2c7cac7b54dc30e25556e4ad8ca6): Added UI markdown, describing UI wireframe diagrams in detail
-  2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/commit/05231c0acca14c73dc098da9f60334efa4f2b633): Added Images folder, with images including screenshots from wireframing session
-  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/commit/b2d05f26408ee5bff467bc80fcf2e493388506e7): Updated the reports file to reflect my contributions for Milestone 2. 
+  1. [Commit 1](https://github.com/ibhattacharj/LocalVibes/commit/560a0be1fb101e6958604821706141a5c4e08fa2): Added UI markdown, describing UI wireframe diagrams in detail
+  2. [Commit 2](https://github.com/ibhattacharj/LocalVibes/commit/d18595a9da0fe6b9063ef9436d33a4fed9a37f25): Added image describing Event-Creation Form for ui-diagram.md
+  3. [Commit 3](https://github.com/ibhattacharj/LocalVibes/commit/d075589769bf81643b56d58afea9c291991a6c03): Updated the reports file to reflect my contributions for Milestone 2. 
 
 ## Adrien Bekker - Communication Lead
 - **Role**: Facilitates communication within the team. Adrien is responsible for maintaining and managing the team’s Slack workspace and ensuring that all members stay informed and engaged.
