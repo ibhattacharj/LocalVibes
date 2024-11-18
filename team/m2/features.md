@@ -10,6 +10,11 @@ Artists can create profiles featuring bios, and details of upcoming shows. This 
 
 **Assigned to**: Asher
 
+## Login and Signup
+Users and Artists can login to their accounts using the login page. This prompts the user to enter their username and password as a requirement. If the user or artist does not yet have an account, they can create one using the signup page. This page requires an email, username, and password. They are then prompted back to the login page to sign into their new account.
+
+**Assigned to**: Zaida
+
 ## Interactive Event Map
 This feature offers users an interactive map that displays upcoming music events by location. Users can explore events happening in various venues, house parties, or other unconventional spaces, helping them discover nearby shows and plan attendance effectively. (could not get to this for milestone three, profile bar took all effort)
 
