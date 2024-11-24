@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./components/eventPage/eventPage.css">
     <link rel="stylesheet" href="main.css"> <!-- Link to your CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
     <script type='module' src="fakeData.js" defer></script> <!-- Link to your generated fake events script -->
     <script type='module' src="main.js" defer></script>
 </head>
@@ -69,9 +71,7 @@
             <!-- Interactive Map Section and Search -->
             <div id="search-and-map">
                 <div id="search-results"></div>
-                <div id="map-container">
-                    <img src="https://developers.google.com/static/maps/images/landing/hero_maps_static_api.png" />
-                </div>
+                <div id="map-container"></div>
             </div>
 
             <!-- Popular Events Section -->
