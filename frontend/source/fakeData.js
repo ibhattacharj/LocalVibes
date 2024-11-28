@@ -1,33 +1,40 @@
 import { faker } from 'https://esm.sh/@faker-js/faker';
 import { toEventDetails } from './main.js';
-
 export const allEvents = [];
 
-function populateFakeEvents(containerId, numEvents) {
-    const container = document.getElementById(containerId);
+//commented out as it interferes with database inputs
+async function populateFakeEvents(containerId, numEvents) {
+    try {
+        const response = await fetch('http://127.0.0.1:5000/events/popular');
+        const popularEvents = response.data;
+        const popularEventsList = document.getElementById('popular-events-list');
+        popularEventsList.innerHTML = '';
 
-    for (let i = 0; i < numEvents; i++) {
-        const eventCard = document.createElement('div');
-        eventCard.classList.add('event-card');
+        searchResults.forEach(e => {
+            const eventCard = document.createElement('div');
+            eventCard.classList.add('event-card');
 
-        const eventTitle = faker.company.catchPhrase();
-        const eventGenre = faker.music.genre();
-        const eventLocation = faker.location.city();
-        const eventImage = faker.image.urlPicsumPhotos({ width: 640, height: 480 }); //generates random image URL from Picsum
+            eventCard.innerHTML = `
+                <img src="${e.image || 'https://via.placeholder.com/150'}" alt="Event Image">
+                <h3>${e.name}</h3>
+                <p>Genre: ${e.tags}</p>
+                <p>Location: ${e.location}</p>
+                <p>Latitude: ${e.lat}</p>
+                <p>Longitude: ${e.long}</p>
+            `;
+            const event = { title: eventTitle, genre: eventGenre, location: eventLocation, image: eventImage };
 
-        eventCard.innerHTML = `
-            <img src="${eventImage}" alt="Event Image">
-            <h3>${eventTitle}</h3>
-            <p>Genre: ${eventGenre}</p>
-            <p>Location: ${eventLocation}</p>
-        `;
-        const event = { title: eventTitle, genre: eventGenre, location: eventLocation, image: eventImage };
-
-        eventCard.addEventListener('click', ()=> toEventDetails(event));
-        container.appendChild(eventCard);
-        allEvents.push({... event, element: eventCard});
+            eventCard.addEventListener('click', ()=> toEventDetails(event));
+            container.appendChild(eventCard);
+            allEvents.push({... event, element: eventCard});
+        });
+    }
+    catch (error) {
+        console.error('Error fetching events:', error);
     }
 }
+    
+
 
 export const fakeEvents = {
     interested: [
