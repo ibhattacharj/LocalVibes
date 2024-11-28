@@ -147,6 +147,8 @@ async function fetchSearchResults(searchTerm, locationTerm) {
       noResultsMessage.textContent = "No events found matching your search.";
       searchResultsContainer.appendChild(noResultsMessage);
     }
+
+    addMarkersToMap(searchResults);
   } catch (error) {
     console.error('Error fetching search results:', error);
   }
@@ -172,6 +174,100 @@ map.addControl(
         showUserHeading: true
     })
 );
+
+let markers = [];
+
+function addMarkersToMap(events) {
+  // Clear existing markers 
+  if (map.getLayer('event-markers')) {
+      map.removeLayer('event-markers');
+      map.removeSource('event-markers');
+  }
+
+  markers.forEach(marker => {
+    marker.remove();
+  });
+
+  if (!events || events.length === 0) {
+      return;
+  }
+
+  markers = [];
+
+  events.forEach(event => {
+    let marker = new mapboxgl.Marker()
+    .setLngLat([parseFloat(event.long), parseFloat(event.lat)])
+    .addTo(map);
+
+    markers.push(marker);
+  })
+
+  const features = events.map(event => ({
+      type: 'Feature',
+      geometry: {
+          type: 'Point',
+          coordinates: [parseFloat(event.long), parseFloat(event.lat)] 
+      },
+      properties: {
+          title: event.name,
+          description: event.description
+      }
+  }));
+
+  map.addSource('event-markers', {
+      type: 'geojson',
+      data: {
+          type: 'FeatureCollection',
+          features: features
+      }
+  });
+
+  map.addLayer({
+      id: 'event-markers',
+      type: 'symbol',
+      source: 'event-markers',
+      layout: {
+          'icon-image': 'marker-15',
+          'icon-size': 1.5,
+          'text-field': ['get', 'title'],
+          'text-offset': [0, 1.25],
+          'text-anchor': 'top'
+      }
+  });
+
+  // Fit map bounds to markers
+  const bounds = new mapboxgl.LngLatBounds();
+  features.forEach(feature => bounds.extend(feature.geometry.coordinates));
+  if (features.length > 0) { // Avoid error if no features exist
+      map.fitBounds(bounds, { padding: 50 });
+  }
+
+  // Add click event to markers
+  map.on('click', 'event-markers', (e) => {
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const description = e.features[0].properties.description;
+
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(description)
+          .addTo(map);
+  });
+
+  // Change the cursor to a pointer when the mouse is over the places layer.
+  map.on('mouseenter', 'event-markers', () => {
+      map.getCanvas().style.cursor = 'pointer';
+  });
+
+  // Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'event-markers', () => {
+  map.getCanvas().style.cursor = '';
+});
+}
+
 
 searchBar.addEventListener('input', () => {
     const searchTerm = searchBar.value.toLowerCase();
