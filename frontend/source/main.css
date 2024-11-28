@@ -96,12 +96,6 @@ body {
     position: sticky;
 }
 
-#map-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
 .scroll-button {
     background-color: #1e1e2f;
     color: #e0c084;

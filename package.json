@@ -8,5 +8,6 @@
     "express": "^4.21.1",
     "sequelize": "^6.37.5",
     "sqlite3": "^5.1.7"
+    "mapbox-gl": "^3.8.0"
   }
 }

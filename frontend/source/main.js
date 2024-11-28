@@ -147,6 +147,27 @@ async function fetchSearchResults(searchTerm) {
   }
 }
 
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWJla2tlciIsImEiOiJjbTN3NGxoZTMxM2cwMmpwdTNjODEyMXBvIn0.9o4pgS4R2dJUmwKJseNr5A';
+
+const map = new mapboxgl.Map({
+    container: 'map-container',
+    center: [-74.5, 40],
+    zoom: 9
+});
+
+// Add geolocate control to the map.
+map.addControl(
+    new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        // When active the map will receive updates to the device's location as it changes.
+        trackUserLocation: true,
+        // Draw an arrow next to the location dot to indicate which direction the device is heading.
+        showUserHeading: true
+    })
+);
+
 searchBar.addEventListener('input', () => {
     const searchTerm = searchBar.value.toLowerCase();
 
