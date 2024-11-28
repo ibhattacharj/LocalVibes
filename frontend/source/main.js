@@ -5,6 +5,7 @@ console.log("JavaScript Loaded");
 
 //grab all the necessary elements from DOM
 const searchBar = document.getElementById('search-bar');
+const locationBar = document.getElementById('location-filter');
 const popularEventsSection = document.getElementById('popular-events');
 const eventsForYouSection = document.getElementById('events-for-you');
 const searchResultsContainer = document.getElementById("search-results"); 
@@ -112,9 +113,13 @@ async function fetchEventsForYou() {
 
 
 //fetch search results from the server
-async function fetchSearchResults(searchTerm) {
+async function fetchSearchResults(searchTerm, locationTerm) {
   try {
-    const response = await fetch(`http://127.0.0.1:5000/events/search?query=${encodeURIComponent(searchTerm)}`);
+    const url = new URL('http://127.0.0.1:5000/events/search');
+    url.searchParams.append('query', searchTerm);
+    url.searchParams.append('location', locationTerm);
+
+    const response = await fetch(url.toString());
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -170,28 +175,38 @@ map.addControl(
 
 searchBar.addEventListener('input', () => {
     const searchTerm = searchBar.value.toLowerCase();
+    const locationTerm = locationBar.value.toLowerCase();  
 
     //utilizes localStorage
     localStorage.setItem("search", JSON.stringify(searchBar.value));
-    updateState(searchTerm);
+    updateState(searchTerm, locationTerm);
+});
+
+locationBar.addEventListener('input', () => {
+  const locationTerm = locationBar.value.toLowerCase();
+  const searchTerm = searchBar.value.toLowerCase();
+
+  //utilizes localStorage
+  localStorage.setItem("location", JSON.stringify(locationBar.value));
+  updateState(searchTerm, locationTerm);
 });
 
 //update page content based on the current search term
-function updateState(searchTerm) {
+function updateState(searchTerm, locationTerm) {
 
     if (!searchResultsContainer || !mapContainer || !popularEventsSection || !eventsForYouSection) {
         console.error('One or more required elements are missing');
         return;
     }
 
-    if (searchTerm.length > 0) {
+    if (searchTerm.length > 0 || locationTerm.length > 0) {
         popularEventsSection.style.display = 'none';
         eventsForYouSection.style.display = 'none';
 
         searchResultsContainer.style.display = 'block';  
         mapContainer.style.display = 'block';
 
-        fetchSearchResults(searchTerm); //fetch search results from the server
+        fetchSearchResults(searchTerm, locationTerm); //fetch search results from the server
     } else {
         searchResultsContainer.style.display = 'none';
         mapContainer.style.display = 'none';
@@ -277,4 +292,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 searchBar.value = JSON.parse(localStorage.getItem("search"));
-updateState(JSON.parse(localStorage.getItem("search")));
+locationBar.value = JSON.parse(localStorage.getItem("location"));
+updateState(JSON.parse(localStorage.getItem("search")), JSON.parse(localStorage.getItem("location")));
