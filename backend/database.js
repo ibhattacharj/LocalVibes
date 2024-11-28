@@ -1,4 +1,3 @@
-//import { Sequelize, DataTypes } from 'sequelize'; //sequelize setup for SQLite database
 const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize({ // initialize sequelize with SQLite

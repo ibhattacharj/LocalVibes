@@ -1,27 +1,23 @@
-//import express from 'express';
-//import { Sequelize } from 'sequelize';
-//import { Event, User } from './database.js';
-
 const { Event, sequelize, User } = require('./database.js');
 const express = require('express')
 const cors = require('cors');
 
 const { Sequelize } = require('sequelize');
-const axios = require('axios');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; //set port. Defaults to 5000 if not provided
 
-//JSON parse
+//middleware for parsing JSON bodies in requests
 app.use(express.json());
 
-//CORS parse
+// Configure CORS to allow requests from front-end origin specified by proceeding URL
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    origin: 'http://127.0.0.1:5500',  //restrict access to this origin 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], //allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'] //allowed headers
   }));
 
+//authenticate Sequelize connection to database
 sequelize.authenticate()
   .then(() => {
     console.log('Database connection has been established successfully.');
@@ -32,7 +28,6 @@ sequelize.authenticate()
 
 //popular events endpoint
 app.get('/events/popular', async (req, res) => {
-  console.log('Endpoint /events/popular called');
   try {
     console.log('Received request for popular events');
 
@@ -47,11 +42,10 @@ app.get('/events/popular', async (req, res) => {
       return res.status(500).json({ error: 'Event model not available' });
     }
 
-    const popularEvents = await Event.findAll();
-    //  {
-    //  order: [['views', 'DESC']],
-    //  limit: 10,
-    //});
+    const popularEvents = await Event.findAll({
+      order: [['views', 'DESC']],
+      limit: 10,
+    });
 
     if (!popularEvents || popularEvents.length === 0) {
       console.log('No popular events found.');
@@ -68,10 +62,29 @@ app.get('/events/popular', async (req, res) => {
 //Events for You endpoint
 app.get('/events/for-you', async (req, res) => {
     try {
+      console.log('Received request for personalized events');
+
+      if (!sequelize) {
+        console.error('Sequelize instance is not available.');
+      } else {
+        console.log('Sequelize instance is available.');
+      }
+
+      if (!Event) {
+        console.error('Event model is not defined');
+        return res.status(500).json({ error: 'Event model not available' });
+      }
+
       const events = await Event.findAll(); //for now returns all events
       
       //must implement filtering logic to determine user preferences here. Will likely filter based on user tags and/or past events
       
+      if (!events || events.length === 0) {
+        console.log('No popular events found.');
+      } else {
+        console.log('Fetched popular events:', JSON.stringify(events, null, 2));
+      }
+
       res.status(200).json(events);
     } catch (error) {
       console.error('Error fetching personalized events:', error);
@@ -98,6 +111,7 @@ app.get('/events/nearby', async (req, res) => {
 app.get('/events/search', async (req, res) => {
   const { query, genre, location } = req.query;
   try {
+    //search w/ dynamic filters if parameters provided
     const searchResults = await Event.findAll({
       where: {
         name: query ? { [Sequelize.Op.like]: `%${query}%` } : undefined,
