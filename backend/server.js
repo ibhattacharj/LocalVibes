@@ -110,15 +110,19 @@ app.get('/events/nearby', async (req, res) => {
 //search events endpoint
 app.get('/events/search', async (req, res) => {
   const { query, genre, location } = req.query;
+  const whereClause = {};
+  if (query) {
+    whereClause.name = { [Sequelize.Op.like]: `%${query}%` };
+  }
+  if (genre) {
+    whereClause.tags = { [Sequelize.Op.like]: `%${genre}%` };
+  }
+  if (location) {
+    whereClause.location = { [Sequelize.Op.like]: `%${location}%` };
+  }
+
   try {
-    //search w/ dynamic filters if parameters provided
-    const searchResults = await Event.findAll({
-      where: {
-        name: query ? { [Sequelize.Op.like]: `%${query}%` } : undefined,
-        tags: genre ? { [Sequelize.Op.like]: `%${genre}%` } : undefined,
-        location: location ? { [Sequelize.Op.like]: `%${location}%` } : undefined,
-      },
-    });
+    const searchResults = await Event.findAll({ where: whereClause});
     res.status(200).json(searchResults);
   } catch (error) {
     res.status(500).json({ error: 'Failed to search events' });
