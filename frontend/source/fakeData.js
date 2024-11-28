@@ -1,14 +1,11 @@
 import { faker } from 'https://esm.sh/@faker-js/faker';
 import { toEventDetails } from './main.js';
-//import axios from 'https://cdn.skypack.dev/axios'; 
-import axios from 'axios';
-
 export const allEvents = [];
 
 //commented out as it interferes with database inputs
 async function populateFakeEvents(containerId, numEvents) {
     try {
-        const response = await axios.get('http://localhost:5500/events/popular');
+        const response = await fetch('http://127.0.0.1:5000/events/popular');
         const popularEvents = response.data;
         const popularEventsList = document.getElementById('popular-events-list');
         popularEventsList.innerHTML = '';
