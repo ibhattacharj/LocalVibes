@@ -1,0 +1,21 @@
+<section id="event-creation-form">
+    <h2>Create an Event</h2>
+    <form id="create-event-form">
+        <label for="event-name">Event Name:</label>
+        <input type="text" id="event-name" name="event-name" required />
+
+        <label for="event-description">Description:</label>
+        <textarea id="event-description" name="event-description" rows="4" required></textarea>
+
+        <label for="event-location">Location:</label>
+        <input type="text" id="event-location" name="event-location" required />
+
+        <label for="event-tags">Tags:</label>
+        <input type="text" id="event-tags" name="event-tags" placeholder="e.g., Rock, Jazz" required />
+
+        <label for="event-time">Time:</label>
+        <input type="datetime-local" id="event-time" name="event-time" required />
+
+        <button type="submit">Create Event</button>
+    </form>
+</section>

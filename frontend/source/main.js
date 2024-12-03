@@ -1,4 +1,5 @@
 import { showEventDetails } from './components/eventPage/eventPage.js';
+import "./components/eventCreationForm/eventCreationForm.js";
 
 console.log('main.js loaded');
 console.log("JavaScript Loaded");
