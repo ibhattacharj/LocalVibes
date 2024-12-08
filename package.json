@@ -11,6 +11,6 @@
     "mapbox-gl": "^3.8.0"
   }
   "scripts": {
-    "postinstall": "npm rebuild sqlite3"
+    "postinstall": "npm install sqlite3@latest"
   }
 }
