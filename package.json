@@ -10,4 +10,7 @@
     "sqlite3": "^5.1.7",
     "mapbox-gl": "^3.8.0"
   }
+  "scripts": {
+    "postinstall": "npm rebuild sqlite3"
+  }
 }
