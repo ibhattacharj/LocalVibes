@@ -28,7 +28,7 @@ async function fetchPopularEvents() {
   try {
     console.log('Fetching popular events...');
     
-    const response = await fetch('http://127.0.0.1:5000/events/popular');
+    const response = await fetch('http://127.0.0.1:4000/events/popular');
     console.log('Response received:', response);
 
     if (!response.ok) {
@@ -72,7 +72,7 @@ async function fetchEventsForYou() {
   try {
     console.log('Fetching events for you...');
 
-    const response = await fetch('http://127.0.0.1:5000/events/for-you');
+    const response = await fetch('http://127.0.0.1:4000/events/for-you');
     console.log('Response received:', response);
 
     if (!response.ok) {
@@ -116,7 +116,7 @@ async function fetchEventsForYou() {
 //fetch search results from the server
 async function fetchSearchResults(searchTerm, locationTerm) {
   try {
-    const url = new URL('http://127.0.0.1:5000/events/search');
+    const url = new URL('http://127.0.0.1:4000/events/search');
     url.searchParams.append('query', searchTerm);
     url.searchParams.append('location', locationTerm);
 
