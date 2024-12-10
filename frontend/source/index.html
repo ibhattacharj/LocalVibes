@@ -164,6 +164,15 @@
             });
         });
 
+        document.getElementById('open-event-form').addEventListener('click', () => {
+        const modal = document.getElementById('event-form-modal');
+        modal.style.display = 'flex'; // Show modal
+        const form = document.getElementById('create-event-form');
+        form.reset(); // Clear form fields for a new event
+        form.removeAttribute('data-event-id'); // Ensure no event ID for new events
+        });
+
+
         function scrollEventList(sectionId, direction) {
             const list = document.getElementById(sectionId + '-list');
             const scrollAmount = list.clientWidth; //scroll container width (equal to 3 event cards)

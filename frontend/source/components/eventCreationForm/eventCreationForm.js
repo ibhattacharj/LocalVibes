@@ -27,6 +27,16 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("submit", function (event) {
       event.preventDefault(); // Prevent default behavior
 
+
+      // this logic has been edited to determine whether to create or update event
+
+      const form = event.target;
+      const eventId  = form.getAttribute("data-event-id");
+
+      const url = eventId ? `http://127.0.0.1:4000/events/${eventId}`: 'http://127.0.0.1:4000/events';
+      const method = eventId? 'PUT' : 'POST';
+
+
       // Get form values
       const eventName = document.getElementById("event-name").value;
       const eventDescription =
@@ -48,17 +58,77 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append("eventTime", eventTime);
       formData.append("eventImage", eventImage); // Append the file
 
-      // Log the form data for testing
-      console.log("Form Data:");
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}:`, value);
-      }
+    //   // Log the form data for testing
+    //   console.log("Form Data:");
+    //   for (let [key, value] of formData.entries()) {
+    //     console.log(`${key}:`, value);
+    //   }
 
-      // TODO: Send formData to a server using fetch or AJAX
-      alert("Event created successfully! (Check console for form data)");
+    //   // TODO: Send formData to a server using fetch or AJAX
+    //   alert("Event created successfully! (Check console for form data)");
 
-      // Clear the form and close the modal
-      document.getElementById("create-event-form").reset();
-      modal.style.display = "none";
-    });
+    //   // Clear the form and close the modal
+    //   document.getElementById("create-event-form").reset();
+    //   modal.style.display = "none";
+    // });
+
+    // submit form to the server
+    fetch(url, {
+      method: method,
+      body: formData,
+  })
+      .then((response) => {
+          if (!response.ok) {
+              throw new Error(`Failed to ${eventId ? 'update' : 'create'} event: ${response.statusText}`);
+          }
+          return response.json();
+      })
+      .then((data) => {
+        alert(`Event ${eventId ? "updated" : "created"} successfully!`);
+        // Clear the form and close the modal
+        modal.style.display = "none";
+        form.reset();
+        form.removeAttribute("data-event-id"); // Clear event ID for new events
+    })
+    .catch((error) => {
+        console.error("Error submitting form:", error);
+        alert(`Failed to ${eventId ? "update" : "create"} event. Please try again.`);
+    });   alert(`Event ${eventId ? "updated" : "created"} successfully!`);
+    // Clear the form and close the modal
+    modal.style.display = "none";
+    form.reset();
+    form.removeAttribute("data-event-id"); // Clear event ID for new events
+})
+.catch((error) => {
+    console.error("Error submitting form:", error);
+    alert(`Failed to ${eventId ? "update" : "create"} event. Please try again.`);
 });
+});
+
+
+ export function openEventForm(eventId) {
+  const modal = document.getElementById('event-form-modal');
+  modal.style.display = 'flex'; 
+
+  // Fetch event details from the server
+  fetch(`http://127.0.0.1:4000/events/${eventId}`)
+      .then((response) => {
+          if (!response.ok) {
+              throw new Error(`Failed to fetch event: ${response.statusText}`);
+          }
+          return response.json();
+      })
+      .then((event) => {
+          // Populate the form with the fetched event details
+          document.getElementById('event-name').value = event.name;
+          document.getElementById('event-description').value = event.description;
+          document.getElementById('event-location').value = event.location;
+          document.getElementById('event-tags').value = event.tags;
+          document.getElementById('event-time').value = new Date(event.time).toISOString().slice(0, 16);
+
+           // Set the data-event-id attribute on the form
+           const form = document.getElementById('create-event-form');
+           form.setAttribute('data-event-id', event.id); 
+      })
+      .catch((error) => console.error('Error fetching event data:', error));
+}
