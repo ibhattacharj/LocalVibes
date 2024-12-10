@@ -169,6 +169,21 @@ app.delete('/events/:id', async (req, res) => {
   }
 });
 
+// endpoint to fetch a single event by the ID
+app.get('/events/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const event = await Event.findByPk(id); 
+    if (!event) {
+      return res.status(404).json({ error: 'Event not found' });
+    }
+    res.status(200).json(event);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch event' });
+  }
+});
+
+
 //start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://127.0.0.1:${PORT}`);

@@ -1,3 +1,5 @@
+import { openEventForm } from '../eventCreationForm/eventCreationForm.js';
+
 export function showEventDetails(event) {
     const eventDetailView = document.getElementById('event-detail-view') || document.createElement('div');
     eventDetailView.id = 'event-detail-view';
@@ -15,7 +17,7 @@ export function showEventDetails(event) {
                 <button id="add-to-interested">${event.interested ? 'Remove' : 'Add'}</button>
                 <button id="rsvp-button">RSVP</button>
                 <button id="share-button">Share</button>
-                ${event.host === getCurrentUserName() ? `<button id="edit-event-button">Edit </button>` : ''}
+                ${event.host === getCurrentUserName() ? `<button id="edit-event-button"> Edit </button>` : ''}
             </div>  
             <div class="map-reviews-container">
                 <div class="map-container">
@@ -46,17 +48,28 @@ export function showEventDetails(event) {
     document.getElementById("submit-review").addEventListener("click", submitReview); 
 
     if (event.host === getCurrentUserName()) {
-        document.getElementById('edit-event-button').addEventListener('click', () => editEvent(event));
+        document.getElementById('edit-event-button').addEventListener('click', () => {
+            openEventForm(event.id); 
+        });    
     }
 }
 
+
+
+//fot testing 
+
+localStorage.setItem('currentUser', 'Rock Society');
+
+
  // this will be replaced with logic to get the current user
 function getCurrentUserName() {
-    return localStorage.getItem('userName');
+    const currentUser = localStorage.getItem('currentUser') || "Guest";
+    console.log(`Current User: ${currentUser}`);
+    return currentUser;
 }
 
 function editEvent(event) {
-    window.location.href = `eventCreationForm.html?eventId=${event.id}`;
+    window.location.href = `http://127.0.0.1:5500/frontend/source/components/eventCreationForm/eventCreationForm.html`;
 }
 function updateInterested(event) {
     event.interested = !event.interested;
