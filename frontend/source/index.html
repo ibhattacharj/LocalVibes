@@ -11,7 +11,7 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
     <!--<script type='module' src="fakeData.js" defer></script>  link to generated fake events script -->
-    <script type='module' src="main.js" defer></script>
+    <!-- <script type='module' src="main.js" defer></script> -->
 
 </head>
 <body>
@@ -20,31 +20,23 @@
         <div class="navbar">
             <nav>
                 <ul>
-                    <!-- Home Icon on the left -->
                     <li class="home-icon"><a href="index.html"><i class="fas fa-home"></i></a></li>
-
-                    <!-- Profile Icon on the right -->
                     <li class="profile-icon"><a href="profile.html"><i class="fas fa-user"></i></a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <main>
-
-        <!-- Event Search Section -->
         <button id="open-event-form" class="create-event-btn">Create Event</button>
+
         <section id="event-search">
-            <!-- Search Bar -->
             <div class="search-bar-container">
                 <input type="text" id="search-bar" placeholder="Search for events..." />
                 <button id="search-button">Search</button>
             </div>
 
-            <!-- Filters Section -->
             <div class="filters-container">
-                <!-- Genre Filter -->
                 <label for="genre-filter">Genre:</label>
                 <select id="genre-filter">
                     <option value="">All Genres</option>
@@ -52,63 +44,51 @@
                     <option value="jazz">Jazz</option>
                     <option value="hip-hop">Hip-Hop</option>
                     <option value="electronic">Electronic</option>
-                    <!-- Add more genres as needed -->
                 </select>
 
-                <!-- Location Filter -->
                 <label for="location-filter">Location:</label>
                 <input type="text" id="location-filter" placeholder="Enter a location..." />
 
-                <!-- Venue Type Filter -->
                 <label for="venue-filter">Venue Type:</label>
                 <select id="venue-filter">
                     <option value="">All Venues</option>
                     <option value="club">Club</option>
                     <option value="house-party">House Party</option>
                     <option value="library">Library Basement</option>
-                    <!-- Add more venue types as needed -->
                 </select>
             </div>
 
-            <!-- Interactive Map Section and Search -->
             <div id="search-and-map">
                 <div id="search-results"></div>
                 <div id="map-container"></div>
             </div>
 
-            <!-- Popular Events Section -->
-            <section id="popular-events" class="banner-section"> <!-- Having the class="banner-section in this and not the other section provides the contract of background color between the two sections-->
+            <section id="popular-events" class="banner-section">
                 <h2 class="banner-heading">Popular Events</h2>
                 <div class="event-list-container">
                     <button class="scroll-button left" onclick="scrollEventList('popular-events', 'left')">&#9664;</button>
-                    <div class="event-list horizontal-scroll" id="popular-events-list">
-                        <!-- Events will be dynamically populated here by main.js -->
-                    </div>
+                    <div class="event-list horizontal-scroll" id="popular-events-list"></div>
                     <button class="scroll-button right" onclick="scrollEventList('popular-events', 'right')">&#9654;</button>
                 </div>
             </section>
 
-            <!-- Personalized Event Recommendations Section -->
             <section id="events-for-you">
                 <h2 class="banner-heading">Events For You</h2>
                 <div class="event-list-container">
                     <button class="scroll-button left" onclick="scrollEventList('events-for-you', 'left')">&#9664;</button>
-                    <div class="event-list horizontal-scroll" id="events-for-you-list">
-                        <!-- Events will be dynamically populated here by main.js -->
-                    </div>
+                    <div class="event-list horizontal-scroll" id="events-for-you-list"></div>
                     <button class="scroll-button right" onclick="scrollEventList('events-for-you', 'right')">&#9654;</button>
                 </div>
             </section>
-            <section style="height: 50px;"></section>
         </section>
     </main>
 
     <div id="event-form-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button">&times;</span> <!-- Close Modal Button -->
+            <span class="close-button">&times;</span>
             <section id="event-creation-form">
                 <h2>Create an Event</h2>
-                <form id="create-event-form">
+                <form id="create-event-form" enctype="multipart/form-data">
                     <label for="event-name">Event Name:</label>
                     <input type="text" id="event-name" name="event-name" required />
 
@@ -124,9 +104,8 @@
                     <label for="event-time">Time:</label>
                     <input type="datetime-local" id="event-time" name="event-time" required />
 
-                    <!-- Image Upload Field -->
                     <label for="event-image">Event Flyer/Poster:</label>
-                    <input type="file" id="event-image" name="event-image" accept="image/*" />
+                    <input type="file" id="event-image" name="event-image" accept="image/*" required />
 
                     <button type="submit">Create Event</button>
                 </form>
@@ -134,17 +113,15 @@
         </div>
     </div>
 
-
-    <!-- Footer Section -->
     <footer>
         <p>&copy; 2024 LocalVibes. All rights reserved.</p>
     </footer>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const openButton = document.getElementById('open-event-form'); // Open modal button
-            const modal = document.getElementById('event-form-modal'); // Modal container
-            const closeButton = modal.querySelector('.close-button'); // Close button
+            const openButton = document.getElementById('open-event-form');
+            const modal = document.getElementById('event-form-modal');
+            const closeButton = modal.querySelector('.close-button');
 
             // Open the modal
             openButton.addEventListener('click', () => {
@@ -165,9 +142,9 @@
         });
 
         function scrollEventList(sectionId, direction) {
-            const list = document.getElementById(sectionId + '-list');
-            const scrollAmount = list.clientWidth; //scroll container width (equal to 3 event cards)
-    
+            const list = document.getElementById(`${sectionId}-list`);
+            const scrollAmount = list.clientWidth;
+
             if (direction === 'left') {
                 list.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
             } else {
