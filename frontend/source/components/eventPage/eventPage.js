@@ -68,9 +68,6 @@ function getCurrentUserName() {
     return currentUser;
 }
 
-function editEvent(event) {
-    window.location.href = `http://127.0.0.1:5500/frontend/source/components/eventCreationForm/eventCreationForm.html`;
-}
 function updateInterested(event) {
     event.interested = !event.interested;
     document.getElementById('add-to-interested').textContent = event.interested ? "Remove" : "Add";
