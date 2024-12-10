@@ -62,3 +62,32 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.style.display = "none";
     });
 });
+
+// this pre fills the form with the event data from the database
+document.addEventListener("DOMContentLoaded", () => {
+  const urlParam = new URLSearchParams(window.location.search);
+  const eventId = urlParam.get("eventId");
+
+  if (eventId) {
+    fetch(`https://127.0.0.1:4000/events/${eventId}`)
+     .then(response => response.json())
+     .then(event =>  {
+       // fill the form with the event data
+       document.getElementById("event-name").value = event.name;
+       document.getElementById("event-description").value = event.description;
+       document.getElementById("event-location").value = event.location;
+       document.getElementById("event-tags").value = event.tags.split(',').map(tag => tag.trim()).join(', ');
+       document.getElementById("event-time").value = new Date(event.time).toISOString().slice(0, 16);
+       
+       const imageInput = document.getElementById("event-image");
+        if (imageInput && event.image) {
+          const imgPreview = document.createElement("img");
+          imgPreview.src = `data:image/jpeg;base64,${event.image}`;
+          imgPreview.alt = "Event Image Preview";
+          imgPreview.style.maxWidth = "100px";
+          imageInput.insertAdjacentElement("beforebegin", imgPreview);
+        }
+      })
+      .catch((error) => console.error("Error fetching event data:", error));
+    }
+});
