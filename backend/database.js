@@ -24,6 +24,10 @@ const Event = sequelize.define('Event', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  tags: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   host: {
     type: DataTypes.STRING,
     allowNull: false,
