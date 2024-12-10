@@ -56,7 +56,7 @@ const logout = (req, res) => {
         res.json(factoryResponse(500, "Logout failed"));
         return;
       }
-      res.json(factoryResponse(200, "Logout successful"));
+      res.redirect("/login");
     });
 };
 
