@@ -5,18 +5,19 @@ const multer = require("multer"); // For handling file uploads
 const { Sequelize } = require("sequelize");
 
 const app = express();
-const PORT = process.env.PORT || 4000; // Set port, defaults to 4000 if not provided
+//const PORT = process.env.PORT || 5000; //set port. Defaults to 5000 if not provided
+const PORT = process.env.PORT || 4000; //set port. Defaults to 5000 if not provided
 
-// Middleware for parsing JSON bodies in requests
+//middleware for parsing JSON bodies in requests
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 
 // Configure CORS to allow requests from front-end origin specified by proceeding URL
 app.use(
   cors({
-    origin: "http://127.0.0.1:5500", // Restrict access to this origin
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    origin: "http://127.0.0.1:5500", //restrict access to this origin
+    methods: ["GET", "POST", "PUT", "DELETE"], //allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], //allowed headers
   })
 );
 
@@ -124,20 +125,45 @@ app.post("/events", upload.single("eventImage"), async (req, res) => {
       user,
     } = req.body;
 
+    // Validate input fields
+    if (
+      !eventName ||
+      !eventDescription ||
+      !eventLocation ||
+      !eventTime ||
+      !req.file
+    ) {
+      return res
+        .status(400)
+        .json({ error: "All fields are required, including an image." });
+    }
+
     // Create a new event
     const newEvent = await Event.create({
       name: eventName,
       description: eventDescription,
-      host: user, // Assuming user is provided in the request body
+      host: user || "Default Host", // Use "Default Host" if user is not provided
       location: eventLocation,
       tags: eventTags.join(", "), // Convert array to comma-separated string
       time: eventTime,
       comments: "", // Default comments
       views: 0, // Default views
-      image: req.file ? req.file.path : null, // Store file path if an image was uploaded
+      image: req.file.path, // Store file path if an image was uploaded
     });
 
-    res.status(201).json(newEvent);
+    // Return success response with detailed event info
+    res.status(201).json({
+      message: "Event created successfully",
+      event: {
+        id: newEvent.id,
+        name: newEvent.name,
+        description: newEvent.description,
+        location: newEvent.location,
+        time: newEvent.time,
+        tags: newEvent.tags,
+        image: newEvent.image,
+      },
+    });
   } catch (error) {
     console.error("Failed to create event:", error);
     res.status(500).json({ error: "Failed to create event" });

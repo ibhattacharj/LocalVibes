@@ -56,9 +56,14 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append("eventName", eventName);
       formData.append("eventDescription", eventDescription);
       formData.append("eventLocation", eventLocation);
-      formData.append("eventTags", eventTags);
+      formData.append("eventTags", eventTags.join(",")); // Send as a comma-separated string
       formData.append("eventTime", eventTime);
       formData.append("eventImage", eventImage); // Append the file
+
+      // Debug: Log form data to verify correctness
+      for (const pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+      }
 
       // Show loading indicator
       loadingIndicator.style.display = "block";
@@ -69,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
         body: formData,
       })
         .then((response) => {
-          loadingIndicator.style.display = "none"; // Hide the loading indicator
           if (!response.ok) {
             throw new Error("Failed to create event");
           }
@@ -84,9 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
           modal.style.display = "none";
         })
         .catch((error) => {
-          loadingIndicator.style.display = "none"; // Hide the loading indicator
           console.error("Error creating event:", error);
           alert("Failed to create event. Please try again.");
+        })
+        .finally(() => {
+          loadingIndicator.style.display = "none"; // Always hide the loading indicator
         });
     });
 });
