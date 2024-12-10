@@ -45,15 +45,18 @@ export function showEventDetails(event) {
     document.getElementById('rsvp-button').addEventListener('click', rsvpEvent);
     document.getElementById("submit-review").addEventListener("click", submitReview); 
 
-    // this will be replaced with logic to get the current user
     if (event.host === getCurrentUserName()) {
         document.getElementById('edit-event-button').addEventListener('click', () => editEvent(event));
     }
 }
 
-
+ // this will be replaced with logic to get the current user
 function getCurrentUserName() {
     return localStorage.getItem('userName');
+}
+
+function editEvent(event) {
+    window.location.href = `eventCreationForm.html?eventId=${event.id}`;
 }
 function updateInterested(event) {
     event.interested = !event.interested;
