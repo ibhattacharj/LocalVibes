@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Open the modal
   openButton.addEventListener("click", () => {
     modal.style.display = "flex";
+    const form = document.getElementById("create-event-form");
+    form.reset(); // Clear the form
+    form.removeAttribute("data-event-id"); // Remove event ID for new event
   });
 
   // Close the modal
@@ -39,8 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Get form values
       const eventName = document.getElementById("event-name").value;
-      const eventDescription =
-        document.getElementById("event-description").value;
+      const eventDescription = document.getElementById("event-description").value;
       const eventLocation = document.getElementById("event-location").value;
       const eventTags = document
         .getElementById("event-tags")
@@ -51,13 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Create a FormData object
       const formData = new FormData();
-      formData.append("eventName", eventName);
-      formData.append("eventDescription", eventDescription);
-      formData.append("eventLocation", eventLocation);
-      formData.append("eventTags", eventTags);
-      formData.append("eventTime", eventTime);
-      formData.append("eventImage", eventImage); // Append the file
-
+      formData.append("name", eventName);
+      formData.append("description", eventDescription);
+      formData.append("location", eventLocation);
+      formData.append("tags", eventTags);
+      formData.append("time", eventTime);
+      if (eventImage) {
+        formData.append("image", eventImage); // Append the file if it exists
+      }
     //   // Log the form data for testing
     //   console.log("Form Data:");
     //   for (let [key, value] of formData.entries()) {
@@ -71,6 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
     //   document.getElementById("create-event-form").reset();
     //   modal.style.display = "none";
     // });
+
+    // for debugging
+    console.log("Submitting FormData:");
+    for (let [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+    }
+
 
     // submit form to the server
     fetch(url, {
@@ -91,19 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
         form.removeAttribute("data-event-id"); // Clear event ID for new events
     })
     .catch((error) => {
-        console.error("Error submitting form:", error);
-        alert(`Failed to ${eventId ? "update" : "create"} event. Please try again.`);
-    });   alert(`Event ${eventId ? "updated" : "created"} successfully!`);
-    // Clear the form and close the modal
-    modal.style.display = "none";
-    form.reset();
-    form.removeAttribute("data-event-id"); // Clear event ID for new events
-})
-.catch((error) => {
-    console.error("Error submitting form:", error);
-    alert(`Failed to ${eventId ? "update" : "create"} event. Please try again.`);
-});
-});
+      console.error("Error submitting form:", error);
+      alert(`Failed to ${eventId ? "update" : "create"} event. Please try again.`);
+    });
+    });
+  });
 
 
  export function openEventForm(eventId) {

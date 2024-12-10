@@ -134,7 +134,14 @@ app.get('/events/search', async (req, res) => {
 //new event endpoint
 app.post('/events', async (req, res) => {
   try {
-    const newEvent = await Event.create(req.body);
+    const newEvent = await Event.create ({
+      name: req.body.name,
+      description: req.body.description,
+      host: req.body.host,
+      location: req.body.location,
+      tags: req.body.tags,
+      time: req.body.time,
+    });
     res.status(201).json(newEvent);
   } catch (error) {
     res.status(500).json({ error: 'Failed to create event' });
