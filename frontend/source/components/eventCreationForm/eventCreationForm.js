@@ -1,8 +1,8 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   const openButton = document.getElementById("open-event-form");
   const modal = document.getElementById("event-form-modal");
   const closeButton = modal.querySelector(".close-button");
+  const loadingIndicator = document.getElementById("loading-indicator");
 
   // Open the modal
   openButton.addEventListener("click", () => {
@@ -39,6 +39,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const eventTime = document.getElementById("event-time").value;
       const eventImage = document.getElementById("event-image").files[0]; // Get the uploaded file
 
+      // Validate input fields
+      if (
+        !eventName ||
+        !eventDescription ||
+        !eventLocation ||
+        !eventTime ||
+        !eventImage
+      ) {
+        alert("Please fill out all required fields and upload an image.");
+        return;
+      }
+
       // Create a FormData object
       const formData = new FormData();
       formData.append("eventName", eventName);
@@ -48,17 +60,33 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append("eventTime", eventTime);
       formData.append("eventImage", eventImage); // Append the file
 
-      // Log the form data for testing
-      console.log("Form Data:");
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}:`, value);
-      }
+      // Show loading indicator
+      loadingIndicator.style.display = "block";
 
-      // TODO: Send formData to a server using fetch or AJAX
-      alert("Event created successfully! (Check console for form data)");
+      // Send formData to the server
+      fetch("http://127.0.0.1:4000/events", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          loadingIndicator.style.display = "none"; // Hide the loading indicator
+          if (!response.ok) {
+            throw new Error("Failed to create event");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Event created successfully:", data);
+          alert("Event created successfully!");
 
-      // Clear the form and close the modal
-      document.getElementById("create-event-form").reset();
-      modal.style.display = "none";
+          // Clear the form and close the modal
+          document.getElementById("create-event-form").reset();
+          modal.style.display = "none";
+        })
+        .catch((error) => {
+          loadingIndicator.style.display = "none"; // Hide the loading indicator
+          console.error("Error creating event:", error);
+          alert("Failed to create event. Please try again.");
+        });
     });
 });

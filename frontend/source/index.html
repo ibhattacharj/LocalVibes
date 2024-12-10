@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
-    <!--<script type='module' src="fakeData.js" defer></script>  link to generated fake events script -->
-    <script type='module' src="main.js" defer></script>
-
 </head>
 <body>
 
@@ -52,7 +49,6 @@
                     <option value="jazz">Jazz</option>
                     <option value="hip-hop">Hip-Hop</option>
                     <option value="electronic">Electronic</option>
-                    <!-- Add more genres as needed -->
                 </select>
 
                 <!-- Location Filter -->
@@ -66,7 +62,6 @@
                     <option value="club">Club</option>
                     <option value="house-party">House Party</option>
                     <option value="library">Library Basement</option>
-                    <!-- Add more venue types as needed -->
                 </select>
             </div>
 
@@ -77,7 +72,7 @@
             </div>
 
             <!-- Popular Events Section -->
-            <section id="popular-events" class="banner-section"> <!-- Having the class="banner-section in this and not the other section provides the contract of background color between the two sections-->
+            <section id="popular-events" class="banner-section">
                 <h2 class="banner-heading">Popular Events</h2>
                 <div class="event-list-container">
                     <button class="scroll-button left" onclick="scrollEventList('popular-events', 'left')">&#9664;</button>
@@ -103,9 +98,10 @@
         </section>
     </main>
 
+    <!-- Modal for Event Creation Form -->
     <div id="event-form-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button">&times;</span> <!-- Close Modal Button -->
+            <span class="close-button">&times;</span>
             <section id="event-creation-form">
                 <h2>Create an Event</h2>
                 <form id="create-event-form">
@@ -134,46 +130,12 @@
         </div>
     </div>
 
-
     <!-- Footer Section -->
     <footer>
         <p>&copy; 2024 LocalVibes. All rights reserved.</p>
     </footer>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const openButton = document.getElementById('open-event-form'); // Open modal button
-            const modal = document.getElementById('event-form-modal'); // Modal container
-            const closeButton = modal.querySelector('.close-button'); // Close button
 
-            // Open the modal
-            openButton.addEventListener('click', () => {
-                modal.style.display = 'flex';
-            });
-
-            // Close the modal
-            closeButton.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-
-            // Close the modal when clicking outside the content
-            window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        });
-
-        function scrollEventList(sectionId, direction) {
-            const list = document.getElementById(sectionId + '-list');
-            const scrollAmount = list.clientWidth; //scroll container width (equal to 3 event cards)
-    
-            if (direction === 'left') {
-                list.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            } else {
-                list.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            }
-        }
-    </script>
+    <!-- Add Event Creation JS Script -->
+    <script src="./components/eventPage/eventCreationForm.js" defer></script>
 </body>
 </html>
