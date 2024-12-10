@@ -15,6 +15,7 @@ export function showEventDetails(event) {
                 <button id="add-to-interested">${event.interested ? 'Remove' : 'Add'}</button>
                 <button id="rsvp-button">RSVP</button>
                 <button id="share-button">Share</button>
+                ${event.host === getCurrentUserName() ? `<button id="edit-event-button">Edit </button>` : ''}
             </div>  
             <div class="map-reviews-container">
                 <div class="map-container">
@@ -43,8 +44,17 @@ export function showEventDetails(event) {
     document.getElementById('share-button').addEventListener('click', () => shareEvent(event));
     document.getElementById('rsvp-button').addEventListener('click', rsvpEvent);
     document.getElementById("submit-review").addEventListener("click", submitReview); 
+
+    // this will be replaced with logic to get the current user
+    if (event.host === getCurrentUserName()) {
+        document.getElementById('edit-event-button').addEventListener('click', () => editEvent(event));
+    }
 }
 
+
+function getCurrentUserName() {
+    return localStorage.getItem('userName');
+}
 function updateInterested(event) {
     event.interested = !event.interested;
     document.getElementById('add-to-interested').textContent = event.interested ? "Remove" : "Add";
