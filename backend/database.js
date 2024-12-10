@@ -170,6 +170,11 @@ const sampleEvents = [
     await Event.bulkCreate(sampleEvents); //TEMPORARY TO INSERT SAMPLE EVENTS
     console.log('Sample events inserted');
 
+    await User.bulkCreate(sampleUsers); //TEMPORARY TO INSERT SAMPLE USERS
+    console.log('Sample users inserted');
+
+    const users = await User.findAll();
+
     const events = await Event.findAll();
     console.log('Events fetched from the database:', JSON.stringify(events, null, 2));
   } catch (error) {
