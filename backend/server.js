@@ -1,3 +1,10 @@
+const dotenv = require("dotenv");
+const session = require("express-session");
+const passport = require("./authentication/auth/passport");
+//const passport = require('passport');
+const routes = require("./authentication/routes");
+const path = require("path");
+
 const { Event, sequelize, User } = require('./database.js');
 const express = require('express')
 const cors = require('cors');
@@ -5,12 +12,31 @@ const cors = require('cors');
 const { Sequelize } = require('sequelize');
 
 const app = express();
-//const PORT = process.env.PORT || 5000; //set port. Defaults to 5000 if not provided
+dotenv.config();
 const PORT = process.env.PORT || 4000; //set port. Defaults to 5000 if not provided
 
+// Allow for static files
+app.use(express.static(path.join(__dirname, "frontend/source")));
+//app.use(express.static("frontend/source"));
 
 //middleware for parsing JSON bodies in requests
 app.use(express.json());
+
+// Configure session management.
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+// Initialize Passport and restore authentication state
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Use routes from routes.js
+app.use("/", routes);
 
 // Configure CORS to allow requests from front-end origin specified by proceeding URL
 app.use(cors({

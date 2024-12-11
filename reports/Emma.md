@@ -33,3 +33,15 @@
 
 ### Mermaid Diagram
 - Created a Mermaid sequence diagram to illustrate the interaction flow for the Event Creation Form:
+
+# Milestone 4
+## Back-End Architecture & Database Integration
+- Ensured proper handling of data retrieval, creation, and updates with full CRUD operations.
+
+## Image Upload & Serving
+- Integrated Multer for image uploads, allowing event creators to attach images.
+- Configured a static /uploads route to serve event images directly.
+- Stored uploaded file paths in the database and displayed images dynamically on the front-end.
+
+## Connected eventCreationForm details to backend
+- Connected the form to the back-end /events POST route using fetch, sending data and images as FormData.

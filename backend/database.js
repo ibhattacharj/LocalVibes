@@ -1,7 +1,11 @@
 const { Sequelize, DataTypes } = require('sequelize');
+//const { Sequelize, DataTypes } = require('@sequelize/core');
+//const { SqliteDialect } = require('@sequelize/sqlite3');
+const path = require('path');
 
 const sequelize = new Sequelize({ // initialize sequelize with SQLite
   dialect: 'sqlite',
+  //storage: path.join(__dirname, 'database.sqlite'),
   storage: './database.sqlite',
   logging: console.log 
 });
@@ -69,6 +73,11 @@ const Event = sequelize.define('Event', {
 
 //user model
 const User = sequelize.define('User', {
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -83,9 +92,9 @@ const User = sequelize.define('User', {
     allowNull: false,
   },
   user_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     primaryKey: true,
-    autoIncrement: true,
+    //autoIncrement: true,
   },
   created_events: {
     type: DataTypes.STRING,
@@ -266,6 +275,7 @@ const sampleEvents = [
   
   const sampleUsers = [
     {
+      username: 'jdoe',
       name: 'John Doe',
       email: 'john.doe@example.com',
       password: 'password123',
@@ -275,6 +285,7 @@ const sampleEvents = [
       past_events: '',
     },
     {
+      username: 'jsmith',
       name: 'Jane Smith',
       email: 'jane.smith@example.com',
       password: 'mypassword',
@@ -288,11 +299,17 @@ const sampleEvents = [
 //sync database
 (async () => {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: true }); //changed from force: true
     console.log('Database & tables created');
 
-    await Event.bulkCreate(sampleEvents); //TEMPORARY TO INSERT SAMPLE EVENTS
-    console.log('Sample events inserted');
+    //Check if the events are already in the database
+    const existingEvents = await Event.findAll();
+    if (existingEvents.length === 0) {
+      await Event.bulkCreate(sampleEvents); // Insert sample events only if the table is empty
+      console.log('Sample events inserted');
+    } else {
+      console.log('Sample events already exist in the database. No insertion needed.');
+    }
 
     const events = await Event.findAll();
     console.log('Events fetched from the database:', JSON.stringify(events, null, 2));
