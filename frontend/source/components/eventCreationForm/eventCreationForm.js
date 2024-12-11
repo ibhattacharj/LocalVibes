@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const openButton = document.getElementById("open-event-form");
   const modal = document.getElementById("event-form-modal");
   const closeButton = modal.querySelector(".close-button");
-  const loadingIndicator = document.getElementById("loading-indicator");
+  const createEventForm = document.getElementById("create-event-form");
 
   // Open the modal
   openButton.addEventListener("click", () => {
@@ -22,77 +22,60 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Handle form submission
-  document
-    .getElementById("create-event-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent default behavior
+  createEventForm.addEventListener("submit", async function (event) {
+    event.preventDefault(); // Prevent default behavior
 
-      // Get form values
-      const eventName = document.getElementById("event-name").value;
-      const eventDescription =
-        document.getElementById("event-description").value;
-      const eventLocation = document.getElementById("event-location").value;
-      const eventTags = document
-        .getElementById("event-tags")
-        .value.split(",")
-        .map((tag) => tag.trim());
-      const eventTime = document.getElementById("event-time").value;
-      const eventImage = document.getElementById("event-image").files[0]; // Get the uploaded file
+    // Get form values
+    const eventName = document.getElementById("event-name").value.trim();
+    const eventDescription = document
+      .getElementById("event-description")
+      .value.trim();
+    const eventLocation = document
+      .getElementById("event-location")
+      .value.trim();
+    const eventTags = document
+      .getElementById("event-tags")
+      .value.split(",")
+      .map((tag) => tag.trim())
+      .filter((tag) => tag !== "");
+    const eventTime = document.getElementById("event-time").value;
+    const eventImage = document.getElementById("event-image").files[0];
 
-      // Validate input fields
-      if (
-        !eventName ||
-        !eventDescription ||
-        !eventLocation ||
-        !eventTime ||
-        !eventImage
-      ) {
-        alert("Please fill out all required fields and upload an image.");
-        return;
-      }
+    // Prepare the data to send as FormData
+    const formData = new FormData();
+    formData.append("eventName", eventName);
+    formData.append("eventDescription", eventDescription);
+    formData.append("eventLocation", eventLocation);
+    // Append each tag individually (Multer/Express will receive them as an array if handled correctly)
+    eventTags.forEach((tag) => formData.append("eventTags", tag));
+    formData.append("eventTime", eventTime);
 
-      // Create a FormData object
-      const formData = new FormData();
-      formData.append("eventName", eventName);
-      formData.append("eventDescription", eventDescription);
-      formData.append("eventLocation", eventLocation);
-      formData.append("eventTags", eventTags.join(",")); // Send as a comma-separated string
-      formData.append("eventTime", eventTime);
-      formData.append("eventImage", eventImage); // Append the file
+    if (eventImage) {
+      formData.append("eventImage", eventImage);
+    }
 
-      // Debug: Log form data to verify correctness
-      for (const pair of formData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-      }
-
-      // Show loading indicator
-      loadingIndicator.style.display = "block";
-
-      // Send formData to the server
-      fetch("http://127.0.0.1:4000/events", {
+    try {
+      const response = await fetch("http://127.0.0.1:4000/events", {
         method: "POST",
         body: formData,
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to create event");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Event created successfully:", data);
-          alert("Event created successfully!");
+      });
 
-          // Clear the form and close the modal
-          document.getElementById("create-event-form").reset();
-          modal.style.display = "none";
-        })
-        .catch((error) => {
-          console.error("Error creating event:", error);
-          alert("Failed to create event. Please try again.");
-        })
-        .finally(() => {
-          loadingIndicator.style.display = "none"; // Always hide the loading indicator
-        });
-    });
+      if (response.ok) {
+        const newEvent = await response.json();
+        console.log("Event created successfully:", newEvent);
+        alert("Event created successfully!");
+
+        // Clear the form and close the modal
+        createEventForm.reset();
+        modal.style.display = "none";
+      } else {
+        const errorText = await response.text();
+        console.error("Error creating event:", errorText);
+        alert("Failed to create event. Check the console for errors.");
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("Network error. Check the console for details.");
+    }
+  });
 });
