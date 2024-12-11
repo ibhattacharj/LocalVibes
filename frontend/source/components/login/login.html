@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LocalVibes Login</title>
-    <link rel="stylesheet" href="login.css"> <!-- Link to your CSS file -->
+    <!--<link rel="stylesheet" href="login.css">  Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="/logincss" />
+
     <script type='module' src="login.js" defer></script>
-    <!--<script type='module' src="main.js" defer></script>-->
 </head>
 <body>
 
@@ -16,14 +17,15 @@
             <div class="login">
             <h1>Login</h1>
             <div class="input-box">
-                <input type="text" placeholder="Username" required>
+                <input type="text" id="username" placeholder="Username" required>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Password" required>
+                <input type="password" id="password" placeholder="Password" required>
             </div>
-            <a href="index.html">
-            <button class="button">Login</button> <!--change to submit instead of href-->
-            </a>
+            <!--<a href="index.html">-->
+            <button class="button" onclick="login()">Login</button> <!--change to submit instead of href-->
+            <!--</a>-->
+            <a href="/auth/google">Login with Google</a>
             <div class="signup">
                 <p>Create your account
                 <a href="signup.html">here</a></p>
