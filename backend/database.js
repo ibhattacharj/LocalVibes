@@ -105,6 +105,20 @@ const User = sequelize.define('User', {
   }
 });
 
+//Review Model
+const Review = sequelize.define(
+  "Review",
+  {
+    review_text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    event_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
+  });
+
 const sampleEvents = [
     {
       name: 'Rock Fest 2024',
@@ -266,24 +280,44 @@ const sampleEvents = [
   
   const sampleUsers = [
     {
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      password: 'password123',
-      created_events: 'Rock Fest 2024',
-      interested_events: 'Jazz Night',
-      upcoming_events: 'Electronic Beats',
-      past_events: '',
+      name: "John Doe",
+      email: "john.doe@example.com",
+      password: "password123",
+      created_events: "Rock Fest 2024",
+      interested_events: "Jazz Night",
+      upcoming_events: "Electronic Beats",
+      past_events: "",
     },
     {
-      name: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      password: 'mypassword',
-      created_events: '',
-      interested_events: 'Electronic Beats',
-      upcoming_events: 'Jazz Night',
-      past_events: 'Rock Fest 2024',
+      name: "Jane Smith",
+      email: "jane.smith@example.com",
+      password: "mypassword",
+      created_events: "",
+      interested_events: "Electronic Beats",
+      upcoming_events: "Jazz Night",
+      past_events: "Rock Fest 2024",
+    },
+    {
+      name: "Willy Wonka",
+      email: "w.w@example.com",
+      password: "somepassword",
+      created_events: "",
+      interested_events: "Electronic Beats",
+      upcoming_events: "Jazz Night",
+      past_events: "Rock Fest 2024",
     }
   ];
+
+const sampleReviews = [
+  {
+    review_text: 'Worst. Concert. Ever.',
+    event_id: 1,
+  },
+  {  // Add another review object here
+    review_text: 'This event was amazing!',
+    event_id: 2,
+  }
+];
 
 //sync database
 (async () => {
@@ -294,6 +328,15 @@ const sampleEvents = [
     await Event.bulkCreate(sampleEvents); //TEMPORARY TO INSERT SAMPLE EVENTS
     console.log('Sample events inserted');
 
+    await User.bulkCreate(sampleUsers); //TEMPORARY TO INSERT SAMPLE USERS
+    console.log("Sample users inserted");
+
+    await Review.bulkCreate(sampleReviews); //TEMPORARY TO INSERT SAMPLE REVIEWS
+    console.log("Sample review inserted");
+
+    // await Review.bulkCreate(sampleEvents); //TEMPORARY TO INSERT SAMPLE EVENTS
+    // console.log("Sample events inserted");
+
     const events = await Event.findAll();
     console.log('Events fetched from the database:', JSON.stringify(events, null, 2));
   } catch (error) {
@@ -301,4 +344,4 @@ const sampleEvents = [
   }
 })();
 
-module.exports = { sequelize, Event, User };
+module.exports = { sequelize, Event, User, Review };

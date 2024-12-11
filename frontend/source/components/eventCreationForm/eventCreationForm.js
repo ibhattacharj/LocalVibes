@@ -88,7 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
       body: formData,
   })
       .then((response) => {
-          if (!response.ok) {
+        if (!response.ok) {
+            console.log(`Event ID for update: ${eventId}`);
               throw new Error(`Failed to ${eventId ? 'update' : 'create'} event: ${response.statusText}`);
           }
           return response.json();

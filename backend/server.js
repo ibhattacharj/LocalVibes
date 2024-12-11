@@ -1,4 +1,4 @@
-const { Event, sequelize, User } = require('./database.js');
+const { Event, sequelize, User, Review } = require('./database.js');
 const express = require('express')
 const cors = require('cors');
 
@@ -189,6 +189,33 @@ app.get('/events/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch event' });
   }
+});
+
+// Endpoint to create a review
+app.post('/api/reviews', async (req, res) => {
+  // try {
+  //   const { review_text, event_id } = req.body;
+
+  //   // Check if the event exists
+  //   const event = await Event.findByPk(event_id);
+  //   if (!event) {
+  //     return res.status(404).json({ message: 'Event not found' });
+  //   }
+
+  //   // Create the review
+  //   const review = await Review.create({ review_text, event_id });
+
+  //   res.status(201).json(review); // Return the created review
+  // } catch (error) {
+  //   console.error(error);
+  //   res.status(500).json({ message: 'Failed to create review' });
+  // }
+
+  // Handle review submission
+  const { review_text, event_id } = req.body;
+  console.log("Server has received a review: ", review_text);
+  // Save the review or do other logic here
+  res.status(200).json({ review_text });
 });
 
 
