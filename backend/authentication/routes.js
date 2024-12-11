@@ -33,6 +33,15 @@ router.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/source/components/login/login.html"));
 });
 
+router.get('/logincss', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../../frontend/source/components/login/login.css'));
+});
+
+router.get('/appcss', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../../frontend/source/main.css'));
+});
+
+
 // Google Authentication routes
 router.get(
     "/auth/google", 
