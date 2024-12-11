@@ -6,24 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>User Profile</title>
     <link rel="stylesheet" href="./components/eventPage/eventPage.css">
-    <link rel="stylesheet" href="main.css"> <!-- Main CSS file -->
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-
-    </style>
 </head>
 <body>
-    <!-- header -->
+    <!-- Header -->
     <header>
         <div class="navbar">
-            <!-- home-->
             <nav>
                 <ul>
                     <li class="home-icon"><a href="index.html"><i class="fas fa-home"></i></a></li>
                 </ul>
             </nav>
-
-            <!-- profile -->
             <nav>
                 <ul>
                     <li class="profile-icon"><i class="fas fa-user"></i></li>
@@ -32,14 +26,13 @@
         </div>
     </header>
 
-
-
-    <!-- profile page content -->
+    <!-- Profile Page Content -->
     <main id="profile-page">
         <div class="profile-header">
             <p>Welcome, [User Name]!</p>
         </div>
 
+<<<<<<< Updated upstream
         <!-- tags section -->
         <section class="tags-section">
             <h2>Tags</h2>
@@ -48,51 +41,47 @@
                 <div class="tag">Jazz</div>
                 <div class="tag">Electronic</div>
                 <div class="tag">Pop</div>
+=======
+        <!-- Created Events -->
+        <section id="created-events" class="events-section">
+            <h2>Created Events</h2>
+            <div id="created-events-list" class="event-list">
+                <!-- Dynamically Populated -->
+>>>>>>> Stashed changes
             </div>
         </section>
 
-        <!-- Events -->
-        <section class="events-section">
-            <h2>Interested In</h2>
-            <div id="interested-events" class="event-list">
-                <div class="event-card">
-                    <img src="rock-event.jpg" alt="Rock Event">
-                    <h3>Rock Fest 2024</h3>
-                    <p>Genre: Rock</p>
-                    <p>Location: New York</p>
+        <!-- Events For You Section -->
+        <section id="events-for-you" class="banner-section">
+            <h2 class="banner-heading">Events For You</h2>
+            <div class="event-list-container">
+                <button class="scroll-button left" onclick="scrollEventList('events-for-you', 'left')">&#9664;</button>
+                <div class="event-list horizontal-scroll" id="events-for-you-list">
+                    <!-- Events will be dynamically populated by profile.js -->
                 </div>
-            </div>
-
-            <h2>Upcoming Events</h2>
-            <div id="upcoming-events" class="event-list">
-                <div class="event-card">
-                    <img src="jazz-event.jpg" alt="Jazz Event">
-                    <h3>Jazz Night</h3>
-                    <p>Genre: Jazz</p>
-                    <p>Location: Chicago</p>
-                </div>
-            </div>
-
-            <h2>Past Events</h2>
-            <div id="past-events" class="event-list">
-                <div class="event-card">
-                    <img src="electronic-event.jpg" alt="Electronic Event">
-                    <h3>Electronic Beats</h3>
-                    <p>Genre: Electronic</p>
-                    <p>Location: Miami</p>
-                </div>
+                <button class="scroll-button right" onclick="scrollEventList('events-for-you', 'right')">&#9654;</button>
             </div>
         </section>
+<<<<<<< Updated upstream
 
         <!-- event button -->
         <section class="create-event-section">
             <button id="create-event-button">Create Event</button>
         </section>
+=======
+        <section style="height: 50px;"></section>
+>>>>>>> Stashed changes
     </main>
 
-    <!-- footer -->
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 LocalVibes. All rights reserved.</p>
     </footer>
+
+    <!-- Link to JavaScript -->
+    <script src="profile.js" defer></script>
 </body>
 </html>
+
+
+
