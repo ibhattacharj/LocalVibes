@@ -193,7 +193,6 @@ function addMarkersToMap(events) {
       return;
   }
 
-  // Adds map location marker pins
   markers = [];
 
   events.forEach(event => {
@@ -204,7 +203,6 @@ function addMarkersToMap(events) {
     markers.push(marker);
   })
 
-  // Adds text and description to location pin
   const features = events.map(event => ({
       type: 'Feature',
       geometry: {
@@ -217,7 +215,6 @@ function addMarkersToMap(events) {
       }
   }));
 
-  
   map.addSource('event-markers', {
       type: 'geojson',
       data: {
