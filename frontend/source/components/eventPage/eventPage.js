@@ -63,7 +63,7 @@ export function showEventDetails(event) {
   document.getElementById("rsvp-button").addEventListener("click", rsvpEvent);
   document
     .getElementById("submit-review")
-    .addEventListener("click", submitReview);
+    .addEventListener("click", (event) => submitReview(event));
 
   if (event.host === getCurrentUserName()) {
     document
@@ -118,20 +118,25 @@ function shareEvent(event) {
     .catch((error) => console.error("Error", error));
 }
 
-async function submitReview() {
-// get the typed text
-    const reviewText = document.getElementById("review-text").value;
-// if there is text, then we need to post to db
+async function submitReview(event) {
+  // get the typed text
+  event.preventDefault();
+  const reviewText = document.getElementById("review-text").value;
+  const eventTitle = document.querySelector(".event-detail-title");
+  const eventName = eventTitle
+    ? eventTitle.innerText
+    : "No event name available";
+  // if there is text, then we need to post to db
   if (reviewText) {
-    const response = await fetch("http://127.0.0.1:5500/api/reviews", {
+    const response = await fetch("http://127.0.0.1:4000/api/reviews", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        },
+      },
       // in db, records contain the text and the event its for
       body: JSON.stringify({
         review_text: reviewText,
-        event_id: event.id,
+        event_name: eventName,
       }),
     });
 
@@ -139,14 +144,13 @@ async function submitReview() {
     const newReview = await response.json();
     if (response.ok) {
       const reviewBox = document.getElementById("review-box");
-      reviewBox.innerHTML += `<p>${newReview}</p>`; // Append review
+      reviewBox.innerHTML += `<p>${newReview.review_text}</p>`; // Append review
       document.getElementById("review-text").value = ""; // Clear text area
       alert("Review Submitted!");
     } else {
       alert("Failed to submit review");
     }
-  }
-  else {
+  } else {
     alert("Please write a review");
   }
 }

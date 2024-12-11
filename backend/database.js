@@ -106,18 +106,16 @@ const User = sequelize.define('User', {
 });
 
 //Review Model
-const Review = sequelize.define(
-  "Review",
-  {
-    review_text: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    event_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    }
-  });
+const Review = sequelize.define("Review", {
+  review_text: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  event_name: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+});
 
 const sampleEvents = [
     {
@@ -331,8 +329,8 @@ const sampleReviews = [
     await User.bulkCreate(sampleUsers); //TEMPORARY TO INSERT SAMPLE USERS
     console.log("Sample users inserted");
 
-    await Review.bulkCreate(sampleReviews); //TEMPORARY TO INSERT SAMPLE REVIEWS
-    console.log("Sample review inserted");
+    // await Review.bulkCreate(sampleReviews); //TEMPORARY TO INSERT SAMPLE REVIEWS
+    // console.log("Sample review inserted");
 
     // await Review.bulkCreate(sampleEvents); //TEMPORARY TO INSERT SAMPLE EVENTS
     // console.log("Sample events inserted");
