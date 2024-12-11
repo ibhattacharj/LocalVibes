@@ -1,202 +1,130 @@
-const dotenv = require("dotenv");
-const session = require("express-session");
-const passport = require("./authentication/auth/passport");
-//const passport = require('passport');
-const routes = require("./authentication/routes");
+const { Event, sequelize, User } = require("./database.js");
+const express = require("express");
+const cors = require("cors");
 const path = require("path");
+const multer = require("multer");
 
-const { Event, sequelize, User } = require('./database.js');
-const express = require('express')
-const cors = require('cors');
-
-const { Sequelize } = require('sequelize');
+// Configure multer for file uploads
+const upload = multer({ dest: "uploads/" }); // Files go to 'uploads' folder
 
 const app = express();
-dotenv.config();
-const PORT = process.env.PORT || 4000; //set port. Defaults to 5000 if not provided
+const PORT = process.env.PORT || 4000;
 
-// Allow for static files
-app.use(express.static(path.join(__dirname, "frontend/source")));
-//app.use(express.static("frontend/source"));
-
-//middleware for parsing JSON bodies in requests
+// Middleware
 app.use(express.json());
-
-// Configure session management.
 app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
+  cors({
+    origin: "http://127.0.0.1:5500", // Adjust this to match your frontend address
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// Initialize Passport and restore authentication state
-app.use(passport.initialize());
-app.use(passport.session());
+// Serve static files from frontend if needed
+app.use(express.static(path.join(__dirname, "../frontend/source")));
 
-// Use routes from routes.js
-app.use("/", routes);
+// Verify database connection
+sequelize
+  .authenticate()
+  .then(() => console.log("Database connected."))
+  .catch((err) => console.error("Database connection failed:", err));
 
-// Configure CORS to allow requests from front-end origin specified by proceeding URL
-app.use(cors({
-    origin: 'http://127.0.0.1:5500',  //restrict access to this origin 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], //allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'] //allowed headers
-  }));
-
-//authenticate Sequelize connection to database
-sequelize.authenticate()
-  .then(() => {
-    console.log('Database connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-
-//popular events endpoint
-app.get('/events/popular', async (req, res) => {
+// Endpoint to fetch popular events
+app.get("/events/popular", async (req, res) => {
   try {
-    console.log('Received request for popular events');
-
-    if (!sequelize) {
-      console.error('Sequelize instance is not available.');
-    } else {
-      console.log('Sequelize instance is available.');
-    }
-
-    if (!Event) {
-      console.error('Event model is not defined');
-      return res.status(500).json({ error: 'Event model not available' });
-    }
-
     const popularEvents = await Event.findAll({
-      order: [['views', 'DESC']],
+      order: [["views", "DESC"]],
       limit: 10,
     });
 
     if (!popularEvents || popularEvents.length === 0) {
-      console.log('No popular events found.');
-    } else {
-      console.log('Fetched popular events:', JSON.stringify(popularEvents, null, 2));
+      return res.status(200).json([]);
     }
 
     res.status(200).json(popularEvents);
   } catch (error) {
-    console.error('Failed to fetch popular events:', error);
-    res.status(500).json({ error: 'Failed to fetch popular events', details: error.message });  }
+    console.error("Error fetching popular events:", error);
+    res.status(500).json({ error: "Failed to fetch popular events" });
+  }
 });
 
 //Events for You endpoint
-app.get('/events/for-you', async (req, res) => {
-    try {
-      console.log('Received request for personalized events');
+app.get("/events/for-you", async (req, res) => {
+  try {
+    console.log("Received request for personalized events");
 
-      if (!sequelize) {
-        console.error('Sequelize instance is not available.');
-      } else {
-        console.log('Sequelize instance is available.');
-      }
-
-      if (!Event) {
-        console.error('Event model is not defined');
-        return res.status(500).json({ error: 'Event model not available' });
-      }
-
-      const events = await Event.findAll(); //for now returns all events
-      
-      //must implement filtering logic to determine user preferences here. Will likely filter based on user tags and/or past events
-      
-      if (!events || events.length === 0) {
-        console.log('No popular events found.');
-      } else {
-        console.log('Fetched popular events:', JSON.stringify(events, null, 2));
-      }
-
-      res.status(200).json(events);
-    } catch (error) {
-      console.error('Error fetching personalized events:', error);
-      res.status(500).json({ error: 'Failed to retrieve personalized events' });
+    if (!sequelize) {
+      console.error("Sequelize instance is not available.");
+    } else {
+      console.log("Sequelize instance is available.");
     }
-});
 
-//nearby events endpoint (demo purposes)
-app.get('/events/nearby', async (req, res) => {
-  const userLocation = req.query.location; //expects location as query parameter
-  if (!userLocation) {
-    return res.status(400).json({ error: 'User location required' });
-  }
-  try {
-    //for demo, return all events; actual implementation will need Adrien's goelocation data
-    const nearbyEvents = await Event.findAll({ limit: 10 });
-    res.status(200).json(nearbyEvents);
+    if (!Event) {
+      console.error("Event model is not defined");
+      return res.status(500).json({ error: "Event model not available" });
+    }
+
+    const events = await Event.findAll(); //for now returns all events
+
+    //must implement filtering logic to determine user preferences here. Will likely filter based on user tags and/or past events
+
+    if (!events || events.length === 0) {
+      console.log("No popular events found.");
+    } else {
+      console.log("Fetched popular events:", JSON.stringify(events, null, 2));
+    }
+
+    res.status(200).json(events);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch nearby events' });
+    console.error("Error fetching personalized events:", error);
+    res.status(500).json({ error: "Failed to retrieve personalized events" });
   }
 });
 
-//search events endpoint
-app.get('/events/search', async (req, res) => {
-  const { query, genre, location } = req.query;
-  const whereClause = {};
-  if (query) {
-    whereClause.name = { [Sequelize.Op.like]: `%${query}%` };
-  }
-  if (genre) {
-    whereClause.tags = { [Sequelize.Op.like]: `%${genre}%` }; //filters events based on tags
-  }
-  if (location) {
-    whereClause.location = { [Sequelize.Op.like]: `%${location}%` };
-  }
-
+// Endpoint to create a new event (with image upload)
+app.post("/events", upload.single("eventImage"), async (req, res) => {
   try {
-    const searchResults = await Event.findAll({ where: whereClause});
-    res.status(200).json(searchResults);
-  } catch (error) {
-    
-    res.status(500).json({ error: 'Failed to search events' });
-  }
-});
+    const { eventName, eventDescription, eventLocation, eventTags, eventTime } =
+      req.body;
 
-//new event endpoint
-app.post('/events', async (req, res) => {
-  try {
-    const newEvent = await Event.create(req.body);
+    // eventTags can be a single string or multiple values, depending on the form submission
+    // If multiple tags are submitted with the same name, they'll be returned as an array.
+    let tagsArray = [];
+    if (Array.isArray(eventTags)) {
+      tagsArray = eventTags;
+    } else if (typeof eventTags === "string" && eventTags.trim() !== "") {
+      tagsArray = [eventTags.trim()];
+    }
+    const tagsString = tagsArray.join(",");
+
+    let imagePath = null;
+    if (req.file) {
+      // If you have an image column in your Event model, you can store the file path here
+      imagePath = req.file.path;
+      // Consider renaming or moving the file, or uploading to a cloud storage service
+    }
+
+    const newEvent = await Event.create({
+      name: eventName,
+      description: eventDescription,
+      location: eventLocation,
+      tags: tagsString,
+      time: new Date(eventTime),
+      image: imagePath, // Store the image path if your model supports it
+    });
+
     res.status(201).json(newEvent);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create event' });
+    console.error("Error creating event:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-//endpoint to update an event
-app.put('/events/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updatedEvent = await Event.update(req.body, { where: { id } });
-    if (updatedEvent[0] === 0) {
-      return res.status(404).json({ error: 'Event not found.' });
-    }
-    res.status(200).json({ message: 'Event updated' });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to update event' });
-  }
+// Serve the index.html file for the root path
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/source", "index.html"));
 });
 
-//endpoint to delete an event
-app.delete('/events/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deletedEvent = await Event.destroy({ where: { id } });
-    if (!deletedEvent) {
-      return res.status(404).json({ error: 'Event not found' });
-    }
-    res.status(200).json({ message: 'Event deleted' });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to delete event.' });
-  }
-});
-
-//start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://127.0.0.1:${PORT}`);
 });
