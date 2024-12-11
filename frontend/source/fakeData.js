@@ -5,7 +5,7 @@ export const allEvents = [];
 //commented out as it interferes with database inputs
 async function populateFakeEvents(containerId, numEvents) {
     try {
-        const response = await fetch('http://127.0.0.1:5000/events/popular');
+        const response = await fetch('http://127.0.0.1:4000/events/popular');
         const popularEvents = response.data;
         const popularEventsList = document.getElementById('popular-events-list');
         popularEventsList.innerHTML = '';

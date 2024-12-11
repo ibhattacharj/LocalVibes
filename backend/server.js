@@ -118,7 +118,7 @@ app.get('/events/for-you', async (req, res) => {
       console.error('Error fetching personalized events:', error);
       res.status(500).json({ error: 'Failed to retrieve personalized events' });
     }
-  });
+});
 
 //nearby events endpoint (demo purposes)
 app.get('/events/nearby', async (req, res) => {
@@ -143,7 +143,7 @@ app.get('/events/search', async (req, res) => {
     whereClause.name = { [Sequelize.Op.like]: `%${query}%` };
   }
   if (genre) {
-    whereClause.tags = { [Sequelize.Op.like]: `%${genre}%` };
+    whereClause.tags = { [Sequelize.Op.like]: `%${genre}%` }; //filters events based on tags
   }
   if (location) {
     whereClause.location = { [Sequelize.Op.like]: `%${location}%` };
@@ -153,6 +153,7 @@ app.get('/events/search', async (req, res) => {
     const searchResults = await Event.findAll({ where: whereClause});
     res.status(200).json(searchResults);
   } catch (error) {
+    
     res.status(500).json({ error: 'Failed to search events' });
   }
 });

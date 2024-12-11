@@ -45,30 +45,17 @@
 
             <!-- Filters Section -->
             <div class="filters-container">
-                <!-- Genre Filter -->
-                <label for="genre-filter">Genre:</label>
-                <select id="genre-filter">
-                    <option value="">All Genres</option>
-                    <option value="rock">Rock</option>
-                    <option value="jazz">Jazz</option>
-                    <option value="hip-hop">Hip-Hop</option>
-                    <option value="electronic">Electronic</option>
-                    <!-- Add more genres as needed -->
-                </select>
-
+                <!-- Tags Section -->
+                <div class="dropdown">
+                    <button class="dropdown-toggle" id="tag-dropdown-toggle">Select Tags</button>
+                    <div class="dropdown-content">
+                        <div class="tags-container"> </div> <!-- Tags to be dynamically populated by main.js -->
+                    </div>
+                </div>
+            
                 <!-- Location Filter -->
                 <label for="location-filter">Location:</label>
                 <input type="text" id="location-filter" placeholder="Enter a location..." />
-
-                <!-- Venue Type Filter -->
-                <label for="venue-filter">Venue Type:</label>
-                <select id="venue-filter">
-                    <option value="">All Venues</option>
-                    <option value="club">Club</option>
-                    <option value="house-party">House Party</option>
-                    <option value="library">Library Basement</option>
-                    <!-- Add more venue types as needed -->
-                </select>
             </div>
 
             <!-- Interactive Map Section and Search -->

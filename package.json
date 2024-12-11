@@ -6,9 +6,12 @@
     "axios": "^1.7.8",
     "cors": "^2.8.5",
     "express": "^4.21.1",
-    "sequelize": "^6.37.5",
-    "sqlite3": "^5.1.7",
     "mapbox-gl": "^3.8.0",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
+  },
+  "scripts": {
+    "postinstall": "npm install sqlite3@latest",
     
     "@sequelize/sqlite3": "^7.0.0-alpha.43",
     "bcryptjs": "^2.4.3",

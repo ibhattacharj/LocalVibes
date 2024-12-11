@@ -6,6 +6,7 @@ console.log("JavaScript Loaded");
 
 //grab all the necessary elements from DOM
 const searchBar = document.getElementById('search-bar');
+const dropDown = document.getElementById('tag-dropdown-toggle');
 const locationBar = document.getElementById('location-filter');
 const popularEventsSection = document.getElementById('popular-events');
 const eventsForYouSection = document.getElementById('events-for-you');
@@ -28,7 +29,7 @@ async function fetchPopularEvents() {
   try {
     console.log('Fetching popular events...');
     
-    const response = await fetch('http://127.0.0.1:5000/events/popular');
+    const response = await fetch('http://127.0.0.1:4000/events/popular');
     console.log('Response received:', response);
 
     if (!response.ok) {
@@ -72,7 +73,7 @@ async function fetchEventsForYou() {
   try {
     console.log('Fetching events for you...');
 
-    const response = await fetch('http://127.0.0.1:5000/events/for-you');
+    const response = await fetch('http://127.0.0.1:4000/events/for-you');
     console.log('Response received:', response);
 
     if (!response.ok) {
@@ -80,16 +81,15 @@ async function fetchEventsForYou() {
     }
 
     const eventsForYou = await response.json();
-    console.log('Fetched data:', eventsForYou);
+    console.log('Fetched Events for You:', eventsForYou);
 
     const eventsForYouList = document.getElementById('events-for-you-list');
-
     if (!eventsForYouList) {
       console.error('Element with id "events-for-you-list" not found');
       return;
     }
 
-    eventsForYouList.innerHTML = '';
+    eventsForYouList.innerHTML = ''; //clear existing content
 
     eventsForYou.forEach(event => {
       console.log('Adding event to DOM:', event);
@@ -112,13 +112,13 @@ async function fetchEventsForYou() {
   }
 }
 
-
 //fetch search results from the server
-async function fetchSearchResults(searchTerm, locationTerm) {
+async function fetchSearchResults(searchTerm, locationTerm, genre) {
   try {
-    const url = new URL('http://127.0.0.1:5000/events/search');
-    url.searchParams.append('query', searchTerm);
-    url.searchParams.append('location', locationTerm);
+    const url = new URL('http://127.0.0.1:4000/events/search');
+    if (searchTerm) url.searchParams.append('query', searchTerm);
+    if (locationTerm) url.searchParams.append('location', locationTerm);
+    if (genre) url.searchParams.append('genre', genre);
 
     const response = await fetch(url.toString());
     if (!response.ok) {
@@ -126,7 +126,7 @@ async function fetchSearchResults(searchTerm, locationTerm) {
     }
 
     const searchResults = await response.json();
-    searchResultsContainer.innerHTML = '';
+    searchResultsContainer.innerHTML = ''; //clear existing content
 
     searchResults.forEach(event => {
       const eventCard = document.createElement('div');
@@ -193,6 +193,7 @@ function addMarkersToMap(events) {
       return;
   }
 
+  // Adds map location marker pins
   markers = [];
 
   events.forEach(event => {
@@ -203,6 +204,7 @@ function addMarkersToMap(events) {
     markers.push(marker);
   })
 
+  // Adds text and description to location pin
   const features = events.map(event => ({
       type: 'Feature',
       geometry: {
@@ -215,6 +217,7 @@ function addMarkersToMap(events) {
       }
   }));
 
+  
   map.addSource('event-markers', {
       type: 'geojson',
       data: {
@@ -279,6 +282,11 @@ searchBar.addEventListener('input', () => {
     updateState(searchTerm, locationTerm);
 });
 
+dropDown.addEventListener('click', () => {
+  const dropdown = document.querySelector('.dropdown');
+  dropdown.classList.toggle('show');
+});
+
 locationBar.addEventListener('input', () => {
   const locationTerm = locationBar.value.toLowerCase();
   const searchTerm = searchBar.value.toLowerCase();
@@ -290,63 +298,86 @@ locationBar.addEventListener('input', () => {
 
 //update page content based on the current search term
 function updateState(searchTerm, locationTerm) {
+  const activeTag = document.querySelector('.tag.active')?.getAttribute('data-genre');
 
-    if (!searchResultsContainer || !mapContainer || !popularEventsSection || !eventsForYouSection) {
-        console.error('One or more required elements are missing');
-        return;
-    }
+  if (!searchResultsContainer || !mapContainer || !popularEventsSection || !eventsForYouSection) {
+    console.error('One or more required elements are missing');
+    return;
+  }
 
-    if (searchTerm.length > 0 || locationTerm.length > 0) {
-        popularEventsSection.style.display = 'none';
-        eventsForYouSection.style.display = 'none';
-
-        searchResultsContainer.style.display = 'block';  
-        mapContainer.style.display = 'block';
-
-        fetchSearchResults(searchTerm, locationTerm); //fetch search results from the server
-    } else {
-        searchResultsContainer.style.display = 'none';
-        mapContainer.style.display = 'none';
-        popularEventsSection.style.display = 'block';
-        eventsForYouSection.style.display = 'block';
-    }
-}
-
-export function toEventDetails(event) {
-    let eventDetailView = document.getElementById('event-detail-view');
-    if (!eventDetailView) {
-        eventDetailView = document.createElement('div');
-        eventDetailView.id = 'event-detail-view';
-        document.body.appendChild(eventDetailView);
-    }
-
-    //hide unnecessary details from event view
+  if (searchTerm || locationTerm || activeTag) {
     popularEventsSection.style.display = 'none';
     eventsForYouSection.style.display = 'none';
+
+    searchResultsContainer.style.display = 'block';
+    mapContainer.style.display = 'block';
+
+    fetchSearchResults(searchTerm, locationTerm, activeTag);
+  } else {
     searchResultsContainer.style.display = 'none';
     mapContainer.style.display = 'none';
-    eventDetailView.style.display = 'block';
-    showEventDetails(event);
+    popularEventsSection.style.display = 'block';
+    eventsForYouSection.style.display = 'block';
+  }
+}
+
+
+export function toEventDetails(event) {
+  let eventDetailView = document.getElementById('event-detail-view');
+  if (!eventDetailView) {
+    eventDetailView = document.createElement('div');
+    eventDetailView.id = 'event-detail-view';
+    document.body.appendChild(eventDetailView);
+  }
+
+  //hide unnecessary details from event view
+  popularEventsSection.style.display = 'none';
+  eventsForYouSection.style.display = 'none';
+  searchResultsContainer.style.display = 'none';
+  mapContainer.style.display = 'none';
+  eventDetailView.style.display = 'block';
+  showEventDetails(event);
 }
 
 import { fakeEvents, userTags } from './fakeData.js'; 
 
 // Make Tags
 function addTags() {
-    const tagsContainer = document.querySelector('.tags-container');
+  const tagsContainer = document.querySelector('.tags-container');
 
-    if (!tagsContainer) {
-      console.error('Tags container element not found');
-      return;
-    }
+  if (!tagsContainer) {
+    console.error('Tags container element not found');
+    return;
+  }
 
-    userTags.forEach(tag => {
-        const tagElement = document.createElement('div');
-        tagElement.classList.add('tag');
-        tagElement.textContent = tag;
-        tagsContainer.appendChild(tagElement);
+  userTags.forEach(tag => {
+    const tagElement = document.createElement('div');
+    tagElement.classList.add('tag');
+    tagElement.textContent = tag;
+    tagElement.setAttribute('data-genre', tag.toLowerCase());
+
+    //click event for tag filtering
+    tagElement.addEventListener('click', () => {
+      document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+      tagElement.classList.add('active');
+      updateState(searchBar.value.toLowerCase(), locationBar.value.toLowerCase());
+
+      const dropdown = document.querySelector('.dropdown');
+      dropdown.classList.remove('show');
     });
+
+    tagsContainer.appendChild(tagElement);
+  });
 }
+
+document.addEventListener('click', (event) => {
+  const dropdown = document.querySelector('.dropdown');
+  const isClickInside = dropdown.contains(event.target);
+
+  if (!isClickInside) {
+      dropdown.classList.remove('show');
+  }
+});
 
 //add Events
 function addEvents(eventType, containerId) {
@@ -358,6 +389,8 @@ function addEvents(eventType, containerId) {
     }
 
     const events = fakeEvents[eventType]; // 'interested', 'upcoming', 'past'
+    container.innerHTML = '';
+    
     events.forEach(event => {
         const eventCard = document.createElement('div');
         eventCard.classList.add('event-card');
@@ -370,7 +403,6 @@ function addEvents(eventType, containerId) {
     });
 }
 
-
 //initialize profile page with user tags and event data
 function initProfilePage() {
     addTags();
@@ -382,7 +414,7 @@ function initProfilePage() {
 //run on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM fully loaded and parsed');
-
+  
   initProfilePage(); 
   fetchPopularEvents(); 
   fetchEventsForYou();
