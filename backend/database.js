@@ -1,7 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const path = require("path");
 
-// Initialize Sequelize with SQLite
 const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "./database.sqlite",
@@ -18,14 +16,22 @@ sequelize
   });
 
 // Event model
+// Fields that appear in the form and should be required:
+//   - name (event-name)
+//   - description (event-description)
+//   - location (event-location)
+//   - tags (event-tags)
+//   - time (event-time)
+//
+// Fields not in the form can be nullable, including host, comments, lat, long, image.
 const Event = sequelize.define("Event", {
   name: {
     type: DataTypes.STRING,
-    allowNull: false, // required in form
+    allowNull: false, // in form
   },
   description: {
     type: DataTypes.TEXT,
-    allowNull: false, // required in form
+    allowNull: false, // in form
   },
   host: {
     type: DataTypes.STRING,
@@ -33,7 +39,7 @@ const Event = sequelize.define("Event", {
   },
   location: {
     type: DataTypes.STRING,
-    allowNull: false, // required in form
+    allowNull: false, // in form
   },
   lat: {
     type: DataTypes.FLOAT,
@@ -45,15 +51,15 @@ const Event = sequelize.define("Event", {
   },
   tags: {
     type: DataTypes.STRING,
-    allowNull: false, // required in form
+    allowNull: false, // in form
   },
   time: {
     type: DataTypes.DATE,
-    allowNull: false, // required in form
+    allowNull: false, // in form
   },
   comments: {
     type: DataTypes.TEXT,
-    allowNull: true, // optional
+    allowNull: true, // not in form
   },
   views: {
     type: DataTypes.INTEGER,
@@ -61,7 +67,7 @@ const Event = sequelize.define("Event", {
   },
   image: {
     type: DataTypes.STRING,
-    allowNull: true, // optional in form
+    allowNull: true, // in form but can be optional
   },
   id: {
     type: DataTypes.INTEGER,
@@ -70,13 +76,12 @@ const Event = sequelize.define("Event", {
   },
 });
 
+
+
 // User model
+// You can adjust allowNull constraints here as needed.
+// The form currently doesn't handle user creation, so these can remain as is.
 const User = sequelize.define("User", {
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -113,7 +118,8 @@ const User = sequelize.define("User", {
   },
 });
 
-// Sample events for testing
+
+// Sample events (for testing)
 const sampleEvents = [
   {
     name: "Rock Fest 2024",
@@ -153,10 +159,8 @@ const sampleEvents = [
   },
 ];
 
-// Sample users for testing
 const sampleUsers = [
   {
-    username: "jdoe",
     name: "John Doe",
     email: "john.doe@example.com",
     password: "password123",
@@ -166,7 +170,6 @@ const sampleUsers = [
     past_events: "",
   },
   {
-    username: "jsmith",
     name: "Jane Smith",
     email: "jane.smith@example.com",
     password: "mypassword",
@@ -183,22 +186,16 @@ const sampleUsers = [
     await sequelize.sync({ force: true });
     console.log("Database & tables created");
 
-    const existingEvents = await Event.findAll();
-    if (existingEvents.length === 0) {
-      await Event.bulkCreate(sampleEvents); // Insert sample events
-      console.log("Sample events inserted");
-    } else {
-      console.log("Sample events already exist in the database.");
-    }
-
-    await User.bulkCreate(sampleUsers); // Insert sample users
-    console.log("Sample users inserted");
+    await Event.bulkCreate(sampleEvents);
+    console.log("Sample events inserted");
 
     const events = await Event.findAll();
     console.log(
       "Events fetched from the database:",
       JSON.stringify(events, null, 2)
     );
+    await User.bulkCreate(sampleUsers);
+    console.log("Sample users inserted");
   } catch (error) {
     console.error("Error creating database and inserting sample data:", error);
   }
