@@ -5,7 +5,7 @@ const passport = require("./authentication/auth/passport");
 const routes = require("./authentication/routes");
 const path = require("path");
 
-const { Event, sequelize, User } = require("./database.js");
+const { Event, sequelize, User, Review } = require("./database.js");
 const express = require("express");
 const cors = require("cors");
 
@@ -209,17 +209,29 @@ app.delete("/events/:id", async (req, res) => {
 });
 
 app.post("/api/reviews", async (req, res) => {
+  console.log("in /api/reviews");
   // Handle review submission
   const { review_text, event_name } = req.body;
-  console.log("Server has received a review: ", review_text);
-  // Save the review or do other logic here
   res.status(200).json({ review_text });
-  console.log("THIS THE TEXTTT: ", req.body.review_text);
-  console.log(req.body.event_name);
+  console.log("Server has received a review: ", review_text);
+  
   const newReview = await Review.create({
     review_text: req.body.review_text,
     event_name: req.body.event_name,
   });
+
+});
+
+app.get("/api/reviews", async (req, res) => {
+  const eventName = req.query.event_name;
+
+  try {
+    const reviews = await Review.findAll({ where: { event_name: eventName } });
+    res.json(reviews);
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+    res.status(500).json({ error: "Failed to fetch reviews" });
+  }
 });
 
 //start server

@@ -1,3 +1,5 @@
+import { openEventForm } from "../eventCreationForm/eventCreationForm.js";
+
 export function showEventDetails(event) {
   const eventDetailView =
     document.getElementById("event-detail-view") ||
@@ -23,6 +25,11 @@ export function showEventDetails(event) {
                 }</button>
                 <button id="rsvp-button">RSVP</button>
                 <button id="share-button">Share</button>
+                ${
+                  event.host === getCurrentUserName()
+                    ? `<button id="edit-event-button"> Edit </button>`
+                    : ""
+                }
             </div>  
             <div class="map-reviews-container">
                 <div class="map-container">
@@ -45,8 +52,6 @@ export function showEventDetails(event) {
             
         </div>
     `;
-    const eventName = document.querySelector(".event-detail-title").innerText;
-    fetchAndDisplayReviews(eventName);
 
   document
     .getElementById("add-to-interested")
@@ -58,7 +63,26 @@ export function showEventDetails(event) {
   document.getElementById("rsvp-button").addEventListener("click", rsvpEvent);
   document
     .getElementById("submit-review")
-    .addEventListener("click", submitReview);
+    .addEventListener("click", (event) => submitReview(event));
+
+  if (event.host === getCurrentUserName()) {
+    document
+      .getElementById("edit-event-button")
+      .addEventListener("click", () => {
+        openEventForm(event.id);
+      });
+  }
+}
+
+//fot testing
+
+localStorage.setItem("currentUser", "Rock Society");
+
+// this will be replaced with logic to get the current user
+function getCurrentUserName() {
+  const currentUser = localStorage.getItem("currentUser") || "Guest";
+  console.log(`Current User: ${currentUser}`);
+  return currentUser;
 }
 
 function updateInterested(event) {
@@ -94,38 +118,35 @@ function shareEvent(event) {
     .catch((error) => console.error("Error", error));
 }
 
-async function submitReview() {
+async function submitReview(event) {
+  // get the typed text
+  event.preventDefault();
   const reviewText = document.getElementById("review-text").value;
-  const eventName = document.querySelector(".event-detail-title").innerText;
-
+  const eventTitle = document.querySelector(".event-detail-title");
+  const eventName = eventTitle
+    ? eventTitle.innerText
+    : "No event name available";
+  // if there is text, then we need to post to db
   if (reviewText) {
-    // create a reviewElement div for css purposes
-    const reviewElement = document.createElement("div");
-    reviewElement.className = "review";
-    reviewElement.textContent = reviewText;
-
-    // append the review to other displayed reviews
-    const reviewBox = document.getElementById("review-box");
-    reviewBox.appendChild(reviewElement);
-
-    document.getElementById("review-text").value = "";
-
-    // logic to post to db
-    const review = JSON.stringify({
-      review_text: reviewText,
-      event_name: eventName,
-    });
-
     const response = await fetch("http://127.0.0.1:4000/api/reviews", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: review,
+      // in db, records contain the text and the event its for
+      body: JSON.stringify({
+        review_text: reviewText,
+        event_name: eventName,
+      }),
     });
 
+    // the post request should return res with just the text
+    const newReview = await response.json();
     if (response.ok) {
-      alert("Review has been submitted!");
+      const reviewBox = document.getElementById("review-box");
+      reviewBox.innerHTML += `<p>${newReview.review_text}</p>`; // Append review
+      document.getElementById("review-text").value = ""; // Clear text area
+      alert("Review Submitted!");
     } else {
       alert("Failed to submit review");
     }
@@ -133,50 +154,6 @@ async function submitReview() {
     alert("Please write a review");
   }
 }
-
-async function fetchAndDisplayReviews(eventName) {
-    // Check if eventName is provided
-    console.log(eventName);
-  if (!eventName) {
-    console.error("Event name is undefined or empty");
-    alert("Event name is missing. Unable to fetch reviews.");
-    return;
-  }
-
-  try {
-    // Fetch reviews from the server
-    const response = await fetch(
-      `http://127.0.0.1:4000/api/reviews?event_name=${eventName}`
-    );
-      console.log(response);
-    // Check if the response is successful
-    if (!response.ok) {
-      console.error("Error fetching reviews: " + response.statusText);
-      alert("Failed to fetch reviews. Please try again later.");
-      return;
-    }
-
-    // Parse the response JSON
-    const reviews = await response.json();
-
-    // Get the review box element
-    const reviewBox = document.getElementById("review-box");
-    reviewBox.innerHTML = ""; // Clear existing reviews
-
-    // Display the reviews
-    reviews.forEach((review) => {
-      const reviewElement = document.createElement("div");
-      reviewElement.className = "review";
-      reviewElement.textContent = review.review_text;
-      reviewBox.appendChild(reviewElement);
-    });
-  } catch (error) {
-    // Handle errors (network issues, JSON parsing, etc.)
-    console.error("Error fetching reviews:", error);
-    alert("Failed to fetch reviews. Please try again later.");
-  }
-}
-
 
 function rsvpEvent(event) {
   const modal = document.getElementById("rsvp-modal");
