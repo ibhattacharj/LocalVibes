@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
+const path = require("path");
 
 const sequelize = new Sequelize({ // initialize sequelize with SQLite
   dialect: 'sqlite',
@@ -103,6 +104,17 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: true,
   }
+});
+
+const Review = sequelize.define("Review", {
+  review_text: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  event_name: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
 });
 
 const sampleEvents = [
@@ -301,4 +313,4 @@ const sampleEvents = [
   }
 })();
 
-module.exports = { sequelize, Event, User };
+module.exports = { sequelize, Event, User, Review };
