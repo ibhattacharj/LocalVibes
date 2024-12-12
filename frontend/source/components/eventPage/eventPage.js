@@ -42,7 +42,9 @@ export function showEventDetails(event) {
     document.getElementById('back-to-main').addEventListener('click', backToMain);
     document.getElementById('share-button').addEventListener('click', () => shareEvent(event));
     document.getElementById('rsvp-button').addEventListener('click', rsvpEvent);
-    document.getElementById("submit-review").addEventListener("click", submitReview); 
+    document
+      .getElementById("submit-review")
+      .addEventListener("click", (event) => submitReview(event)); 
 }
 
 function updateInterested(event) {
@@ -71,22 +73,59 @@ function shareEvent(event) {
     .catch((error) => console.error('Error', error));
 }
 
-function submitReview() {
-  const reviewText = document.getElementById("review-text").value.trim();
-  const reviewBox = document.getElementById("review-box");
+// function submitReview() {
+//   const reviewText = document.getElementById("review-text").value.trim();
+//   const reviewBox = document.getElementById("review-box");
 
+//   if (reviewText) {
+//     const reviewElement = document.createElement("div");
+//     reviewElement.className = "review";
+//     reviewElement.textContent = reviewText;
+
+//     reviewBox.appendChild(reviewElement);
+
+//     document.getElementById("review-text").value = "";
+//   }
+//   //   else {
+//   //     alert("Please write a review before submitting.");
+//   //   }
+// }
+
+async function submitReview(event) {
+  // get the typed text
+  event.preventDefault();
+  const reviewText = document.getElementById("review-text").value;
+  const eventTitle = document.querySelector(".event-detail-title");
+  const eventName = eventTitle
+    ? eventTitle.innerText
+    : "No event name available";
+  // if there is text, then we need to post to db
   if (reviewText) {
-    const reviewElement = document.createElement("div");
-    reviewElement.className = "review";
-    reviewElement.textContent = reviewText;
+    const response = await fetch("http://127.0.0.1:4000/api/reviews", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // in db, records contain the text and the event its for
+      body: JSON.stringify({
+        review_text: reviewText,
+        event_name: eventName,
+      }),
+    });
 
-    reviewBox.appendChild(reviewElement);
-
-    document.getElementById("review-text").value = "";
+    // the post request should return res with just the text
+    const newReview = await response.json();
+    if (response.ok) {
+      const reviewBox = document.getElementById("review-box");
+      reviewBox.innerHTML += `<p>${newReview.review_text}</p>`; // Append review
+      document.getElementById("review-text").value = ""; // Clear text area
+      alert("Review Submitted!");
+    } else {
+      alert("Failed to submit review");
+    }
+  } else {
+    alert("Please write a review");
   }
-  //   else {
-  //     alert("Please write a review before submitting.");
-  //   }
 }
 
 function rsvpEvent(event) {

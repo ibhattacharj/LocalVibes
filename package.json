@@ -8,9 +8,16 @@
     "express": "^4.21.1",
     "mapbox-gl": "^3.8.0",
     "sequelize": "^6.37.5",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "dotenv": "^16.4.5",
+    "express-session": "^1.18.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "@sequelize/sqlite3": "^7.0.0-alpha.43",
+    "bcryptjs": "^2.4.3"
   },
   "scripts": {
-    "postinstall": "npm install sqlite3@latest"
+    "postinstall": "echo 'Installation complete!'"
   }
 }
+
