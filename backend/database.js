@@ -1,6 +1,4 @@
 const { Sequelize, DataTypes } = require('sequelize');
-//const { Sequelize, DataTypes } = require('@sequelize/core');
-//const { SqliteDialect } = require('@sequelize/sqlite3');
 const path = require('path');
 
 const sequelize = new Sequelize({ // initialize sequelize with SQLite
@@ -80,12 +78,12 @@ const User = sequelize.define('User', {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: false,
   },
   password: {
     type: DataTypes.STRING,
@@ -94,7 +92,6 @@ const User = sequelize.define('User', {
   user_id: {
     type: DataTypes.STRING,
     primaryKey: true,
-    //autoIncrement: true,
   },
   created_events: {
     type: DataTypes.STRING,
@@ -299,7 +296,7 @@ const sampleEvents = [
 //sync database
 (async () => {
   try {
-    await sequelize.sync({ force: true }); //changed from force: true
+    await sequelize.sync({ force: false }); //changed from force: true
     console.log('Database & tables created');
 
     //Check if the events are already in the database

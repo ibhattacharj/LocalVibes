@@ -1,5 +1,6 @@
 const factoryResponse = (status, message) => ({ status, message });
 
+//Create a middleware function that checks if the user is authenticated
 const isAuthenticated = (req, res, next) => {
   return req.isAuthenticated()
     ? next()

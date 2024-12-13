@@ -1,10 +1,8 @@
 const dotenv = require("dotenv");
 const session = require("express-session");
 const passport = require("./authentication/auth/passport");
-//const passport = require('passport');
 const routes = require("./authentication/routes");
 const path = require("path");
-
 const { Event, sequelize, User } = require('./database.js');
 const express = require('express')
 const cors = require('cors');
@@ -13,11 +11,10 @@ const { Sequelize } = require('sequelize');
 
 const app = express();
 dotenv.config();
-const PORT = process.env.PORT || 4000; //set port. Defaults to 5000 if not provided
+const PORT = process.env.PORT || 4000; //set port. Defaults to 4000 if not provided
 
 // Allow for static files
 app.use(express.static(path.join(__dirname, "frontend/source")));
-//app.use(express.static("frontend/source"));
 
 //middleware for parsing JSON bodies in requests
 app.use(express.json());
