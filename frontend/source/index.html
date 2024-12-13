@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LocalVibes</title>
-    <link rel="stylesheet" href="./components/eventPage/eventPage.css">
-    <!--<link rel="stylesheet" href="./main.css"> -->
-    <link rel="stylesheet" type="text/css" href="/logincss" />
+    <!--<link rel="stylesheet" href="./components/eventPage/eventPage.css">-->
+    <link rel="stylesheet" type="text/css" href="/eventpagecss"/>
+    <!-- <link rel="stylesheet" href="./main.css"> -->
+    <link rel="stylesheet" type="text/css" href="/appcss"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
-    <!--<script type='module' src="fakeData.js" defer></script>  link to generated fake events script -->
-    <script type='module' src="main.js" defer></script>
+    <!--<script type='module' src="fakeData.js" defer></script>  link to generated fake events script-->
+    <!--<script type="module" src="http://127.0.0.1:4000/fakeData.js" defer></script>-->
+    <!--<script type="module" src="main.js" defer></script>-->
+    <script type="module" src="http://127.0.0.1:4000/main.js" defer></script>
+    <!-- <script type="module" src="http://127.0.0.1:4000/eventPage.js" defer></script>
+    <script type="module" src="http://127.0.0.1:4000/eventCreationForm.js" defer></script> -->
 
 </head>
 <body>
@@ -22,10 +27,15 @@
             <nav>
                 <ul>
                     <!-- Home Icon on the left -->
-                    <li class="home-icon"><a href="index.html"><i class="fas fa-home"></i></a></li>
+                    <!--<li class="home-icon"><a href="index.html"><i class="fas fa-home"></i></a></li>-->
+                    <!-- Changed to call /home route instead of static index.html file -->
+                    <li class="home-icon"><a href="/home"><i class="fas fa-home"></i></a></li>
+
 
                     <!-- Profile Icon on the right -->
-                    <li class="profile-icon"><a href="profile.html"><i class="fas fa-user"></i></a></li>
+                    <!--<li class="profile-icon"><a href="profile.html"><i class="fas fa-user"></i></a></li>-->
+                    <!-- Changed to call /profile route instead of static profile.html file -->
+                    <li class="profile-icon"><a href="/profile"><i class="fas fa-user"></i></a></li>
                 </ul>
             </nav>
         </div>

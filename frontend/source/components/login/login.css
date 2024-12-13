@@ -71,8 +71,22 @@ body {
     font-size: 14px;
     text-align: center;
 }
+
+.wrapper .login{
+    font-size: 14px;
+    text-align: center;
+}
  
 .signup p a{
     font-weight: 100;
     color: #ffd700;
+}
+
+.login p a{
+    font-weight: 100;
+    color: #ffd700;
+}
+
+a:visited {
+    color: #ffd900b9; /* Change to a different color, for example, tomato red */
 }

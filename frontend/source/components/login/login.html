@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LocalVibes Login</title>
-    <!--<link rel="stylesheet" href="login.css">  Link to your CSS file -->
+    <link rel="stylesheet" href="login.css">
+    <!-- Used /logincss route instead of static file to load file while running server -->
     <link rel="stylesheet" type="text/css" href="/logincss" />
-
     <script type='module' src="login.js" defer></script>
+    <!-- Used /login.js route instead of static file to load file while running server -->
+    <script type="module" src="http://127.0.0.1:4000/login.js" defer></script>
 </head>
 <body>
-
     <div class="wrapper">
         <form action="">
             <div class="login">
@@ -22,13 +23,12 @@
             <div class="input-box">
                 <input type="password" id="password" placeholder="Password" required>
             </div>
-            <!--<a href="index.html">-->
-            <button class="button" onclick="login()">Login</button> <!--change to submit instead of href-->
-            <!--</a>-->
+            <!-- Button to call login function when login button in clicked -->
+            <button class="button" onclick="login()">Login</button><br><br>
             <a href="/auth/google">Login with Google</a>
             <div class="signup">
                 <p>Create your account
-                <a href="signup.html">here</a></p>
+                <a href="/signup">here</a></p>
             </div>
             </div>
         </form>
