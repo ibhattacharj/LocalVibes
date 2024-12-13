@@ -208,27 +208,31 @@ app.delete("/events/:id", async (req, res) => {
   }
 });
 
+// API endpoint to post submitted reviews to the database; request object has both content of review
+// and the event that is being reviewed
 app.post("/api/reviews", async (req, res) => {
   console.log("in /api/reviews");
   // Handle review submission
   const { review_text, event_name } = req.body;
-  res.status(200).json({ review_text });
+  res.status(200).json({ review_text }); // send just the textual content of review in response
   console.log("Server has received a review: ", review_text);
   
-  const newReview = await Review.create({
+  const newReview = await Review.create({ // create entry in Reviews table
     review_text: req.body.review_text,
     event_name: req.body.event_name,
   });
 
 });
 
+// API endpoint to retrieve submitted reviews from the database; ultimately, these are shown on each individual
+// event's page 
 app.get("/api/reviews", async (req, res) => {
   const eventName = req.query.event_name;
 
   try {
-    const reviews = await Review.findAll({ where: { event_name: eventName } });
+    const reviews = await Review.findAll({ where: { event_name: eventName } }); // finding reviews for specific event
     res.json(reviews);
-  } catch (error) {
+  } catch (error) { // error catching
     console.error("Error fetching reviews:", error);
     res.status(500).json({ error: "Failed to fetch reviews" });
   }

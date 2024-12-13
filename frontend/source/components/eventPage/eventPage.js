@@ -116,6 +116,7 @@ async function submitReview() {
       event_name: eventName,
     });
 
+      // Fetching from Post API endpoint
     const response = await fetch("http://127.0.0.1:4000/api/reviews", {
       method: "POST",
       headers: {
@@ -123,7 +124,7 @@ async function submitReview() {
       },
       body: review,
     });
-
+    // error handling
     if (response.ok) {
       alert("Review has been submitted!");
     } else {
@@ -179,11 +180,15 @@ async function fetchAndDisplayReviews(eventName) {
 
 
 function rsvpEvent(event) {
+  // Check if the RSVP modal element already exists
   const modal = document.getElementById("rsvp-modal");
   if (!modal) {
+    // Create the modal element if it doesn't exist
     const modalElement = document.createElement("div");
     modalElement.id = "rsvp-modal";
-    modalElement.classList.add("modal");
+    modalElement.classList.add("modal"); // Add the "modal" class for styling
+
+    // Set the modal content (HTML structure)
     modalElement.innerHTML = `
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -207,25 +212,34 @@ function rsvpEvent(event) {
             </div>
         `;
 
+    // Append the modal element to the body
     document.body.appendChild(modalElement);
 
+    // Add click event listener for the close button (X)
     document
       .querySelector(".close")
       .addEventListener("click", () => (modalElement.style.display = "none"));
 
+    // Add submit event listener for the RSVP form
     document.getElementById("rsvp-form").addEventListener("submit", (e) => {
-      e.preventDefault();
+      e.preventDefault(); // Prevent default form submission behavior
+
+      // Get the user's RSVP details
       const attendance = document.getElementById("attendance").value;
       const attendeesCount = document.getElementById("attendees").value;
       const comments = document.getElementById("comments").value;
 
+      // Log the RSVP details to the console
       console.log(`RSVP for event: ${event.name}`);
       console.log(`Attendance: ${attendance}`);
       console.log(`Number of people: ${attendeesCount}`);
       console.log(`Comments: ${comments}`);
 
+      // Hide the modal after submission
       modalElement.style.display = "none";
     });
   }
-  modal.style.display = "block";
+
+  // If the modal already exists, just show it
+  modal.style.display = "block"; // Display the modal element
 }
