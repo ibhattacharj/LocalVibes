@@ -11,10 +11,10 @@ export function showEventDetails(event) {
             <div class="event-detail">
                 <button id="back-to-main">Back to Main</button>
                 <img src="${event.image}" alt="${
-    event.title
+    event.name
   }" class="event-detail-image">
-                <h2 class="event-detail-title">${event.title}</h2>
-                <p class="event-detail-genre">Genre: ${event.genre || "N/A"}</p>
+                <h2 class="event-detail-title">${event.name}</h2>
+                <p class="event-detail-genre">Genre: ${event.tags || "N/A"}</p>
                 <p class="event-detail-location">Location: ${
                   event.location || "N/A"
                 }</p>
@@ -86,7 +86,7 @@ function backToMain() {
 function shareEvent(event) {
   const eventUrl = `${window.location.origin}${
     window.location.pathname
-  }?event=${encodeURIComponent(event.title)}`;
+  }?event=${encodeURIComponent(event.name)}`;
 
   navigator.clipboard
     .writeText(eventUrl)
@@ -187,7 +187,7 @@ function rsvpEvent(event) {
     modalElement.innerHTML = `
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h3>RSVP for ${event.title}</h3>
+                <h3>RSVP for ${event.name}</h3>
                 <form id="rsvp-form">
                     <label for="attendance">Will you attend?</label>
                     <select id="attendance">
@@ -219,7 +219,7 @@ function rsvpEvent(event) {
       const attendeesCount = document.getElementById("attendees").value;
       const comments = document.getElementById("comments").value;
 
-      console.log(`RSVP for event: ${event.title}`);
+      console.log(`RSVP for event: ${event.name}`);
       console.log(`Attendance: ${attendance}`);
       console.log(`Number of people: ${attendeesCount}`);
       console.log(`Comments: ${comments}`);
