@@ -23,11 +23,11 @@ Follow these steps to set up and run the project locally:
 - Navigate to the backend directory: cd backend
 - Install dependencies: npm install
 - Start the server: node server.js
+- You will be directed to the login page, once authenticated, you will be brought to the home page
 
 ### Frontend Setup
 - Navigate to the frontend directory
 - Open source/index.html in your browser to see the home page
-- To test Google authenication open source/components/login/login.html in your browser to see the home page
 
 
 ## Issues that we ran into
