@@ -70,23 +70,27 @@ const Event = sequelize.define('Event', {
 
 //user model
 const User = sequelize.define('User', {
-  name: {
+  username: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: false,
   },
   password: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   user_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     primaryKey: true,
-    autoIncrement: true,
   },
   created_events: {
     type: DataTypes.STRING,
@@ -300,7 +304,8 @@ const sampleEvents = [
 //sync database
 (async () => {
   try {
-    await sequelize.sync({ force: true });
+    //Changed to force: false, so the database won't recreate itself every time
+    await sequelize.sync({ force: false });
     console.log('Database & tables created');
 
     await Event.bulkCreate(sampleEvents); //TEMPORARY TO INSERT SAMPLE EVENTS
