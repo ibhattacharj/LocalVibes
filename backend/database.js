@@ -1,15 +1,14 @@
-const { Sequelize, DataTypes } = require('sequelize');
-//const { Sequelize, DataTypes } = require('@sequelize/core');
-//const { SqliteDialect } = require('@sequelize/sqlite3');
-const path = require('path');
+const { Sequelize, DataTypes } = require('sequelize'); //import necessary modules from sequelize package
+const path = require('path'); 
 
-const sequelize = new Sequelize({ // initialize sequelize with SQLite
-  dialect: 'sqlite',
-  //storage: path.join(__dirname, 'database.sqlite'),
-  storage: './database.sqlite',
-  logging: console.log 
+//initialize sequelize with SQLite
+const sequelize = new Sequelize({ 
+  dialect: 'sqlite', //use SQLite database
+  storage: './database.sqlite', //set location for SQLite database file
+  logging: console.log //enable logging for debugging 
 });
 
+//authenticate connection to database
 sequelize.authenticate()
   .then(() => {
     console.log('Database connection has been established successfully.');
@@ -18,102 +17,98 @@ sequelize.authenticate()
     console.error('Unable to connect to the database:', err);
   });
 
-//event model
+//define Event model for event data
 const Event = sequelize.define('Event', {
   name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING, //event name
+    allowNull: false, //required
   },
   description: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+    type: DataTypes.TEXT, //detailed description of event
+    allowNull: false, //required
   },
   tags: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING, //tags for filtering and categorizing events
+    allowNull: false, //tags must be provided
   },
   host: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING, //name of event host
+    allowNull: false, //host is required
   },
   location: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING, //location where event will take place
+    allowNull: false, //location is mandatory
   },
   lat: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
+    type: DataTypes.FLOAT, //latitude for geolocation
+    allowNull: true, //latitude is optional. Ideally location is there but this is slightly easier to debug as false
   },
   long: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  tags: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.FLOAT, //longitude for geolocation
+    allowNull: true, //longitude is optional too
   },
   time: {
-    type: DataTypes.DATE,
-    allowNull: false,
+    type: DataTypes.DATE, //date and time of the event
+    allowNull: false, //time is required
   },
   comments: {
-    type: DataTypes.TEXT,
-    allowNull: true,
+    type: DataTypes.TEXT, //additional comments about event
+    allowNull: true, //comments are optional
   },
   views: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+    type: DataTypes.INTEGER, //number of views for event
+    defaultValue: 0, //default views set to zero
   },
   id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+    type: DataTypes.INTEGER, //unique ID for event
+    primaryKey: true, //marks this as primary key
+    autoIncrement: true, //auto increments ID
   }
 });
 
-//user model
+//define User model to store user info
 const User = sequelize.define('User', {
   username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
+    type: DataTypes.STRING, //unique username for the user
+    allowNull: false, //must have a username
+    unique: true, //ensure no duplicate usernames
   },
   name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING, //full name of user
+    allowNull: false, //name is required
   },
   email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
+    type: DataTypes.STRING, //email address of user
+    allowNull: false, //email is mandatory
+    unique: true, //every email must be unique
   },
   password: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING, //hashed password for user
+    allowNull: false, //password is mandatory
   },
   user_id: {
-    type: DataTypes.STRING,
-    primaryKey: true,
-    //autoIncrement: true,
+    type: DataTypes.STRING, //unique ID for user
+    primaryKey: true, //set as primary key
   },
   created_events: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.STRING, //list of events created by user
+    allowNull: true, //optional field
   },
   interested_events: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.STRING, //list of events user is interested in
+    allowNull: true, 
   },
   upcoming_events: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.STRING, //list of upcoming events for user
+    allowNull: true, 
   },
   past_events: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.STRING, //list of past events user attended
+    allowNull: true, 
   }
 });
 
+//create a sample dataset of events
 const sampleEvents = [
     {
       name: 'Rock Fest 2024',
@@ -273,6 +268,7 @@ const sampleEvents = [
     },
 ];
   
+//sample dataset of users
   const sampleUsers = [
     {
       username: 'jdoe',
@@ -296,26 +292,26 @@ const sampleEvents = [
     }
   ];
 
-//sync database
+//initialize and sync the database
 (async () => {
   try {
-    await sequelize.sync({ force: true }); //changed from force: true
+    await sequelize.sync({ force: true }); //force sync to rebuild database
     console.log('Database & tables created');
 
-    //Check if the events are already in the database
+    //check if events already exist before inserting
     const existingEvents = await Event.findAll();
     if (existingEvents.length === 0) {
-      await Event.bulkCreate(sampleEvents); // Insert sample events only if the table is empty
+      await Event.bulkCreate(sampleEvents); //insert sample events
       console.log('Sample events inserted');
     } else {
       console.log('Sample events already exist in the database. No insertion needed.');
     }
 
-    const events = await Event.findAll();
+    const events = await Event.findAll(); //fetch all events
     console.log('Events fetched from the database:', JSON.stringify(events, null, 2));
   } catch (error) {
     console.error('Error creating database and inserting sample data:', error);
   }
 })();
 
-module.exports = { sequelize, Event, User };
+module.exports = { sequelize, Event, User }; //export models and sequelize instance
