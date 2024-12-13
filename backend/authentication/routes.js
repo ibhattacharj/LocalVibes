@@ -67,8 +67,8 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/home",
-    failureRedirect: "/"
+    successRedirect: "http://127.0.0.1:5500/frontend/source/index.html",
+    failureRedirect: "http://127.0.0.1:4000/",
   })
 );
 
