@@ -110,6 +110,7 @@ const User = sequelize.define('User', {
   }
 });
 
+// Review model
 const Review = sequelize.define("Review", {
   review_text: {
     type: DataTypes.TEXT,
@@ -121,6 +122,7 @@ const Review = sequelize.define("Review", {
   },
 });
 
+// sample events to test posting to db
 const sampleEvents = [
     {
       name: 'Rock Fest 2024',
@@ -301,7 +303,9 @@ const sampleEvents = [
     }
   ];
 
-//sync database
+//This code is used to sync the Sequelize models with the database (by dropping and recreating 
+// tables), insert sample event data, and fetch and log those events from the database. 
+// It's mainly used for testing or setting up initial data for development purposes.
 (async () => {
   try {
     //Changed to force: false, so the database won't recreate itself every time
@@ -311,7 +315,7 @@ const sampleEvents = [
     await Event.bulkCreate(sampleEvents); //TEMPORARY TO INSERT SAMPLE EVENTS
     console.log('Sample events inserted');
 
-    const events = await Event.findAll();
+    const events = await Event.findAll(); // to see what events are in db
     console.log('Events fetched from the database:', JSON.stringify(events, null, 2));
   } catch (error) {
     console.error('Error creating database and inserting sample data:', error);
