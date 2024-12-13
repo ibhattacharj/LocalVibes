@@ -1,0 +1,62 @@
+[33m82ba5b7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: pull origin main: Fast-forward
+[33m37e7d19[m HEAD@{1}: pull origin main: Fast-forward
+[33meac18b7[m HEAD@{2}: checkout: moving from Jacob/DatabaseImages to main
+[33m1fe11b9[m[33m ([m[1;32mJacob/DatabaseImages[m[33m)[m HEAD@{3}: reset: moving to HEAD
+[33m1fe11b9[m[33m ([m[1;32mJacob/DatabaseImages[m[33m)[m HEAD@{4}: checkout: moving from main to Jacob/DatabaseImages
+[33meac18b7[m HEAD@{5}: reset: moving to HEAD
+[33meac18b7[m HEAD@{6}: pull origin main: Fast-forward
+[33m4b64e49[m HEAD@{7}: checkout: moving from Jacob/MoreEvents to main
+[33m0dc73f1[m[33m ([m[1;31morigin/Jacob/MoreEvents[m[33m)[m HEAD@{8}: commit: Events#46: Added more sample events in databse to show core functionality of app.
+[33m4b64e49[m HEAD@{9}: checkout: moving from main to Jacob/MoreEvents
+[33m4b64e49[m HEAD@{10}: pull origin main: Fast-forward
+[33m1fe11b9[m[33m ([m[1;32mJacob/DatabaseImages[m[33m)[m HEAD@{11}: checkout: moving from Jacob/DatabaseTags to main
+[33m27a04dd[m[33m ([m[1;31morigin/Jacob/DatabaseTags[m[33m)[m HEAD@{12}: commit: Tags#45:Updated the server to include tags with search queries. Added an addTags function in main.js to populate tags on the home page, and updated updateState to include active Tag filtering. Changed tags.js to get events when a tag is clicked, and replaced 'Genre' and 'Venue Type' in index.html with the tag drop down, as they were front end examples. Also added things to main.css for dropdown to look good.
+[33m1fe11b9[m[33m ([m[1;32mJacob/DatabaseImages[m[33m)[m HEAD@{13}: checkout: moving from main to Jacob/DatabaseTags
+[33m1fe11b9[m[33m ([m[1;32mJacob/DatabaseImages[m[33m)[m HEAD@{14}: checkout: moving from Jacob/DatabaseImages to main
+[33m1fe11b9[m[33m ([m[1;32mJacob/DatabaseImages[m[33m)[m HEAD@{15}: checkout: moving from main to Jacob/DatabaseImages
+[33m1fe11b9[m[33m ([m[1;32mJacob/DatabaseImages[m[33m)[m HEAD@{16}: pull origin main: Fast-forward
+[33mc675bf3[m HEAD@{17}: pull origin main: Fast-forward
+[33m204a059[m HEAD@{18}: reset: moving to HEAD
+[33m204a059[m HEAD@{19}: commit: Added script to unify SQLite between Operating Systems
+[33ma0f8536[m HEAD@{20}: pull origin main: Fast-forward
+[33m41c19ce[m HEAD@{21}: checkout: moving from Jacob/Database to main
+[33m3909a4c[m HEAD@{22}: reset: moving to HEAD
+[33m3909a4c[m HEAD@{23}: reset: moving to HEAD
+[33m3909a4c[m HEAD@{24}: pull origin main: Fast-forward
+[33m3dbb166[m HEAD@{25}: pull origin main: Fast-forward
+[33mb63caba[m HEAD@{26}: pull origin main: Fast-forward
+[33md5f1520[m[33m ([m[1;31morigin/Jacob/Database[m[33m)[m HEAD@{27}: commit: Implemented full database and included connected events to it. replaced evenPage.js with eventPage.js
+[33m314108a[m HEAD@{28}: commit: completed SQLite database completely.
+[33m9eff064[m HEAD@{29}: commit: inklings of database implementation
+[33m41c19ce[m HEAD@{30}: checkout: moving from main to Jacob/Database
+[33m41c19ce[m HEAD@{31}: pull origin main: Fast-forward
+[33m08cb269[m HEAD@{32}: pull origin main: Fast-forward
+[33m50aeb70[m HEAD@{33}: pull origin main: Fast-forward
+[33mf4a1b06[m HEAD@{34}: checkout: moving from Events-SequenceDiagram to main
+[33m8fc5c4a[m[33m ([m[1;31morigin/Events-SequenceDiagram[m[33m)[m HEAD@{35}: checkout: moving from main to Events-SequenceDiagram
+[33mf4a1b06[m HEAD@{36}: checkout: moving from Events-SequenceDiagram to main
+[33m8fc5c4a[m[33m ([m[1;31morigin/Events-SequenceDiagram[m[33m)[m HEAD@{37}: commit: added top 3 commits
+[33mfa56ee1[m HEAD@{38}: checkout: moving from main to Events-SequenceDiagram
+[33mf4a1b06[m HEAD@{39}: pull origin main: Fast-forward
+[33m07aa085[m HEAD@{40}: checkout: moving from Events-SequenceDiagram to main
+[33mfa56ee1[m HEAD@{41}: commit: added my sequence diagram for PopularEvents and EventsForYou Implementation
+[33m07aa085[m HEAD@{42}: checkout: moving from main to Events-SequenceDiagram
+[33m07aa085[m HEAD@{43}: pull: Fast-forward
+[33m1600a2f[m HEAD@{44}: checkout: moving from Home_Page-JacobTorres/AdrienBekker to main
+[33m8dd9d3c[m[33m ([m[1;31morigin/Home_Page-JacobTorres/AdrienBekker[m[33m)[m HEAD@{45}: commit: updated features.md and their respective contributors
+[33m6c5fff6[m[33m ([m[1;31morigin/tags-zaida[m[33m, [m[1;31morigin/login-zaida[m[33m, [m[1;31morigin/feature/profiles-page[m[33m)[m HEAD@{46}: pull origin main: Fast-forward
+[33mcd0bc95[m HEAD@{47}: pull origin main: Fast-forward
+[33ma0a3765[m HEAD@{48}: commit: added my contributions to my .md file
+[33mc07e4db[m HEAD@{49}: pull origin main: Fast-forward
+[33m5af771b[m HEAD@{50}: commit: prettied up the whole thing, added some basic color schemes and fixed spacings. Feel free to modify
+[33m2e6626d[m HEAD@{51}: pull origin main: Fast-forward
+[33mab5e5ea[m HEAD@{52}: commit: added images to event cards
+[33m7f64c4b[m HEAD@{53}: commit: Added scrolling of events, and limited event cards in view
+[33m9d9170a[m HEAD@{54}: commit: Created Events for You and Popular Events list with fake data. Added boiler plate for search implementation
+[33mba7760f[m HEAD@{55}: checkout: moving from add-profile-Jacob to Home_Page-JacobTorres/AdrienBekker
+[33mba7760f[m HEAD@{56}: pull origin main: Fast-forward
+[33mfd4be3a[m[33m ([m[1;31morigin/add-profile-Jacob[m[33m)[m HEAD@{57}: commit: Add Jacob's profile to reports folder
+[33me334f5a[m HEAD@{58}: checkout: moving from features-file to add-profile-Jacob
+[33me334f5a[m HEAD@{59}: commit: Add features.md with key functionalities of the app
+[33m1600a2f[m HEAD@{60}: checkout: moving from main to features-file
+[33m1600a2f[m HEAD@{61}: clone: from https://github.com/ibhattacharj/LocalVibes.git

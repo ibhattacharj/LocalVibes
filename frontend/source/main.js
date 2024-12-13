@@ -24,91 +24,91 @@ if (searchBar) {
   console.error('Search bar element not found');
 }
 
-//fetch popular events from server
+//async function to fetch popular events from server
 async function fetchPopularEvents() {
   try {
-    console.log('Fetching popular events...');
+    console.log('Fetching popular events...'); //log start of fetch process
     
-    const response = await fetch('http://127.0.0.1:4000/events/popular');
-    console.log('Response received:', response);
+    const response = await fetch('http://127.0.0.1:4000/events/popular'); //send GET request to server
+    console.log('Response received:', response); //log raw response object
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    if (!response.ok) { //check if the response status is not OK
+      throw new Error(`HTTP error! Status: ${response.status}`); //throw error if status is invalid
     }
 
-    const popularEvents = await response.json();
-    console.log('Fetched data:', popularEvents);
+    const popularEvents = await response.json(); //parse JSON response
+    console.log('Fetched data:', popularEvents); //log parsed data
 
-    const popularEventsList = document.getElementById('popular-events-list');
-    if (!popularEventsList) {
-      console.error('Element with id "popular-events-list" not found');
-      return;
+    const popularEventsList = document.getElementById('popular-events-list'); //select DOM element to display popular events
+    if (!popularEventsList) { //check if DOM element exists
+      console.error('Element with id "popular-events-list" not found'); //log error if element doesn't exist
+      return; 
     }
 
-    popularEventsList.innerHTML = ''; //clear existing content
+    popularEventsList.innerHTML = ''; //clear any existing content in the popular events list
 
-    //loop through each event. create cards for them in DOM
+    //loop through each fetched event and create a card for it in DOM
     popularEvents.forEach(event => {
-      console.log('Adding event to DOM:', event);
-      const eventCard = document.createElement('div');
-      eventCard.classList.add('event-card');
+      console.log('Adding event to DOM:', event); //log event being added to the DOM
+      const eventCard = document.createElement('div'); //create new div for event card
+      eventCard.classList.add('event-card'); //add 'event-card' class to new div
       eventCard.innerHTML = `
-        <img src="${event.image || 'https://via.placeholder.com/150'}" alt="Event Image">
-        <h3>${event.name}</h3>
-        <p>Genre: ${event.tags}</p>
-        <p>Location: ${event.location}</p>
-        <p>Latitude: ${event.lat}</p>
-        <p>Longitude: ${event.long}</p>
+        <img src="${event.image || 'https://via.placeholder.com/150'}" alt="Event Image"> <!--event image or placeholder-->
+        <h3>${event.name}</h3> 
+        <p>Genre: ${event.tags}</p> 
+        <p>Location: ${event.location}</p> 
+        <p>Latitude: ${event.lat}</p> 
+        <p>Longitude: ${event.long}</p> 
       `;
-      eventCard.addEventListener('click', () => toEventDetails(event));
-      popularEventsList.appendChild(eventCard);
+      eventCard.addEventListener('click', () => toEventDetails(event)); //add click event listener to display event details
+      popularEventsList.appendChild(eventCard); //append event card to popular events list
     });
   } catch (error) {
-    console.error('Error fetching popular events:', error);
+    console.error('Error fetching popular events:', error); //log errors
   }
 }
 
-//fetch events for you from server
+//async function to fetch personalized events for the user
 async function fetchEventsForYou() {
   try {
-    console.log('Fetching events for you...');
+    console.log('Fetching events for you...'); //log start of fetch process
 
-    const response = await fetch('http://127.0.0.1:4000/events/for-you');
-    console.log('Response received:', response);
+    const response = await fetch('http://127.0.0.1:4000/events/for-you'); //send GET request to fetch personalized events
+    console.log('Response received:', response); //log raw response object
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    if (!response.ok) { //check if response status is not OK
+      throw new Error(`HTTP error! Status: ${response.status}`); //throw error if the status is invalid
     }
 
-    const eventsForYou = await response.json();
-    console.log('Fetched Events for You:', eventsForYou);
+    const eventsForYou = await response.json(); //parse JSON response
+    console.log('Fetched Events for You:', eventsForYou); //log parsed data
 
-    const eventsForYouList = document.getElementById('events-for-you-list');
-    if (!eventsForYouList) {
-      console.error('Element with id "events-for-you-list" not found');
-      return;
+    const eventsForYouList = document.getElementById('events-for-you-list'); //select DOM element to display personalized events
+    if (!eventsForYouList) { //check if the DOM element exists
+      console.error('Element with id "events-for-you-list" not found'); //log error if element doesn't exist
+      return; 
     }
 
-    eventsForYouList.innerHTML = ''; //clear existing content
+    eventsForYouList.innerHTML = ''; //clear existing content in the personalized events list
 
+    //loop through each fetched event and create a card for it in DOM
     eventsForYou.forEach(event => {
-      console.log('Adding event to DOM:', event);
-
-      const eventCard = document.createElement('div');
-      eventCard.classList.add('event-card');
+      console.log('Adding event to DOM:', event); //log event being added to DOM
+      const eventCard = document.createElement('div'); //create new div for event card
+      eventCard.classList.add('event-card'); //add 'event-card' class to the new div
       eventCard.innerHTML = `
-        <img src="${event.image || 'https://via.placeholder.com/150'}" alt="Event Image">
-        <h3>${event.name}</h3>
-        <p>Genre: ${event.tags}</p>
-        <p>Location: ${event.location}</p>
-        <p>Latitude: ${event.lat}</p>
-        <p>Longitude: ${event.long}</p>
+        <img src="${event.image || 'https://via.placeholder.com/150'}" alt="Event Image"> <!--event image placeholder-->
+        <h3>${event.name}</h3> 
+        <p>Genre: ${event.tags}</p> 
+        <p>Location: ${event.location}</p> 
+        <p>Latitude: ${event.lat}</p> 
+        <p>Longitude: ${event.long}</p> 
       `;
-      eventCard.addEventListener('click', () => toEventDetails(event));
-      eventsForYouList.appendChild(eventCard);
+      eventCard.addEventListener('click', () => toEventDetails(event)); //click event listener to display event details
+      eventsForYouList.appendChild(eventCard); //append event card to personalized events list
     });
   } catch (error) {
-    console.error('Error fetching events for you:', error);
+    console.error('Error fetching events for you:', error); //log error during fetch process
   }
 }
 
@@ -243,7 +243,7 @@ function addMarkersToMap(events) {
   const bounds = new mapboxgl.LngLatBounds();
   features.forEach(feature => bounds.extend(feature.geometry.coordinates));
   if (features.length > 0) { // Avoid error if no features exist
-      map.fitBounds(bounds, { padding: 50 });
+    map.fitBounds(bounds, { padding: 50 });
   }
 
   // Add click event to markers
@@ -263,38 +263,42 @@ function addMarkersToMap(events) {
 
   // Change the cursor to a pointer when the mouse is over the places layer.
   map.on('mouseenter', 'event-markers', () => {
-      map.getCanvas().style.cursor = 'pointer';
+    map.getCanvas().style.cursor = 'pointer';
   });
 
   // Change it back to a pointer when it leaves.
   map.on('mouseleave', 'event-markers', () => {
-  map.getCanvas().style.cursor = '';
-});
+    map.getCanvas().style.cursor = '';
+  });
 }
 
 
+//add event listener to search bar input
 searchBar.addEventListener('input', () => {
-    const searchTerm = searchBar.value.toLowerCase();
-    const locationTerm = locationBar.value.toLowerCase();  
+  const searchTerm = searchBar.value.toLowerCase(); //convert input value to lowercase
+  const locationTerm = locationBar.value.toLowerCase(); //get current value of location filter  
 
-    //utilizes localStorage
-    localStorage.setItem("search", JSON.stringify(searchBar.value));
-    updateState(searchTerm, locationTerm);
+  //store search term in localStorage for persistence
+  localStorage.setItem("search", JSON.stringify(searchBar.value)); 
+  updateState(searchTerm, locationTerm); //update app state with the search term and location
 });
 
+//add event listener to dropdown toggle button
 dropDown.addEventListener('click', () => {
-  const dropdown = document.querySelector('.dropdown');
-  dropdown.classList.toggle('show');
+  const dropdown = document.querySelector('.dropdown'); //select dropdown element
+  dropdown.classList.toggle('show'); //toggle 'show' class to expand or collapse the dropdown menu
 });
 
+//add event listener to location bar input
 locationBar.addEventListener('input', () => {
-  const locationTerm = locationBar.value.toLowerCase();
-  const searchTerm = searchBar.value.toLowerCase();
+  const locationTerm = locationBar.value.toLowerCase(); //convert the location input value to lowercase
+  const searchTerm = searchBar.value.toLowerCase(); //get the current value of the search bar
 
-  //utilizes localStorage
-  localStorage.setItem("location", JSON.stringify(locationBar.value));
-  updateState(searchTerm, locationTerm);
+  //store the location term in localStorage for persistence
+  localStorage.setItem("location", JSON.stringify(locationBar.value)); 
+  updateState(searchTerm, locationTerm); //update app state with search term and location
 });
+
 
 //update page content based on the current search term
 function updateState(searchTerm, locationTerm) {
@@ -341,67 +345,69 @@ export function toEventDetails(event) {
 
 import { fakeEvents, userTags } from './fakeData.js'; 
 
-// Make Tags
+//dynamically add tags to the tags container
 function addTags() {
-  const tagsContainer = document.querySelector('.tags-container');
+  const tagsContainer = document.querySelector('.tags-container'); //select container where tags will be added
 
-  if (!tagsContainer) {
-    console.error('Tags container element not found');
+  if (!tagsContainer) { //check if tags container exists
+    console.error('Tags container element not found'); //log error if it doesn't
     return;
   }
 
-  userTags.forEach(tag => {
-    const tagElement = document.createElement('div');
-    tagElement.classList.add('tag');
-    tagElement.textContent = tag;
-    tagElement.setAttribute('data-genre', tag.toLowerCase());
+  userTags.forEach(tag => { //iterate over list of user-defined tags
+    const tagElement = document.createElement('div'); //create new div for each tag
+    tagElement.classList.add('tag'); //assign 'tag' class for styling
+    tagElement.textContent = tag; //set tag's text content
+    tagElement.setAttribute('data-genre', tag.toLowerCase()); //add data attribute for filtering purposes
 
-    //click event for tag filtering
+    //add click event to each tag for filtering
     tagElement.addEventListener('click', () => {
-      document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
-      tagElement.classList.add('active');
-      updateState(searchBar.value.toLowerCase(), locationBar.value.toLowerCase());
+      document.querySelectorAll('.tag').forEach(t => t.classList.remove('active')); //remove 'active' class from all tags
+      tagElement.classList.add('active'); //add 'active' class to clicked tag
+      updateState(searchBar.value.toLowerCase(), locationBar.value.toLowerCase()); //update state with current search and location values
 
-      const dropdown = document.querySelector('.dropdown');
-      dropdown.classList.remove('show');
+      const dropdown = document.querySelector('.dropdown'); //select dropdown
+      dropdown.classList.remove('show'); //collapse dropdown after a tag is selected
     });
 
-    tagsContainer.appendChild(tagElement);
+    tagsContainer.appendChild(tagElement); //add tag element to tags container
   });
 }
 
+//event listener to handle clicks outside dropdown menu
 document.addEventListener('click', (event) => {
-  const dropdown = document.querySelector('.dropdown');
-  const isClickInside = dropdown.contains(event.target);
+  const dropdown = document.querySelector('.dropdown'); //select dropdown element
+  const isClickInside = dropdown.contains(event.target); //check if click occurred inside dropdown
 
-  if (!isClickInside) {
-      dropdown.classList.remove('show');
+  if (!isClickInside) { //if click was outside dropdown...
+    dropdown.classList.remove('show'); //collapse dropdown menu
   }
 });
 
-//add Events
+//function to dynamically add events to a specified container
 function addEvents(eventType, containerId) {
-    const container = document.getElementById(containerId);
+  const container = document.getElementById(containerId); //select the container by ID
 
-    if (!container) {
-      console.error(`Container element with ID ${containerId} not found`);
-      return;
-    }
+  if (!container) { //check if container exists
+    console.error(`Container element with ID ${containerId} not found`); //log error if it doesn't
+    return; 
+  }
 
-    const events = fakeEvents[eventType]; // 'interested', 'upcoming', 'past'
-    container.innerHTML = '';
+  const events = fakeEvents[eventType]; //retrieve events of a specific type
+  container.innerHTML = ''; //clear existing content in container
     
-    events.forEach(event => {
-        const eventCard = document.createElement('div');
-        eventCard.classList.add('event-card');
-        eventCard.innerHTML = `
-            <img src="${event.image}" alt="${event.title}">
-            <h3>${event.title}</h3>
-            <p>${event.date}</p>
-        `;
-        container.appendChild(eventCard);
-    });
+  events.forEach(event => { //iterate over list of events
+    const eventCard = document.createElement('div'); //create new div for each event
+    eventCard.classList.add('event-card'); //assign 'event-card' class for styling
+    eventCard.innerHTML = ` //set the HTML content for the event card
+      <img src="${event.image}" alt="${event.title}"> 
+      <h3>${event.title}</h3>
+      <p>${event.date}</p>
+      `;
+      container.appendChild(eventCard); //add event card to the container
+  });
 }
+
 
 //initialize profile page with user tags and event data
 function initProfilePage() {

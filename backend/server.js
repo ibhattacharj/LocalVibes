@@ -1,51 +1,49 @@
 const dotenv = require("dotenv");
 const session = require("express-session");
-const passport = require("./authentication/auth/passport");
-//const passport = require('passport');
-const routes = require("./authentication/routes");
-const path = require("path");
+const passport = require("./authentication/auth/passport"); //import custom Passport config
+const routes = require("./authentication/routes"); //routes for authentication
+const path = require("path"); //Node.js module for handling file paths
 
-const { Event, sequelize, User } = require('./database.js');
-const express = require('express')
-const cors = require('cors');
+const { Event, sequelize, User } = require('./database.js'); //import database models and connection
+const express = require('express'); //framework for building web applications
+const cors = require('cors'); //middleware for enabling CORS (Cross-Origin Resource Sharing)
 
 const { Sequelize } = require('sequelize');
 
-const app = express();
-dotenv.config();
-const PORT = process.env.PORT || 4000; //set port. Defaults to 5000 if not provided
+const app = express(); //initialize Express app
+dotenv.config(); //load environment variables
+const PORT = process.env.PORT || 4000; //set server port. Defaults to 4000
 
-// Allow for static files
+//serve static files from the frontend directory
 app.use(express.static(path.join(__dirname, "frontend/source")));
-//app.use(express.static("frontend/source"));
 
-//middleware for parsing JSON bodies in requests
+//middleware to parse JSON request bodies
 app.use(express.json());
 
-// Configure session management.
+//configure session management to handle user sessions
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
+    secret: process.env.SESSION_SECRET, //session secret from environment variables
+    resave: false, //do not save session if its unmodified
+    saveUninitialized: false, //do not create session until something is stored
   })
 );
 
-// Initialize Passport and restore authentication state
+//initialize Passport for authentication
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Use routes from routes.js
+//use authentication routes
 app.use("/", routes);
 
-// Configure CORS to allow requests from front-end origin specified by proceeding URL
+//enable CORS to allow front-end requests
 app.use(cors({
-    origin: 'http://127.0.0.1:5500',  //restrict access to this origin 
+    origin: 'http://127.0.0.1:5500', //restrict access to this origin
     methods: ['GET', 'POST', 'PUT', 'DELETE'], //allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'] //allowed headers
-  }));
+}));
 
-//authenticate Sequelize connection to database
+//connect Sequelize to database and check connection
 sequelize.authenticate()
   .then(() => {
     console.log('Database connection has been established successfully.');
@@ -54,7 +52,7 @@ sequelize.authenticate()
     console.error('Unable to connect to the database:', err);
   });
 
-//popular events endpoint
+//define endpoint to fetch popular events
 app.get('/events/popular', async (req, res) => {
   try {
     console.log('Received request for popular events');
@@ -71,8 +69,8 @@ app.get('/events/popular', async (req, res) => {
     }
 
     const popularEvents = await Event.findAll({
-      order: [['views', 'DESC']],
-      limit: 10,
+      order: [['views', 'DESC']], //sort by views in descending order
+      limit: 10, //return only the top 10 events
     });
 
     if (!popularEvents || popularEvents.length === 0) {
@@ -105,7 +103,7 @@ app.get('/events/for-you', async (req, res) => {
 
       const events = await Event.findAll(); //for now returns all events
       
-      //must implement filtering logic to determine user preferences here. Will likely filter based on user tags and/or past events
+      //would implement filtering logic to determine user preferences here. Tags responsibility changed so I was not able to complete this. 
       
       if (!events || events.length === 0) {
         console.log('No popular events found.');
@@ -120,59 +118,57 @@ app.get('/events/for-you', async (req, res) => {
     }
 });
 
-//nearby events endpoint (demo purposes)
+//endpoint to fetch nearby events (placeholder logic)
 app.get('/events/nearby', async (req, res) => {
-  const userLocation = req.query.location; //expects location as query parameter
+  const userLocation = req.query.location; //user's location from query parameters
   if (!userLocation) {
     return res.status(400).json({ error: 'User location required' });
   }
   try {
-    //for demo, return all events; actual implementation will need Adrien's goelocation data
-    const nearbyEvents = await Event.findAll({ limit: 10 });
+    const nearbyEvents = await Event.findAll({ limit: 10 }); //return top 10 events for now
     res.status(200).json(nearbyEvents);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch nearby events' });
   }
 });
 
-//search events endpoint
+//search for events based on query/genre/location
 app.get('/events/search', async (req, res) => {
   const { query, genre, location } = req.query;
-  const whereClause = {};
+  const whereClause = {}; //build query dynamically based on provided filters
   if (query) {
-    whereClause.name = { [Sequelize.Op.like]: `%${query}%` };
+    whereClause.name = { [Sequelize.Op.like]: `%${query}%` }; //search by event name
   }
   if (genre) {
-    whereClause.tags = { [Sequelize.Op.like]: `%${genre}%` }; //filters events based on tags
+    whereClause.tags = { [Sequelize.Op.like]: `%${genre}%` }; //filter by tags
   }
   if (location) {
-    whereClause.location = { [Sequelize.Op.like]: `%${location}%` };
+    whereClause.location = { [Sequelize.Op.like]: `%${location}%` }; //search by location
   }
 
   try {
-    const searchResults = await Event.findAll({ where: whereClause});
+    const searchResults = await Event.findAll({ where: whereClause });
     res.status(200).json(searchResults);
   } catch (error) {
-    
     res.status(500).json({ error: 'Failed to search events' });
   }
 });
 
-//new event endpoint
+//create new event
 app.post('/events', async (req, res) => {
   try {
-    const newEvent = await Event.create(req.body);
+    const newEvent = await Event.create(req.body); //insert event into the database
     res.status(201).json(newEvent);
   } catch (error) {
     res.status(500).json({ error: 'Failed to create event' });
   }
 });
 
-//endpoint to update an event
+//update an existing event by ID
 app.put('/events/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-    const updatedEvent = await Event.update(req.body, { where: { id } });
+    const { id } = req.params; //get event ID from request params
+    const updatedEvent = await Event.update(req.body, { where: { id } }); //update event data
     if (updatedEvent[0] === 0) {
       return res.status(404).json({ error: 'Event not found.' });
     }
@@ -182,11 +178,11 @@ app.put('/events/:id', async (req, res) => {
   }
 });
 
-//endpoint to delete an event
+//delete an event by ID
 app.delete('/events/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-    const deletedEvent = await Event.destroy({ where: { id } });
+    const { id } = req.params; //get event ID from request params
+    const deletedEvent = await Event.destroy({ where: { id } }); //delete event
     if (!deletedEvent) {
       return res.status(404).json({ error: 'Event not found' });
     }
@@ -196,7 +192,7 @@ app.delete('/events/:id', async (req, res) => {
   }
 });
 
-//start server
+//start server and listen on specified port
 app.listen(PORT, () => {
   console.log(`Server is running on http://127.0.0.1:${PORT}`);
 });
